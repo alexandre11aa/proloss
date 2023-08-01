@@ -11,43 +11,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+from perda_por_atrito import perda_por_atrito
+
 root = Tk()
 
 class funcoes():
-
-    # Calculos
-    def calculo_da_forca(self, n_cordoalhas, area, fptk, fpyk):
-
-        if (0.74 * float(fptk)) < (0.82 * float(fpyk)):
-            forca_i = float(n_cordoalhas) * float(area) * 10**(-4) * (0.74 * float(fptk)) * 10**(3)
-
-        else:
-            forca_i = float(n_cordoalhas) * float(area) * 10**(-4) * (0.82 * float(fpyk)) * 10**(3)
-
-        return forca_i
-
-    def calculo_da_perda(self, variaveis_para_forca, distancias, situacao, alturas, constante_u):
-
-        forca = self.calculo_da_forca(variaveis_para_forca[0],
-                                      variaveis_para_forca[1],
-                                      variaveis_para_forca[2],
-                                      variaveis_para_forca[3])
-
-        iteracoes, distancia, perdas, constante_a = [len(distancias), distancias[0], [forca], 0]
-
-        for i in range(iteracoes):
-
-            if (situacao[i] == 'Curvo'):
-                constante_a += 2 * (abs(float(alturas[i]) - float(alturas[i + 1])) / float(distancias[i]))
-            
-            perdas.append(forca * np.exp(- (float(constante_u) * constante_a + 0.01 * float(constante_u) * distancia)))
-
-            if (i != iteracoes - 1):
-                distancia += float(distancias[i + 1])
-
-            perda_percentual = ((forca - perdas[-1]) / forca) * 100
-
-        return perdas, perda_percentual
             
     # Resultados
     def perda_por_atrito(self):
@@ -77,11 +45,11 @@ class funcoes():
                 dist.append(self.quadro_2_itens[i][0])
                 situ.append(self.quadro_2_itens[i][1])
 
-            self.quadro_3_itens = self.calculo_da_perda(self.variaveis[:4],
-                                                        dist,
-                                                        situ,
-                                                        altu,
-                                                        self.variaveis[4])[0]
+            self.quadro_3_itens = perda_por_atrito(self.variaveis[:4],
+                                                   dist,
+                                                   situ,
+                                                   altu,
+                                                   self.variaveis[4])[0]
             
             self.y_1, self.x_2, self.y_2  = [altu, self.x_1, self.quadro_3_itens]
 
