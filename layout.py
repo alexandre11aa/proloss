@@ -224,7 +224,7 @@ class programa(funcoes):
 
     # Configurações da Tela
     def tela(self):
-        self.root.title("Cálculo de Perdas de Protenção")
+        self.root.title("Cálculo de Perdas de Protensão")
         self.root.configure(background='#F0F0F0')
         self.root.geometry('750x500')
         self.root.resizable(False, False)
@@ -247,12 +247,19 @@ class programa(funcoes):
 
         self.aba_1 = Frame(self.abas)
         self.aba_1.configure(background='#F0F0F0')
-        self.abas.add(self.aba_1, text=" Perda por Atrito ")
+        self.abas.add(self.aba_1, text=" Atrito ")
+
+        self.aba_2 = Frame(self.abas)
+        self.aba_2.configure(background='#F0F0F0')
+        self.abas.add(self.aba_2, text=" Acomodação de Ancoragem ")
 
         self.abas.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         self.aba_1_funcoes()
         self.aba_1_funcoes_destrutivas()
+
+        self.aba_2_funcoes()
+        self.aba_2_funcoes_destrutivas()
 
     # Widgets Estáticos da Aba 1 da Página 1
     def aba_1_funcoes(self):
@@ -380,8 +387,8 @@ class programa(funcoes):
         self.u_texto = Label(self.aba_1, text='μ :', bg='#F0F0F0', fg='#000000')
         self.u_texto.place(relx=0.63, rely=0.088, relwidth=0.02, relheight=0.05)
 
-        self.entrada_das_variaveis = Entry()
-        self.entrada_das_variaveis.place(relx=0.7855, rely=0.105, relwidth=0.076, relheight=0.046)
+        self.entrada_das_variaveis = Entry(self.aba_1, text="")
+        self.entrada_das_variaveis.place(relx=0.7925, rely=0.052, relwidth=0.076, relheight=0.046)
 
         self.botao_inserir_4 = tk.Button(self.aba_1, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_4)
         self.botao_inserir_4.place(relx=0.8875, rely=0.050, relwidth=0.08, relheight=0.05)
@@ -507,5 +514,60 @@ class programa(funcoes):
         self.canvas.draw()
 
         self.canvas.get_tk_widget().pack(side=RIGHT, anchor=SW, padx=15.25, pady=17)
+
+    # Widgets Estáticos da Aba 1 da Página 1
+    def aba_2_funcoes(self):
+
+        # 3.0 Quadrante:
+
+        self.fundo_do_quadro_3 = Label(self.aba_2, text='', relief="raised", bg='#F0F0F0', fg='#800000')
+        self.fundo_do_quadro_3.place(relx=0.455, rely=0.01, relwidth=0.137, relheight=0.98)
+
+        self.fundo_de_resultados = Label(self.aba_2, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_resultados.place(relx=0.465, rely=0.04, relwidth=0.115, relheight=0.58)
+
+        self.resultados = Label(self.aba_2, text='Força P0 :', bg='#F0F0F0', fg='#000000')
+        self.resultados.place(relx=0.475, rely=0.02, relwidth=0.07, relheight=0.035)
+
+        self.fundo_de_resultados = Label(self.aba_2, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_resultados.place(relx=0.465, rely=0.645, relwidth=0.115, relheight=0.325)
+
+        self.botao_inserir_3 = tk.Button(self.aba_2, text='Procurar', bg='#F0F0F0', fg='#000000',
+                                         command=self.procurar_1)
+        self.botao_inserir_3.place(relx=0.4825, rely=0.7425, relwidth=0.08, relheight=0.05)
+
+        self.botao_inserir_3 = tk.Button(self.aba_2, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                         command=self.insercao_3)
+        self.botao_inserir_3.place(relx=0.4825, rely=0.8175, relwidth=0.08, relheight=0.05)
+
+        self.botao_calcular_1 = tk.Button(self.aba_2, text='Calcular', bg='#F0F0F0', fg='#000000', 
+                                          command=self.perda_por_atrito)
+        self.botao_calcular_1.place(relx=0.4825, rely=0.89, relwidth=0.08, relheight=0.05)
+
+    # Widgets Dinâmicos da Aba 1 da Página 1
+    def aba_2_funcoes_destrutivas(self):
+
+        # 3.0 Quadrante:
+
+        self.quadro_3 = ttk.Treeview(self.aba_2, columns=('Perda'))
+
+        self.quadro_3.column('#0', width=0, stretch=NO)
+        self.quadro_3.column('Perda', anchor=CENTER, width=20)
+
+        self.quadro_3.heading('Perda', text='Perda', anchor=CENTER)
+
+        self.quadro_3.place(relx=0.475, rely=0.0665, relwidth=0.075, relheight=0.535)
+
+        self.y_scroll_3 = ttk.Scrollbar(self.aba_2, orient=tk.VERTICAL, command=self.quadro_3.yview)
+
+        self.quadro_3['yscroll'] = self.y_scroll_3.set
+
+        self.y_scroll_3.place(relx=0.55, rely=0.0665, relwidth=0.025, relheight=0.535)
+
+        for i in range(len(self.quadro_3_itens)):
+            self.quadro_3.insert(parent='', index=i, iid=i, text='', values=(str(self.quadro_3_itens[i])))
+
+        self.lista_de_links = ttk.Combobox(self.aba_2, values=self.links_1)
+        self.lista_de_links.place(relx=0.48, rely=0.675, relwidth=0.085, relheight=0.045)
 
 programa()
