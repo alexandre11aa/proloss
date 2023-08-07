@@ -46,11 +46,11 @@ class funcoes():
                 dist.append(self.quadro_2_itens[i][0])
                 situ.append(self.quadro_2_itens[i][1])
 
-            self.quadro_3_itens = perda_por_atrito(self.variaveis[:4],
-                                                   dist,
-                                                   situ,
-                                                   altu,
-                                                   self.variaveis[4])[0]
+            self.quadro_3_itens = atrito(self.variaveis[:4],
+                                         dist,
+                                         situ,
+                                         altu,
+                                         self.variaveis[4])[0]
             
             self.y_1, self.x_2, self.y_2  = [altu, self.x_1, self.quadro_3_itens]
 
