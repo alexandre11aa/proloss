@@ -51,7 +51,7 @@ def acomodacao_de_ancoragem(delta_w,
                     hipotese = ['HIPOTESE 2',
                                 (p_a - delta_p_2 * comprimento_w_linha),
                                 (p_a - 2 * delta_p_2 * comprimento_w_linha),
-                                (2 * (delta_p_2 * comprimento_w_linha + delta_p_1 * comprimento_a))
+                                (2 * (delta_p_2 * comprimento_w_linha + delta_p_1 * comprimento_a)),
                                 (p_i - 2 * (delta_p_2 * comprimento_w_linha + delta_p_1 * comprimento_a))]
 
                     hipoteses.append(hipotese)
