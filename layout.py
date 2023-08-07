@@ -11,7 +11,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-from perda_por_atrito import perda_por_atrito
+from perda_por_atrito import atrito
+from perda_por_acomodacao_de_ancoragem import acomodacao_de_ancoragem
 
 root = Tk()
 
