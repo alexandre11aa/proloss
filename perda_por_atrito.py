@@ -16,7 +16,7 @@ def calculo_da_forca(n_cordoalhas, area, fptk, fpyk):
 
     return forca_i
 
-def perda_por_atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
+def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
 
     forca = calculo_da_forca(variaveis_para_forca[0],
                              variaveis_para_forca[1],
