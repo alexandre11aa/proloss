@@ -22,7 +22,7 @@ def acomodacao_de_ancoragem(delta_w,
             delta_p_2 = (p_a - p_meio_l) / (comprimento_meio_l - comprimento_a)
 
             if   (j + 1) == 1:
-                comprimento_w = ((delta_w[i] * constante_e * area_p) / delta_p_1) ** (1/2)
+                comprimento_w = ((delta_w[i] * constante_E * area_p) / delta_p_1) ** (1/2)
 
                 if comprimento_w < comprimento_a:
 
@@ -61,10 +61,10 @@ def acomodacao_de_ancoragem(delta_w,
             elif (j + 1) == 3:
 
                 hipotese = ['HIPOTESE 3',
-                            ((1 / comprimento_meio_l) * (delta_w[i] * constante_e * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))),
-                            (p_meio_l - ((1 / comprimento_meio_l) * (delta_w[i] * constante_e * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2)))),
-                            (p_a - (((1 / comprimento_meio_l) * (delta_w[i] * constante_e * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))) + 2 * delta_p_2 * (comprimento_meio_l - comprimento_a)))
-                            (p_i - (((1 / comprimento_meio_l) * (delta_w[i] * constante_e * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))) + 2 * delta_p_1 * comprimento_a + 2 * delta_p_2 * (comprimento_meio_l - comprimento_a))]
+                            ((1 / comprimento_meio_l) * (delta_w[i] * constante_E * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))),
+                            (p_meio_l - ((1 / comprimento_meio_l) * (delta_w[i] * constante_E * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2)))),
+                            (p_a - (((1 / comprimento_meio_l) * (delta_w[i] * constante_E * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))) + 2 * delta_p_2 * (comprimento_meio_l - comprimento_a))),
+                            (p_i - (((1 / comprimento_meio_l) * (delta_w[i] * constante_E * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))) + 2 * delta_p_1 * comprimento_a + 2 * delta_p_2 * (comprimento_meio_l - comprimento_a)))]
 
                 hipoteses.append(hipotese)
 
