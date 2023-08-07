@@ -56,6 +56,9 @@ class funcoes():
 
         self.destruicao_1()
 
+    def perda_por_acomodacao_de_ancoragem(self):
+        pass
+
     # Destruições
     def destruicao_1(self):
 
