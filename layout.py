@@ -202,6 +202,8 @@ class programa(funcoes):
 
         self.quadro_3_itens = []
 
+        self.quadro_4_itens = [2, 3.5]
+
         self.x_1 = []
         self.y_1 = []
 
@@ -518,56 +520,64 @@ class programa(funcoes):
     # Widgets Estáticos da Aba 1 da Página 1
     def aba_2_funcoes(self):
 
-        # 3.0 Quadrante:
+        # 1.0 Quadrante:
 
-        self.fundo_do_quadro_3 = Label(self.aba_2, text='', relief="raised", bg='#F0F0F0', fg='#800000')
-        self.fundo_do_quadro_3.place(relx=0.455, rely=0.01, relwidth=0.137, relheight=0.98)
+        self.fundo_do_quadro_4 = Label(self.aba_2, text='', relief="raised", bg='#F0F0F0', fg='#800000')
+        self.fundo_do_quadro_4.place(relx=0.005, rely=0.01, relwidth=0.137, relheight=0.98)
 
-        self.fundo_de_resultados = Label(self.aba_2, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_de_resultados.place(relx=0.465, rely=0.04, relwidth=0.115, relheight=0.58)
+        self.fundo_de_constante_w = Label(self.aba_2, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_constante_w.place(relx=0.015, rely=0.04, relwidth=0.115, relheight=0.58)
 
-        self.resultados = Label(self.aba_2, text='Força P0 :', bg='#F0F0F0', fg='#000000')
-        self.resultados.place(relx=0.475, rely=0.02, relwidth=0.07, relheight=0.035)
+        self.constante_w = Label(self.aba_2, text='A. de Anc. :', bg='#F0F0F0', fg='#000000')
+        self.constante_w.place(relx=0.025, rely=0.02, relwidth=0.082, relheight=0.035)
 
-        self.fundo_de_resultados = Label(self.aba_2, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_de_resultados.place(relx=0.465, rely=0.645, relwidth=0.115, relheight=0.325)
+        self.fundo_de_constante_w = Label(self.aba_2, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_constante_w.place(relx=0.015, rely=0.645, relwidth=0.115, relheight=0.325)
 
-        self.botao_inserir_3 = tk.Button(self.aba_2, text='Procurar', bg='#F0F0F0', fg='#000000',
+        self.botao_inserir_5 = tk.Button(self.aba_2, text='Procurar', bg='#F0F0F0', fg='#000000',
                                          command=self.procurar_1)
-        self.botao_inserir_3.place(relx=0.4825, rely=0.7425, relwidth=0.08, relheight=0.05)
+        self.botao_inserir_5.place(relx=0.0325, rely=0.7425, relwidth=0.08, relheight=0.05)
 
-        self.botao_inserir_3 = tk.Button(self.aba_2, text='Inserir', bg='#F0F0F0', fg='#000000',
+        self.botao_inserir_5 = tk.Button(self.aba_2, text='Inserir', bg='#F0F0F0', fg='#000000',
                                          command=self.insercao_3)
-        self.botao_inserir_3.place(relx=0.4825, rely=0.8175, relwidth=0.08, relheight=0.05)
+        self.botao_inserir_5.place(relx=0.0325, rely=0.8175, relwidth=0.08, relheight=0.05)
 
-        self.botao_calcular_1 = tk.Button(self.aba_2, text='Calcular', bg='#F0F0F0', fg='#000000', 
+        self.botao_calcular_2 = tk.Button(self.aba_2, text='Calcular', bg='#F0F0F0', fg='#000000', 
                                           command=self.perda_por_atrito)
-        self.botao_calcular_1.place(relx=0.4825, rely=0.89, relwidth=0.08, relheight=0.05)
+        self.botao_calcular_2.place(relx=0.0325, rely=0.89, relwidth=0.08, relheight=0.05)
+
+        # 2.0 Quadrante:
+
+        self.fundo_do_quadro_5 = Label(self.aba_2, text='', relief="raised", bg='#F0F0F0', fg='#800000')
+        self.fundo_do_quadro_5.place(relx=0.155, rely=0.01, relwidth=0.137, relheight=0.98)
+
+        self.fundo_de_constante_w = Label(self.aba_2, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_constante_w.place(relx=0.165, rely=0.04, relwidth=0.115, relheight=0.58)
 
     # Widgets Dinâmicos da Aba 1 da Página 1
     def aba_2_funcoes_destrutivas(self):
 
-        # 3.0 Quadrante:
+        # 1.0 Quadrante:
 
-        self.quadro_3 = ttk.Treeview(self.aba_2, columns=('Perda'))
+        self.quadro_4 = ttk.Treeview(self.aba_2, columns=('Δw'))
 
-        self.quadro_3.column('#0', width=0, stretch=NO)
-        self.quadro_3.column('Perda', anchor=CENTER, width=20)
+        self.quadro_4.column('#0', width=0, stretch=NO)
+        self.quadro_4.column('Δw', anchor=CENTER, width=20)
 
-        self.quadro_3.heading('Perda', text='Perda', anchor=CENTER)
+        self.quadro_4.heading('Δw', text='Δw', anchor=CENTER)
 
-        self.quadro_3.place(relx=0.475, rely=0.0665, relwidth=0.075, relheight=0.535)
+        self.quadro_4.place(relx=0.025, rely=0.0665, relwidth=0.075, relheight=0.535)
 
-        self.y_scroll_3 = ttk.Scrollbar(self.aba_2, orient=tk.VERTICAL, command=self.quadro_3.yview)
+        self.y_scroll_4 = ttk.Scrollbar(self.aba_2, orient=tk.VERTICAL, command=self.quadro_3.yview)
 
-        self.quadro_3['yscroll'] = self.y_scroll_3.set
+        self.quadro_4['yscroll'] = self.y_scroll_3.set
 
-        self.y_scroll_3.place(relx=0.55, rely=0.0665, relwidth=0.025, relheight=0.535)
+        self.y_scroll_4.place(relx=0.1, rely=0.0665, relwidth=0.025, relheight=0.535)
 
-        for i in range(len(self.quadro_3_itens)):
-            self.quadro_3.insert(parent='', index=i, iid=i, text='', values=(str(self.quadro_3_itens[i])))
+        for i in range(len(self.quadro_4_itens)):
+            self.quadro_3.insert(parent='', index=i, iid=i, text='', values=(str(self.quadro_4_itens[i])))
 
         self.lista_de_links = ttk.Combobox(self.aba_2, values=self.links_1)
-        self.lista_de_links.place(relx=0.48, rely=0.675, relwidth=0.085, relheight=0.045)
+        self.lista_de_links.place(relx=0.03, rely=0.675, relwidth=0.085, relheight=0.045)
 
 programa()
