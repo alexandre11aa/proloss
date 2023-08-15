@@ -71,35 +71,35 @@ class funcoes():
 
     def aplicar_1(self):
 
-        if self.resultados_de_ac_de_anc[0] == 'HIPOTESE 1':
+        if self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0] == 'HIPOTESE 1':
 
-            self.resultados_1[0] = self.resultados_de_ac_de_anc[0]
-            self.resultados_1[1] = self.resultados_de_ac_de_anc[1]
-            self.resultados_1[2] = self.resultados_de_ac_de_anc[3]
+            self.resultados_1[0] = self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0]
+            self.resultados_1[1] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][1]
+            self.resultados_1[2] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][3]
             self.resultados_1[3] = '-'
             self.resultados_1[4] = '-'
-            self.resultados_1[5] = self.resultados_de_ac_de_anc[2]
+            self.resultados_1[5] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][2]
             self.resultados_1[6] = '-'
 
-        elif self.resultados_de_ac_de_anc[0] == 'HIPOTESE 2':
+        elif self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0] == 'HIPOTESE 2':
         
-            self.resultados_1[0] = self.resultados_de_ac_de_anc[0]
-            self.resultados_1[1] = self.resultados_de_ac_de_anc[1]
-            self.resultados_1[2] = self.resultados_de_ac_de_anc[4]
-            self.resultados_1[3] = self.resultados_de_ac_de_anc[2]
+            self.resultados_1[0] = self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0]
+            self.resultados_1[1] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][1]
+            self.resultados_1[2] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][4]
+            self.resultados_1[3] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][2]
             self.resultados_1[4] = '-'
-            self.resultados_1[5] = self.resultados_de_ac_de_anc[3]
+            self.resultados_1[5] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][3]
             self.resultados_1[6] = '-'
 
-        elif self.resultados_de_ac_de_anc[0] == 'HIPOTESE 3':
+        elif self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0] == 'HIPOTESE 3':
         
-            self.resultados_1[0] = self.resultados_de_ac_de_anc[0]
+            self.resultados_1[0] = self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0]
             self.resultados_1[1] = '-'
-            self.resultados_1[2] = self.resultados_de_ac_de_anc[0]
-            self.resultados_1[3] = self.resultados_de_ac_de_anc[3]
-            self.resultados_1[4] = self.resultados_de_ac_de_anc[2]
+            self.resultados_1[2] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][4]
+            self.resultados_1[3] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][3]
+            self.resultados_1[4] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][2]
             self.resultados_1[5] = '-'
-            self.resultados_1[6] = self.resultados_de_ac_de_anc[1]
+            self.resultados_1[6] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][1]
     
         self.destruicao_2()
 
@@ -142,6 +142,13 @@ class funcoes():
         self.delta_l_2.destroy()
 
         self.aba_2_funcoes_destrutivas()
+
+    def exemplo_2(self):
+        self.quadro_4_itens = [3.5, 2]
+
+        self.variaveis_2 = [5.5, 7.5, 200, 1177.68, 1093.37, 1084.66, 1.4]
+
+        self.destruicao_2()
 
     # Inserções
     def insercao_1(self):
@@ -201,25 +208,25 @@ class funcoes():
         print(decisao)
 
         if decisao == 'a (m)':
-            self.variaveis_2[0] = self.entrada_das_variaveis_2.get()
+            self.variaveis_2[0] = float(self.entrada_das_variaveis_2.get())
         
         elif decisao == 'l/2 (m)':
-            self.variaveis_2[1] = self.entrada_das_variaveis_2.get()
+            self.variaveis_2[1] = float(self.entrada_das_variaveis_2.get())
 
         elif decisao == 'Ep (GPa)':
-            self.variaveis_2[2] = self.entrada_das_variaveis_2.get()
+            self.variaveis_2[2] = float(self.entrada_das_variaveis_2.get())
 
         elif decisao == 'Pi (kN/Cabo)':
-            self.variaveis_2[3] = self.entrada_das_variaveis_2.get()
+            self.variaveis_2[3] = float(self.entrada_das_variaveis_2.get())
 
         elif decisao == 'P₀(x = a) (kN)':
-            self.variaveis_2[4] = self.entrada_das_variaveis_2.get()
+            self.variaveis_2[4] = float(self.entrada_das_variaveis_2.get())
 
         elif decisao == 'P₀(x = l/2) (kN)':
-            self.variaveis_2[5] = self.entrada_das_variaveis_2.get()
+            self.variaveis_2[5] = float(self.entrada_das_variaveis_2.get())
 
         elif decisao == 'Ap⁽⁰⁾ (cm²)':
-            self.variaveis_2[6] = self.entrada_das_variaveis_2.get()
+            self.variaveis_2[6] = float(self.entrada_das_variaveis_2.get())
 
         self.destruicao_2()
 
@@ -270,6 +277,12 @@ class funcoes():
         menu_de_arquivos.add_command(label='Reiniciar', command=self.reiniciar)
         menu_de_arquivos.add_command(label='Sair', command=self.sair)
 
+        menu_de_exemplos = Menu(barra_de_menu)
+        barra_de_menu.add_cascade(label='Exemplos', menu = menu_de_exemplos)
+        menu_de_exemplos.add_command(label='Exemplo 1.0', command=self.limpar)
+        menu_de_exemplos.add_command(label='Exemplo 1.1', command=self.reiniciar)
+        menu_de_exemplos.add_command(label='Exemplo 2.0', command=self.exemplo_2)
+
     # Opção Limpar
     def limpar(self):
         self.quadro_1_itens = []
@@ -312,8 +325,6 @@ class programa(funcoes):
 
         self.quadro_3_itens = []
 
-        
-
         self.x_1 = []
         self.y_1 = []
 
@@ -327,9 +338,9 @@ class programa(funcoes):
 
         # Variáveis de Perda por Acomodação de Ancoragem
 
-        self.quadro_4_itens = [3.5, 2]
+        self.quadro_4_itens = []
 
-        self.variaveis_2 = [5.5, 7.5, 200, 1177.68, 1093.37, 1084.66, 1.4]
+        self.variaveis_2 = ['','','','','','','']
 
         self.resultados_1 = ['','','','','','','']
 
@@ -704,9 +715,9 @@ class programa(funcoes):
         self.area_p_nome = Label(self.aba_2, text='Ap⁽⁰⁾ :', bg='#F0F0F0', fg='#000000')
         self.area_p_nome.place(relx=0.23, rely=0.61, relwidth=0.048, relheight=0.035)
         
-        self.exemplo_1 = tk.Button(self.aba_2, text='Exemplo', bg='#F0F0F0', fg='#000000',
-                                         command=self.procurar_1)
-        self.exemplo_1.place(relx=0.41, rely=0.65, relwidth=0.12, relheight=0.06)
+        self.exemplo_2_botao = tk.Button(self.aba_2, text='Exemplo', bg='#F0F0F0', fg='#000000',
+                                         command=self.exemplo_2)
+        self.exemplo_2_botao.place(relx=0.41, rely=0.65, relwidth=0.12, relheight=0.06)
 
         self.lista_de_variaveis_2 = ttk.Combobox(self.aba_2, values=['',
                                                                      'a (m)', 
@@ -738,7 +749,7 @@ class programa(funcoes):
         self.fundo_de_resultados_4.place(relx=0.6325, rely=0.19, relwidth=0.347, relheight=0.78)
 
         self.botao_aplicar_1 = tk.Button(self.aba_2, text='Aplicar', bg='#F0F0F0', fg='#000000',
-                                         command=self.procurar_1)
+                                         command=self.aplicar_1)
         self.botao_aplicar_1.place(relx=0.85, rely=0.075, relwidth=0.09, relheight=0.05)
 
         self.tipo_de_hipotese_nome = Label(self.aba_2, text='Hipótese :', bg='#F0F0F0', fg='#000000')
@@ -810,9 +821,9 @@ class programa(funcoes):
 
         # 3.0 Quadrante:
 
-        self.lista_de_delta_w_para_exigir = ttk.Combobox(self.aba_2, values=[('Δw = ' + str(i)) for i in self.quadro_4_itens])
-        self.lista_de_delta_w_para_exigir.place(relx=0.67, rely=0.075, relwidth=0.14, relheight=0.05)
-        self.lista_de_delta_w_para_exigir.current(0)
+        self.lista_de_delta_w_para_exibir = ttk.Combobox(self.aba_2, values=[('Δw = ' + str(i)) for i in self.quadro_4_itens])
+        self.lista_de_delta_w_para_exibir.place(relx=0.67, rely=0.075, relwidth=0.14, relheight=0.05)
+        # self.lista_de_delta_w_para_exibir.current(0)
 
         self.tipo_de_hipotese = Label(self.aba_2, text=self.resultados_1[0], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.tipo_de_hipotese.place(relx=0.81, rely=0.25, relwidth=0.12, relheight=0.05)
