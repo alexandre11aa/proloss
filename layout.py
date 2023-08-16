@@ -65,8 +65,9 @@ class funcoes():
                                                                self.variaveis_2[4],
                                                                self.variaveis_2[5],
                                                                self.variaveis_2[2],
-                                                               self.variaveis_2[6])
-        
+                                                               self.variaveis_2[6],
+                                                               self.variaveis_2[7])
+                
         self.aplicar_1()
 
     def aplicar_1(self):
@@ -143,10 +144,28 @@ class funcoes():
 
         self.aba_2_funcoes_destrutivas()
 
+    def exemplo_1_0(self):
+
+        self.quadro_1_itens = [('A', 0.11), ('B', 0.07), ('C', 0.16), ('D', 0.18), ('E', 0.15), ('F', 0.04), ('G', 0.11)]
+        self.quadro_2_itens = [(2.8, 'Curvo'), (3.5, 'Curvo'), (0.7, 'Curvo'), (0.9, 'Curvo'), (4.5, 'Curvo'), (3.6, 'Curvo')]
+
+        self.variaveis_1 = [3, 1.4, 2100, 1890, 0.05]
+
+        self.destruicao_1()
+
+    def exemplo_1_1(self):
+        
+        self.quadro_1_itens = [('A', 1.245), ('B', 1.07), ('C', 0.175), ('D', 0.175), ('E', 1.07), ('F', 1.245)]
+        self.quadro_2_itens = [(0.8, 'Reto'), (8.43, 'Curvo'), (2.04, 'Reto'), (8.43, 'Curvo'), (0.8, 'Reto')]
+
+        self.variaveis_1 = [12, 1.014, 1900, 1710, 0.2]
+
+        self.destruicao_1()
+
     def exemplo_2(self):
         self.quadro_4_itens = [3.5, 2]
 
-        self.variaveis_2 = [5.5, 7.5, 200, 1177.68, 1093.37, 1084.66, 1.4]
+        self.variaveis_2 = [5.5, 9.5, 200, 1177.68, 1093.37, 1084.66, 1.4, 6]
 
         self.destruicao_2()
 
@@ -176,18 +195,18 @@ class funcoes():
         self.destruicao_1()
 
     def insercao_4(self):
-        decisao = self.lista_variaveis.get()
+        decisao = self.lista_variaveis_1.get()
 
         if decisao == 'μ':
             self.variaveis_1[4] = self.entrada_das_variaveis_1.get()
         
-        elif decisao == 'fptk':
+        elif decisao == 'fptk (MPa)':
             self.variaveis_1[2] = self.entrada_das_variaveis_1.get()
 
-        elif decisao == 'fpyk':
+        elif decisao == 'fpyk (MPa)':
             self.variaveis_1[3] = self.entrada_das_variaveis_1.get()
 
-        elif decisao == 'Área':
+        elif decisao == 'Ap⁽⁰⁾ (cm² / Cord.)':
             self.variaveis_1[1] = self.entrada_das_variaveis_1.get()
 
         elif decisao == 'Nº de Cordoalhas':
@@ -204,8 +223,6 @@ class funcoes():
 
     def insercao_6(self):
         decisao = self.lista_de_variaveis_2.get()
-
-        print(decisao)
 
         if decisao == 'a (m)':
             self.variaveis_2[0] = float(self.entrada_das_variaveis_2.get())
@@ -227,6 +244,9 @@ class funcoes():
 
         elif decisao == 'Ap⁽⁰⁾ (cm²)':
             self.variaveis_2[6] = float(self.entrada_das_variaveis_2.get())
+
+        elif decisao == 'Nº de Cord.':
+            self.variaveis_2[7] = float(self.entrada_das_variaveis_2.get())
 
         self.destruicao_2()
 
@@ -279,8 +299,8 @@ class funcoes():
 
         menu_de_exemplos = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Exemplos', menu = menu_de_exemplos)
-        menu_de_exemplos.add_command(label='Exemplo 1.0', command=self.limpar)
-        menu_de_exemplos.add_command(label='Exemplo 1.1', command=self.reiniciar)
+        menu_de_exemplos.add_command(label='Exemplo 1.0', command=self.exemplo_1_0)
+        menu_de_exemplos.add_command(label='Exemplo 1.1', command=self.exemplo_1_1)
         menu_de_exemplos.add_command(label='Exemplo 2.0', command=self.exemplo_2)
 
     # Opção Limpar
@@ -317,11 +337,8 @@ class programa(funcoes):
 
         # Variáveis de Perda por Atrito
 
-        self.quadro_1_itens = [('A', 0.11), ('B', 0.07), ('C', 0.16), ('D', 0.18), ('E', 0.15), ('F', 0.04), ('G', 0.11)]
-        self.quadro_2_itens = [(2.8, 'Curvo'), (3.5, 'Curvo'), (0.7, 'Curvo'), (0.9, 'Curvo'), (4.5, 'Curvo'), (3.6, 'Curvo')]
-        
-        #self.quadro_1_itens = [('A', 1.245), ('B', 1.07), ('C', 0.175), ('D', 0.175), ('E', 1.07), ('F', 1.245)]
-        #self.quadro_2_itens = [(0.8, 'Reto'), (8.43, 'Curvo'), (2.04, 'Reto'), (8.43, 'Curvo'), (0.8, 'Reto')]
+        self.quadro_1_itens = []
+        self.quadro_2_itens = []
 
         self.quadro_3_itens = []
 
@@ -333,14 +350,13 @@ class programa(funcoes):
 
         self.links_1 = []
 
-        self.variaveis_1 = [3, 1.4, 2100, 1890, 0.05]
-        #self.variaveis_1 = [12, 1.014, 1900, 1710, 0.2]
+        self.variaveis_1 = ['','','','','']
 
         # Variáveis de Perda por Acomodação de Ancoragem
 
         self.quadro_4_itens = []
 
-        self.variaveis_2 = ['','','','','','','']
+        self.variaveis_2 = ['','','','','','','','']
 
         self.resultados_1 = ['','','','','','','']
 
@@ -714,11 +730,10 @@ class programa(funcoes):
 
         self.area_p_nome = Label(self.aba_2, text='Ap⁽⁰⁾ :', bg='#F0F0F0', fg='#000000')
         self.area_p_nome.place(relx=0.23, rely=0.61, relwidth=0.048, relheight=0.035)
-        
-        self.exemplo_2_botao = tk.Button(self.aba_2, text='Exemplo', bg='#F0F0F0', fg='#000000',
-                                         command=self.exemplo_2)
-        self.exemplo_2_botao.place(relx=0.41, rely=0.65, relwidth=0.12, relheight=0.06)
 
+        self.ncd_texto_2 = Label(self.aba_2, text='Nº de Cord. :', bg='#F0F0F0', fg='#000000')
+        self.ncd_texto_2.place(relx=0.41, rely=0.61, relwidth=0.1, relheight=0.035)
+        
         self.lista_de_variaveis_2 = ttk.Combobox(self.aba_2, values=['',
                                                                      'a (m)', 
                                                                      'l/2 (m)', 
@@ -726,12 +741,13 @@ class programa(funcoes):
                                                                      'Pi (kN/Cabo)', 
                                                                      'P₀(x = a) (kN)', 
                                                                      'P₀(x = l/2) (kN)', 
-                                                                     'Ap⁽⁰⁾ (cm²)'])
-        self.lista_de_variaveis_2.place(relx=0.19, rely=0.88, relwidth=0.17, relheight=0.05)
+                                                                     'Ap⁽⁰⁾ (cm²)',
+                                                                     'Nº de Cord.'])
+        self.lista_de_variaveis_2.place(relx=0.19, rely=0.88, relwidth=0.165, relheight=0.05)
         self.lista_de_variaveis_2.current(0)
 
         self.entrada_das_variaveis_2 = Entry(self.aba_2, text="")
-        self.entrada_das_variaveis_2.place(relx=0.375, rely=0.88, relwidth=0.09, relheight=0.05)
+        self.entrada_das_variaveis_2.place(relx=0.3725, rely=0.88, relwidth=0.09, relheight=0.05)
 
         self.botao_inserir_6 = tk.Button(self.aba_2, text='Inserir', bg='#F0F0F0', fg='#000000',
                                          command=self.insercao_6)
@@ -819,11 +835,13 @@ class programa(funcoes):
         self.area_p = Label(self.aba_2, text=str(self.variaveis_2[6]), relief="sunken", bg='#FFFFFF', fg='#000000')
         self.area_p.place(relx=0.23, rely=0.66, relwidth=0.12, relheight=0.05)
 
+        self.variavel_n_de_cord_2 = Label(self.aba_2, text=str(self.variaveis_2[7]), relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_n_de_cord_2.place(relx=0.41, rely=0.66, relwidth=0.12, relheight=0.05)
+
         # 3.0 Quadrante:
 
         self.lista_de_delta_w_para_exibir = ttk.Combobox(self.aba_2, values=[('Δw = ' + str(i)) for i in self.quadro_4_itens])
         self.lista_de_delta_w_para_exibir.place(relx=0.67, rely=0.075, relwidth=0.14, relheight=0.05)
-        # self.lista_de_delta_w_para_exibir.current(0)
 
         self.tipo_de_hipotese = Label(self.aba_2, text=self.resultados_1[0], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.tipo_de_hipotese.place(relx=0.81, rely=0.25, relwidth=0.12, relheight=0.05)
