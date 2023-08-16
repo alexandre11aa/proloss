@@ -70,38 +70,41 @@ class funcoes():
                 
         self.aplicar_1()
 
+    # Aplicações
     def aplicar_1(self):
 
-        if self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0] == 'HIPOTESE 1':
+        if self.lista_de_delta_w_para_exibir.get() != '':
 
-            self.resultados_1[0] = self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0]
-            self.resultados_1[1] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][1]
-            self.resultados_1[2] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][3]
-            self.resultados_1[3] = '-'
-            self.resultados_1[4] = '-'
-            self.resultados_1[5] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][2]
-            self.resultados_1[6] = '-'
+            if self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0] == 'HIPOTESE 1':
 
-        elif self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0] == 'HIPOTESE 2':
+                self.resultados_1[0] = self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0]
+                self.resultados_1[1] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][1]
+                self.resultados_1[2] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][3]
+                self.resultados_1[3] = '-'
+                self.resultados_1[4] = '-'
+                self.resultados_1[5] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][2]
+                self.resultados_1[6] = '-'
+
+            elif self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0] == 'HIPOTESE 2':
+            
+                self.resultados_1[0] = self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0]
+                self.resultados_1[1] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][1]
+                self.resultados_1[2] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][4]
+                self.resultados_1[3] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][2]
+                self.resultados_1[4] = '-'
+                self.resultados_1[5] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][3]
+                self.resultados_1[6] = '-'
+
+            elif self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0] == 'HIPOTESE 3':
+            
+                self.resultados_1[0] = self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0]
+                self.resultados_1[1] = '-'
+                self.resultados_1[2] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][4]
+                self.resultados_1[3] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][3]
+                self.resultados_1[4] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][2]
+                self.resultados_1[5] = '-'
+                self.resultados_1[6] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][1]
         
-            self.resultados_1[0] = self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0]
-            self.resultados_1[1] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][1]
-            self.resultados_1[2] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][4]
-            self.resultados_1[3] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][2]
-            self.resultados_1[4] = '-'
-            self.resultados_1[5] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][3]
-            self.resultados_1[6] = '-'
-
-        elif self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0] == 'HIPOTESE 3':
-        
-            self.resultados_1[0] = self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0]
-            self.resultados_1[1] = '-'
-            self.resultados_1[2] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][4]
-            self.resultados_1[3] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][3]
-            self.resultados_1[4] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][2]
-            self.resultados_1[5] = '-'
-            self.resultados_1[6] = '%.4f' % self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][1]
-    
         self.destruicao_2()
 
     # Destruições
@@ -392,13 +395,17 @@ class programa(funcoes):
 
         self.abas = ttk.Notebook(self.frame)
 
+        # Perda de Protensão por Atrito
+        
         self.aba_1 = Frame(self.abas)
         self.aba_1.configure(background='#F0F0F0')
-        self.abas.add(self.aba_1, text=" Atrito ")
+        self.abas.add(self.aba_1, text=" PPAT ")
+
+        # Perda de Protensão por Acomodação e Ancoragem
 
         self.aba_2 = Frame(self.abas)
         self.aba_2.configure(background='#F0F0F0')
-        self.abas.add(self.aba_2, text=" Ancoragem ")
+        self.abas.add(self.aba_2, text=" PPAC ")
 
         self.abas.place(relx=0, rely=0, relwidth=1, relheight=1)
 
@@ -840,8 +847,11 @@ class programa(funcoes):
 
         # 3.0 Quadrante:
 
-        self.lista_de_delta_w_para_exibir = ttk.Combobox(self.aba_2, values=[('Δw = ' + str(i)) for i in self.quadro_4_itens])
+        lista_de_delta_w_para_exibir = [('Δw = ' + str(i)) for i in self.quadro_4_itens]
+        lista_de_delta_w_para_exibir.append('')
+        self.lista_de_delta_w_para_exibir = ttk.Combobox(self.aba_2, values=lista_de_delta_w_para_exibir)
         self.lista_de_delta_w_para_exibir.place(relx=0.67, rely=0.075, relwidth=0.14, relheight=0.05)
+        self.lista_de_delta_w_para_exibir.current(0)
 
         self.tipo_de_hipotese = Label(self.aba_2, text=self.resultados_1[0], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.tipo_de_hipotese.place(relx=0.81, rely=0.25, relwidth=0.12, relheight=0.05)
