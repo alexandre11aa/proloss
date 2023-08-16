@@ -4,7 +4,15 @@ Cálculo de perda de protensão por acomodação de ancoragem explicado por Chol
 CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 145-154.
 '''
 
-import numpy as np
+def raiz_quadrada(a, b, c):
+
+    delta = b**2 - 4 * a * c
+
+    x_1 = (- b + delta**(1/2)) / (2 * a)
+
+    x_2 = (- b - delta**(1/2)) / (2 * a)
+
+    return [x_1, x_2]
 
 def acomodacao_de_ancoragem(delta_w,
                             comprimento_a,
@@ -13,7 +21,8 @@ def acomodacao_de_ancoragem(delta_w,
                             p_a,
                             p_meio_l,
                             constante_E,
-                            area_p):
+                            area_p,
+                            ncd):
     hipoteses = []
   
     for i in range(len(delta_w)):
@@ -22,12 +31,12 @@ def acomodacao_de_ancoragem(delta_w,
             delta_p_2 = (p_a - p_meio_l) / (comprimento_meio_l - comprimento_a)
 
             if   (j + 1) == 1:
-                comprimento_w = ((delta_w[i] * constante_E * area_p) / delta_p_1) ** (1/2)
+                comprimento_w = ((delta_w[i] * constante_E * ncd * area_p * 10**(-1)) / delta_p_1) ** (1/2)
 
                 if comprimento_w < comprimento_a:
 
                     hipotese = ['HIPOTESE 1',
-                                (p_i * delta_p_1 * comprimento_w),
+                                (p_i - delta_p_1 * comprimento_w),
                                 (2 * delta_p_1 * comprimento_w),
                                 (p_i - 2 * delta_p_1 * comprimento_w)]
 
@@ -36,10 +45,11 @@ def acomodacao_de_ancoragem(delta_w,
                     break
 
             elif (j + 1) == 2:
-                raizes = np.roots([delta_p_2, 
-                                   2 * delta_p_2 * comprimento_a, 
-                                   delta_p_1 * comprimento_a**2 - delta_w[i] * constante_E * area_p])
 
+                raizes = raiz_quadrada(delta_p_2, 
+                                       2 * delta_p_2 * comprimento_a, 
+                                       delta_p_1 * comprimento_a**2 - delta_w[i] * constante_E * ncd * area_p * 10**(-1))
+                
                 if raizes[0] > raizes[1]:
                     comprimento_w_linha = raizes[0]
 
@@ -61,10 +71,10 @@ def acomodacao_de_ancoragem(delta_w,
             elif (j + 1) == 3:
 
                 hipotese = ['HIPOTESE 3',
-                            ((1 / comprimento_meio_l) * (delta_w[i] * constante_E * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))),
-                            (p_meio_l - ((1 / comprimento_meio_l) * (delta_w[i] * constante_E * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2)))),
-                            (p_a - (((1 / comprimento_meio_l) * (delta_w[i] * constante_E * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))) + 2 * delta_p_2 * (comprimento_meio_l - comprimento_a))),
-                            (p_i - (((1 / comprimento_meio_l) * (delta_w[i] * constante_E * area_p - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))) + 2 * delta_p_1 * comprimento_a + 2 * delta_p_2 * (comprimento_meio_l - comprimento_a)))]
+                            ((1 / comprimento_meio_l) * (delta_w[i] * constante_E * ncd * area_p * 10**(-1) - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))),
+                            (p_meio_l - ((1 / comprimento_meio_l) * (delta_w[i] * constante_E * ncd * area_p * 10**(-1) - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2)))),
+                            (p_a - (((1 / comprimento_meio_l) * (delta_w[i] * constante_E * ncd * area_p * 10**(-1) - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))) + 2 * delta_p_2 * (comprimento_meio_l - comprimento_a))),
+                            (p_i - (((1 / comprimento_meio_l) * (delta_w[i] * constante_E * ncd * area_p * 10**(-1) - (delta_p_1 * comprimento_a**2 + 2 * comprimento_a * delta_p_2 * (comprimento_meio_l - comprimento_a) + delta_p_2 * (comprimento_meio_l - comprimento_a)**2))) + 2 * delta_p_1 * comprimento_a + 2 * delta_p_2 * (comprimento_meio_l - comprimento_a)))]
 
                 hipoteses.append(hipotese)
 
