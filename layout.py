@@ -73,6 +73,8 @@ class funcoes():
     # Aplicações
     def aplicar_1(self):
 
+        self.indice_da_lista_de_delta_w_para_exibir = self.lista_de_delta_w_para_exibir.current()
+
         if self.lista_de_delta_w_para_exibir.get() != '':
 
             if self.resultados_de_ac_de_anc[self.lista_de_delta_w_para_exibir.current()][0] == 'HIPOTESE 1':
@@ -363,6 +365,8 @@ class programa(funcoes):
 
         self.resultados_1 = ['','','','','','','']
 
+        self.indice_da_lista_de_delta_w_para_exibir = 0
+
         # Funções
 
         self.root = root
@@ -407,6 +411,14 @@ class programa(funcoes):
         self.aba_2.configure(background='#F0F0F0')
         self.abas.add(self.aba_2, text=" PPAC ")
 
+        # Perda de Protensão por Encurtamento Imediato do Concreto
+
+        self.aba_3 = Frame(self.abas)
+        self.aba_3.configure(background='#F0F0F0')
+        self.abas.add(self.aba_3, text=" PPEC ")
+
+        # Abrindo Abas
+
         self.abas.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         self.aba_1_funcoes()
@@ -415,7 +427,10 @@ class programa(funcoes):
         self.aba_2_funcoes()
         self.aba_2_funcoes_destrutivas()
 
-    # Widgets Estáticos da Aba 1 da Página 1
+        self.aba_3_funcoes()
+        self.aba_3_funcoes_destrutivas()
+
+    # Widgets Estáticos da Aba 1
     def aba_1_funcoes(self):
 
         # 1.0 Quadrante:
@@ -561,7 +576,7 @@ class programa(funcoes):
         self.fundo_de_duracoes = Label(self.aba_1, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_de_duracoes.place(relx=0.615, rely=0.3, relwidth=0.368, relheight=0.67)
         
-    # Widgets Dinâmicos da Aba 1 da Página 1
+    # Widgets Dinâmicos da Aba 1
     def aba_1_funcoes_destrutivas(self):
 
         # 1.0 Quadrante:
@@ -674,7 +689,7 @@ class programa(funcoes):
 
         self.canvas.get_tk_widget().pack(side=RIGHT, anchor=SW, padx=15.25, pady=17)
 
-    # Widgets Estáticos da Aba 1 da Página 1
+    # Widgets Estáticos da Aba 2
     def aba_2_funcoes(self):
 
         # 1.0 Quadrante:
@@ -796,7 +811,7 @@ class programa(funcoes):
         self.delta_l_2_nome = Label(self.aba_2, text="ΔP₀(x = l/2) :", bg='#F0F0F0', fg='#000000')
         self.delta_l_2_nome.place(relx=0.68, rely=0.85, relwidth=0.09, relheight=0.05)
 
-    # Widgets Dinâmicos da Aba 1 da Página 1
+    # Widgets Dinâmicos da Aba 2
     def aba_2_funcoes_destrutivas(self):
 
         # 1.0 Quadrante:
@@ -851,7 +866,7 @@ class programa(funcoes):
         lista_de_delta_w_para_exibir.append('')
         self.lista_de_delta_w_para_exibir = ttk.Combobox(self.aba_2, values=lista_de_delta_w_para_exibir)
         self.lista_de_delta_w_para_exibir.place(relx=0.67, rely=0.075, relwidth=0.14, relheight=0.05)
-        self.lista_de_delta_w_para_exibir.current(0)
+        self.lista_de_delta_w_para_exibir.current(self.indice_da_lista_de_delta_w_para_exibir)
 
         self.tipo_de_hipotese = Label(self.aba_2, text=self.resultados_1[0], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.tipo_de_hipotese.place(relx=0.81, rely=0.25, relwidth=0.12, relheight=0.05)
@@ -873,5 +888,19 @@ class programa(funcoes):
 
         self.delta_l_2 = Label(self.aba_2, text=self.resultados_1[6], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.delta_l_2.place(relx=0.81, rely=0.85, relwidth=0.12, relheight=0.05)
+
+    # Widgets Estáticos da Aba 3
+    def aba_3_funcoes(self):
+
+        # 1.0 Quadrante:
+
+        pass
+
+    # Widgets Dinâmicos da Aba 3
+    def aba_3_funcoes_destrutivas(self):
+
+        # 1.0 Quadrante:
+
+        pass
 
 programa()
