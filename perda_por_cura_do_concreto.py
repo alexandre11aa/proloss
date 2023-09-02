@@ -31,7 +31,7 @@ def cura_do_concreto(Ac, ycin, Ic,
                 n_1 += 1
                 n_2 += forcas[j]
             
-        y0 += (alturas_unicas[i] / 100) * n
+                y0 += alturas_unicas[i] / 100
 
         NP0i_epi += n_2 * (ycin - (alturas_unicas[i] / 100))
 
@@ -50,6 +50,7 @@ def cura_do_concreto(Ac, ycin, Ic,
     # Perda da força de protenção para cabos
 
     perda_de_forca_todos_os_cabos = []
+
     for i in range(len(forcas)):
         perda_de_forca_todos_os_cabos.append(forcas[i] - n_fios * Ap * 10**(-4) * delta_op)
 
