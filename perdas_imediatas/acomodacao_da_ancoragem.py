@@ -14,7 +14,7 @@ def raiz_quadrada(a, b, c):
 
     return [x_1, x_2]
 
-def acomodacao_de_ancoragem(delta_w,
+def acomodacao_da_ancoragem(delta_w,
                             comprimento_a,
                             comprimento_meio_l,
                             p_i,
