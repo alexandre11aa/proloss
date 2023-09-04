@@ -199,14 +199,7 @@ class funcoes():
 
     def exemplo_1_0(self):
 
-        self.quadro_1_itens = [('A', 0.11), ('B', 0.07), ('C', 0.16), ('D', 0.18), ('E', 0.15), ('F', 0.04), ('G', 0.11)]
-        self.quadro_2_itens = [(2.8, 'Curvo'), (3.5, 'Curvo'), (0.7, 'Curvo'), (0.9, 'Curvo'), (4.5, 'Curvo'), (3.6, 'Curvo')]
-
-        self.variaveis_1 = [3, 1.4, 2100, 1890, 0.05]
-
-        self.destruicao_1()
-
-    def exemplo_1_1(self):
+        # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 138-142.
         
         self.quadro_1_itens = [('A', 1.245), ('B', 1.07), ('C', 0.175), ('D', 0.175), ('E', 1.07), ('F', 1.245)]
         self.quadro_2_itens = [(0.8, 'Reto'), (8.43, 'Curvo'), (2.04, 'Reto'), (8.43, 'Curvo'), (0.8, 'Reto')]
@@ -215,7 +208,21 @@ class funcoes():
 
         self.destruicao_1()
 
+    def exemplo_1_1(self):
+
+        # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 142-144.
+
+        self.quadro_1_itens = [('A', 0.11), ('B', 0.07), ('C', 0.16), ('D', 0.18), ('E', 0.15), ('F', 0.04), ('G', 0.11)]
+        self.quadro_2_itens = [(2.8, 'Curvo'), (3.5, 'Curvo'), (0.7, 'Curvo'), (0.9, 'Curvo'), (4.5, 'Curvo'), (3.6, 'Curvo')]
+
+        self.variaveis_1 = [3, 1.4, 2100, 1890, 0.05]
+
+        self.destruicao_1()
+
     def exemplo_2(self):
+
+        # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 151-154.
+
         self.quadro_4_itens = [3.5, 2]
 
         self.variaveis_2 = [5.5, 9.5, 200, 1177.68, 1093.37, 1084.66, 1.4, 6]
@@ -223,6 +230,9 @@ class funcoes():
         self.destruicao_2()
 
     def exemplo_3(self):
+
+        # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 156-158.
+
         self.quadro_5_itens = [['C1.1', 'C2.1', 'C3.1', 'C4.1', 'C5.1', 'C1.2', 'C2.2', 'C3.2', 'C4.2', 'C5.2'],
                                [ 14, 28, 14, 28, 14, 14, 28, 14, 28, 14],
                                [-924, -945, -934, -892, -913, -924, -945, -934, -892, -913],
