@@ -25,7 +25,11 @@ def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
 
     iteracoes, distancia, perdas, constante_a = [len(distancias), distancias[0], [forca], 0]
 
+    perda_media = 0
+
     for i in range(iteracoes):
+
+        perda_media += perdas[i] * distancias[i]
 
         if (situacao[i] == 'Curvo'):
             constante_a += 2 * (abs(float(alturas[i]) - float(alturas[i + 1])) / float(distancias[i]))
@@ -37,4 +41,6 @@ def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
 
         perda_percentual = ((forca - perdas[-1]) / forca) * 100
 
-    return perdas, perda_percentual
+    perda_media /= (200 * variaveis_para_forca[1] * 10**(-1))
+
+    return (perdas, '%.2f' % perda_media, perda_percentual)
