@@ -484,6 +484,8 @@ class programa(funcoes):
 
         self.quadro_3_itens = []
 
+        self.resultado_delta_l = ''
+
         self.x_1 = []
         self.y_1 = []
 
@@ -664,25 +666,27 @@ class programa(funcoes):
         self.fundo_do_quadro_3.place(relx=0.455, rely=0.01, relwidth=0.137, relheight=0.98)
 
         self.fundo_de_resultados_1 = Label(self.aba_1, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_de_resultados_1.place(relx=0.465, rely=0.04, relwidth=0.115, relheight=0.58)
+        self.fundo_de_resultados_1.place(relx=0.465, rely=0.04, relwidth=0.115, relheight=0.535)
 
         self.resultados = Label(self.aba_1, text='Força P0 :', bg='#F0F0F0', fg='#000000')
         self.resultados.place(relx=0.475, rely=0.02, relwidth=0.07, relheight=0.035)
 
+        self.fundo_de_resultados_1_1 = Label(self.aba_1, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_resultados_1_1.place(relx=0.465, rely=0.6025, relwidth=0.115, relheight=0.09)
+
         self.fundo_de_resultados_2 = Label(self.aba_1, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_de_resultados_2.place(relx=0.465, rely=0.645, relwidth=0.115, relheight=0.325)
+        self.fundo_de_resultados_2.place(relx=0.465, rely=0.72, relwidth=0.115, relheight=0.25)
 
         self.botao_procurar_1 = tk.Button(self.aba_1, text='Procurar', bg='#F0F0F0', fg='#000000',
                                          command=self.procurar_1)
-        self.botao_procurar_1.place(relx=0.4825, rely=0.7425, relwidth=0.08, relheight=0.05)
-
-        self.botao_inserir_3 = tk.Button(self.aba_1, text='Inserir', bg='#F0F0F0', fg='#000000',
-                                         command=self.insercao_3)
-        self.botao_inserir_3.place(relx=0.4825, rely=0.8175, relwidth=0.08, relheight=0.05)
+        self.botao_procurar_1.place(relx=0.4825, rely=0.8175, relwidth=0.08, relheight=0.05)
 
         self.botao_calcular_1 = tk.Button(self.aba_1, text='Calcular', bg='#F0F0F0', fg='#000000', 
                                           command=self.perda_por_atrito)
         self.botao_calcular_1.place(relx=0.4825, rely=0.89, relwidth=0.08, relheight=0.05)
+        
+        self.delta_l_texto = Label(self.aba_1, text='Δl :', bg='#F0F0F0', fg='#000000')
+        self.delta_l_texto.place(relx=0.4725, rely=0.59, relwidth=0.028, relheight=0.02)
 
         # 4.0 Quadrante:
 
@@ -784,19 +788,22 @@ class programa(funcoes):
 
         self.quadro_3.heading('Perda', text='Perda', anchor=CENTER)
 
-        self.quadro_3.place(relx=0.475, rely=0.0665, relwidth=0.075, relheight=0.535)
+        self.quadro_3.place(relx=0.475, rely=0.0665, relwidth=0.075, relheight=0.4925)
 
         self.y_scroll_3 = ttk.Scrollbar(self.aba_1, orient=tk.VERTICAL, command=self.quadro_3.yview)
 
         self.quadro_3['yscroll'] = self.y_scroll_3.set
 
-        self.y_scroll_3.place(relx=0.55, rely=0.0665, relwidth=0.025, relheight=0.535)
+        self.y_scroll_3.place(relx=0.55, rely=0.0665, relwidth=0.025, relheight=0.4925)
 
         for i in range(len(self.quadro_3_itens)):
             self.quadro_3.insert(parent='', index=i, iid=i, text='', values=(str(self.quadro_3_itens[i])))
 
+        self.delta_l = Label(self.aba_1, text=self.resultado_delta_l, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.delta_l.place(relx=0.4825, rely=0.625, relwidth=0.08, relheight=0.0475) 
+
         self.lista_de_links = ttk.Combobox(self.aba_1, values=self.links_1)
-        self.lista_de_links.place(relx=0.48, rely=0.675, relwidth=0.085, relheight=0.045)
+        self.lista_de_links.place(relx=0.4825, rely=0.7475, relwidth=0.08, relheight=0.045)
 
         # 4.0 Quadrante:
 
