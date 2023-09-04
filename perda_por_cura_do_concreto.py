@@ -1,3 +1,9 @@
+'''
+Cálculo de perda de protensão por encurtamento imediato do concreto explicado por Cholfe e Bonilha (2013).
+
+CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 155-158.
+'''
+
 import math
 
 def cura_do_concreto(Ac, ycin, Ic, 
@@ -54,4 +60,7 @@ def cura_do_concreto(Ac, ycin, Ic,
     for i in range(len(forcas)):
         perda_de_forca_todos_os_cabos.append(forcas[i] - n_fios * Ap * 10**(-4) * delta_op)
 
-    return ocp, ocg, delta_op, perda_de_forca_todos_os_cabos
+    return ('%.4f' % ocp, 
+            '%.4f' % ocg, 
+            '%.4f' % delta_op, 
+            perda_de_forca_todos_os_cabos)
