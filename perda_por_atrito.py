@@ -1,7 +1,7 @@
 '''
 Cálculo de perda de protensão por atrito através do processo simplificado explicado por Cholfe e Bonilha (2013).
 
-CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 137-144.
+CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 128-144.
 '''
 
 import numpy as np
