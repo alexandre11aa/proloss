@@ -47,11 +47,15 @@ class funcoes():
                 dist.append(self.quadro_2_itens[i][0])
                 situ.append(self.quadro_2_itens[i][1])
 
-            self.quadro_3_itens = atrito(self.variaveis_1[:4],
-                                         dist,
-                                         situ,
-                                         altu,
-                                         self.variaveis_1[4])[0]
+            resultados = atrito(self.variaveis_1[:4],
+                                dist,
+                                situ,
+                                altu,
+                                self.variaveis_1[4])
+            
+            self.quadro_3_itens = resultados[0]
+            
+            self.resultado_delta_l = resultados[1]
             
             self.y_1, self.x_2, self.y_2  = [altu, self.x_1, self.quadro_3_itens]
 
