@@ -6,10 +6,10 @@ CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini
 
 import math
 
-def cura_do_concreto(Ac, ycin, Ic, 
-                     Ep, Ap, n_fios, 
-                     fck28, Mg, n, 
-                     dias, forcas, altura):
+def encurtamento_imediato_do_concreto(Ac, ycin, Ic, 
+                                      Ep, Ap, n_fios, 
+                                      fck28, Mg, n, 
+                                      dias, forcas, altura):
 
     # Módulos de elasticidade do concreto
 
