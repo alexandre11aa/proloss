@@ -11,9 +11,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-from perda_por_atrito import atrito
-from perda_por_acomodacao_de_ancoragem import acomodacao_de_ancoragem
-from perda_por_cura_do_concreto import cura_do_concreto
+from perdas_imediatas/atrito import atrito
+from perdas_imediatas/acomodacao_da_ancoragem import acomodacao_da_ancoragem
+from perdas_imediatas/encurtamento_imediato_do_concreto import encurtamento_imediato_do_concreto
 
 root = Tk()
 
@@ -63,7 +63,7 @@ class funcoes():
 
     def perda_por_acomodacao_de_ancoragem(self):
 
-        self.resultados_de_ac_de_anc = acomodacao_de_ancoragem(self.quadro_4_itens,
+        self.resultados_de_ac_de_anc = acomodacao_da_ancoragem(self.quadro_4_itens,
                                                                self.variaveis_2[0],
                                                                self.variaveis_2[1],
                                                                self.variaveis_2[3],
@@ -77,18 +77,18 @@ class funcoes():
 
     def perda_por_cura_do_concreto(self):
         
-        self.resultados_2 = cura_do_concreto(float(self.variaveis_3[1]),
-                                             float(self.variaveis_3[6]),
-                                             float(self.variaveis_3[4]),
-                                             float(self.variaveis_3[3]),
-                                             float(self.variaveis_3[2]),
-                                             float(self.variaveis_3[8]),
-                                             float(self.variaveis_3[7]),
-                                             float(self.variaveis_3[5]),
-                                             float(self.variaveis_3[0]),
-                                             self.quadro_5_itens[1],
-                                             self.quadro_5_itens[2],
-                                             self.quadro_5_itens[3])
+        self.resultados_2 = encurtamento_imediato_do_concreto(float(self.variaveis_3[1]),
+                                                              float(self.variaveis_3[6]),
+                                                              float(self.variaveis_3[4]),
+                                                              float(self.variaveis_3[3]),
+                                                              float(self.variaveis_3[2]),
+                                                              float(self.variaveis_3[8]),
+                                                              float(self.variaveis_3[7]),
+                                                              float(self.variaveis_3[5]),
+                                                              float(self.variaveis_3[0]),
+                                                              self.quadro_5_itens[1],
+                                                              self.quadro_5_itens[2],
+                                                              self.quadro_5_itens[3])
         
         self.destruicao_3()   
 
