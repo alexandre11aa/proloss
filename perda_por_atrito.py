@@ -29,8 +29,6 @@ def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
 
     for i in range(iteracoes):
 
-        print(perdas[i], distancias[i])
-
         perda_media += perdas[i] * distancias[i]
 
         if (situacao[i] == 'Curvo'):
