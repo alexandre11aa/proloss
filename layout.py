@@ -13,6 +13,7 @@ import numpy as np
 
 from perda_por_atrito import atrito
 from perda_por_acomodacao_de_ancoragem import acomodacao_de_ancoragem
+from perda_por_cura_do_concreto import cura_do_concreto
 
 root = Tk()
 
@@ -70,6 +71,23 @@ class funcoes():
                 
         self.aplicar_1()
 
+    def perda_por_cura_do_concreto(self):
+        
+        self.resultados_2 = cura_do_concreto(float(self.variaveis_3[1]),
+                                             float(self.variaveis_3[6]),
+                                             float(self.variaveis_3[4]),
+                                             float(self.variaveis_3[3]),
+                                             float(self.variaveis_3[2]),
+                                             float(self.variaveis_3[8]),
+                                             float(self.variaveis_3[7]),
+                                             float(self.variaveis_3[5]),
+                                             float(self.variaveis_3[0]),
+                                             self.quadro_5_itens[1],
+                                             self.quadro_5_itens[2],
+                                             self.quadro_5_itens[3])
+        
+        self.destruicao_3()   
+
     # Aplicações
     def aplicar_1(self):
 
@@ -109,6 +127,15 @@ class funcoes():
         
         self.destruicao_2()
 
+    def aplicar_2(self):
+
+        self.indice_da_lista_de_p_individual_para_exibir = self.lista_de_resultados.current()
+        
+        if self.lista_de_resultados.current() != 0 and len(self.resultados_2[3]) != 0:
+            self.p_individual = '%.4f' % self.resultados_2[3][(self.lista_de_resultados.current() - 1)]
+
+        self.destruicao_3()
+
     # Destruições
     def destruicao_1(self):
 
@@ -127,7 +154,6 @@ class funcoes():
 
         self.aba_1_funcoes_destrutivas()
 
-    # Destruições
     def destruicao_2(self):
 
         self.quadro_4.destroy()
@@ -148,6 +174,28 @@ class funcoes():
         self.delta_l_2.destroy()
 
         self.aba_2_funcoes_destrutivas()
+
+    def destruicao_3(self):
+        
+        self.quadro_5.destroy()
+        self.y_scroll_5.destroy()
+        self.lista_de_links_2.destroy()
+        self.variavel_ppec_n.destroy()
+        self.variavel_ppec_ac.destroy()
+        self.variavel_ppec_ap.destroy()
+        self.variavel_ppec_ep.destroy()
+        self.variavel_ppec_ic.destroy()
+        self.variavel_ppec_mg.destroy()
+        self.variavel_ppec_ycin.destroy()
+        self.variavel_ppec_fck.destroy()
+        self.variavel_ppec_ncord.destroy()
+        self.variavel_ppec_ocp.destroy()
+        self.variavel_ppec_ocg.destroy()
+        self.variavel_ppec_dop.destroy()
+        self.variavel_ppec_p_individuais.destroy()
+        self.lista_de_resultados.destroy()
+
+        self.aba_3_funcoes_destrutivas()
 
     def exemplo_1_0(self):
 
@@ -174,6 +222,16 @@ class funcoes():
 
         self.destruicao_2()
 
+    def exemplo_3(self):
+        self.quadro_5_itens = [['C1.1', 'C2.1', 'C3.1', 'C4.1', 'C5.1', 'C1.2', 'C2.2', 'C3.2', 'C4.2', 'C5.2'],
+                               [ 14, 28, 14, 28, 14, 14, 28, 14, 28, 14],
+                               [-924, -945, -934, -892, -913, -924, -945, -934, -892, -913],
+                               [8, 8, 8, 20, 20, 8, 8, 8, 20, 20]]
+        
+        self.variaveis_3 = [5, 2.678, 1.014, 200, 2, 5000, 1.454, 30, 7]
+
+        self.destruicao_3()
+        
     # Inserções
     def insercao_1(self):
         self.quadro_1_itens.append((self.ponto.get(), float(self.altura.get())))
@@ -255,6 +313,57 @@ class funcoes():
 
         self.destruicao_2()
 
+    def insercao_7(self):
+
+        if (self.cabos_ppec.get() != '') and (self.dias_ppec.get() != '') and (self.forca_ppec.get() != '') and (self.altura_ppec.get() != ''):
+
+            self.quadro_5_itens[0].append(self.cabos_ppec.get())
+            self.quadro_5_itens[1].append(float(self.dias_ppec.get()))
+            self.quadro_5_itens[2].append(float(self.forca_ppec.get()))
+            self.quadro_5_itens[3].append(float(self.altura_ppec.get()))
+
+        if str(self.lista_de_links_2.get()) != "":
+            lista_excel = np.asarray(pd.read_excel(str(self.lista_de_links_2.get()), index_col=None, header=None))
+
+            for i in range(len(lista_excel)):
+                self.quadro_5_itens[0].append(lista_excel[i][0])
+                self.quadro_5_itens[1].append(float(lista_excel[i][1]))
+                self.quadro_5_itens[2].append(float(lista_excel[i][2]))
+                self.quadro_5_itens[3].append(float(lista_excel[i][3]))
+
+        self.destruicao_3()
+
+    def insercao_8(self):
+
+        if self.lista_de_variaveis_4.get() == 'n (Cabos)':
+            self.variaveis_3[0] = self.entrada_das_variaveis_5.get()
+
+        elif self.lista_de_variaveis_4.get() == 'Ac (m²)':
+            self.variaveis_3[1] = self.entrada_das_variaveis_5.get()
+
+        elif self.lista_de_variaveis_4.get() == 'Ap (cm²)':
+            self.variaveis_3[2] = self.entrada_das_variaveis_5.get()
+
+        elif self.lista_de_variaveis_4.get() == 'Ep (GPa)':
+            self.variaveis_3[3] = self.entrada_das_variaveis_5.get()
+
+        elif self.lista_de_variaveis_4.get() == 'Ic (m^4)':
+            self.variaveis_3[4] = self.entrada_das_variaveis_5.get()
+
+        elif self.lista_de_variaveis_4.get() == 'Mg (kN.m)':
+            self.variaveis_3[5] = self.entrada_das_variaveis_5.get()
+
+        elif self.lista_de_variaveis_4.get() == 'ycin (m)':
+            self.variaveis_3[6] = self.entrada_das_variaveis_5.get()
+
+        elif self.lista_de_variaveis_4.get() == 'fck₂₈ (MPa)':
+            self.variaveis_3[7] = self.entrada_das_variaveis_5.get()
+
+        elif self.lista_de_variaveis_4.get() == 'Nº de Cordoalhas':
+            self.variaveis_3[8] = self.entrada_das_variaveis_5.get()
+
+        self.destruicao_3()
+
     # Apagando
     def apagando_1(self):
         selecionador = self.quadro_1.selection()[0]
@@ -283,6 +392,16 @@ class funcoes():
 
         self.destruicao_2()
 
+    def apagando_4(self):
+        selecionador = self.quadro_5.selection()[0]
+
+        self.quadro_5.delete(selecionador)
+
+        for i in range(len(self.quadro_5_itens)):
+            del (self.quadro_5_itens[i][int(selecionador)])
+
+        self.destruicao_3()
+
     # Procurar
     def procurar_1(self):
         arquivo = askopenfilename(filetypes=[('Arquivos do Excel', '*.xlsx')])
@@ -290,6 +409,13 @@ class funcoes():
         self.links_1.append(arquivo)
 
         self.destruicao_1()
+
+    def procurar_2(self):
+        arquivo = askopenfilename(filetypes=[('Arquivos do Excel', '*.xlsx')])
+
+        self.links_2.append(arquivo)
+
+        self.destruicao_3()
 
     # Menu de Opções
     def menus(self):
@@ -307,6 +433,7 @@ class funcoes():
         menu_de_exemplos.add_command(label='Exemplo 1.0', command=self.exemplo_1_0)
         menu_de_exemplos.add_command(label='Exemplo 1.1', command=self.exemplo_1_1)
         menu_de_exemplos.add_command(label='Exemplo 2.0', command=self.exemplo_2)
+        menu_de_exemplos.add_command(label='Exemplo 3.0', command=self.exemplo_3)
 
     # Opção Limpar
     def limpar(self):
@@ -366,6 +493,20 @@ class programa(funcoes):
         self.resultados_1 = ['','','','','','','']
 
         self.indice_da_lista_de_delta_w_para_exibir = 0
+
+        # Variáveis de Perda por Cura do Concreto
+
+        self.quadro_5_itens = [[], [], [], []]
+
+        self.links_2 = []
+        
+        self.variaveis_3 = ['','','','','','','','','']
+
+        self.resultados_2 = ['','','',[]]
+
+        self.p_individual = ''
+
+        self.indice_da_lista_de_p_individual_para_exibir = 0
 
         # Funções
 
@@ -521,9 +662,9 @@ class programa(funcoes):
         self.fundo_de_resultados_2 = Label(self.aba_1, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_de_resultados_2.place(relx=0.465, rely=0.645, relwidth=0.115, relheight=0.325)
 
-        self.botao_inserir_3 = tk.Button(self.aba_1, text='Procurar', bg='#F0F0F0', fg='#000000',
+        self.botao_procurar_1 = tk.Button(self.aba_1, text='Procurar', bg='#F0F0F0', fg='#000000',
                                          command=self.procurar_1)
-        self.botao_inserir_3.place(relx=0.4825, rely=0.7425, relwidth=0.08, relheight=0.05)
+        self.botao_procurar_1.place(relx=0.4825, rely=0.7425, relwidth=0.08, relheight=0.05)
 
         self.botao_inserir_3 = tk.Button(self.aba_1, text='Inserir', bg='#F0F0F0', fg='#000000',
                                          command=self.insercao_3)
@@ -729,8 +870,8 @@ class programa(funcoes):
         self.fundo_de_variaveis_2 = Label(self.aba_2, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_de_variaveis_2.place(relx=0.165, rely=0.04, relwidth=0.432, relheight=0.78)
 
-        self.fundo_de_variaveis_3 = Label(self.aba_2, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_de_variaveis_3.place(relx=0.165, rely=0.845, relwidth=0.432, relheight=0.125)
+        self.fundo_de_variaveis_2 = Label(self.aba_2, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_variaveis_2.place(relx=0.165, rely=0.845, relwidth=0.432, relheight=0.125)
 
         self.comprimento_a_nome = Label(self.aba_2, text='a :', bg='#F0F0F0', fg='#000000')
         self.comprimento_a_nome.place(relx=0.23, rely=0.1, relwidth=0.02, relheight=0.035)
@@ -894,13 +1035,222 @@ class programa(funcoes):
 
         # 1.0 Quadrante:
 
-        pass
+        self.fundo_do_quadro_6 = Label(self.aba_3, text='', relief="raised", bg='#F0F0F0', fg='#800000')
+        self.fundo_do_quadro_6.place(relx=0.005, rely=0.01, relwidth=0.3645, relheight=0.98)
+
+        self.fundo_cabos_dias_forcas_alturas = Label(self.aba_3, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_cabos_dias_forcas_alturas.place(relx=0.015, rely=0.04, relwidth=0.3425, relheight=0.58)
+
+        self.fundo_cabos_dias_forcas_alturas = Label(self.aba_3, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_cabos_dias_forcas_alturas.place(relx=0.015, rely=0.645, relwidth=0.3425, relheight=0.325)
+
+        self.cabos_ppec_texto = Label(self.aba_3, text='Cabo :', bg='#F0F0F0', fg='#000000')
+        self.cabos_ppec_texto.place(relx=0.04, rely=0.685, relwidth=0.043, relheight=0.035)
+
+        self.cabos_ppec = Entry(self.aba_3, text="")
+        self.cabos_ppec.place(relx=0.1075, rely=0.685, relwidth=0.07, relheight=0.04)
+
+        self.dias_ppec_texto = Label(self.aba_3, text='Dia :', bg='#F0F0F0', fg='#000000')
+        self.dias_ppec_texto.place(relx=0.195, rely=0.685, relwidth=0.034, relheight=0.035)
+
+        self.dias_ppec = Entry(self.aba_3, text="")
+        self.dias_ppec.place(relx=0.2625, rely=0.685, relwidth=0.07, relheight=0.04)
+
+        self.forca_ppec_texto = Label(self.aba_3, text='Forca :', bg='#F0F0F0', fg='#000000')
+        self.forca_ppec_texto.place(relx=0.04, rely=0.75, relwidth=0.045, relheight=0.035)
+
+        self.forca_ppec = Entry(self.aba_3, text="")
+        self.forca_ppec.place(relx=0.1075, rely=0.75, relwidth=0.07, relheight=0.04)
+
+        self.altura_ppec_texto = Label(self.aba_3, text='Altura :', bg='#F0F0F0', fg='#000000')
+        self.altura_ppec_texto.place(relx=0.195, rely=0.75, relwidth=0.051, relheight=0.035)
+
+        self.altura_ppec = Entry(self.aba_3, text="")
+        self.altura_ppec.place(relx=0.2625, rely=0.75, relwidth=0.07, relheight=0.04)
+
+        self.botao_procurar_2 = tk.Button(self.aba_3, text='Procurar', bg='#F0F0F0', fg='#000000',
+                                         command=self.procurar_2)
+        self.botao_procurar_2.place(relx=0.2525, rely=0.81, relwidth=0.08, relheight=0.05)
+
+        self.botao_calcular_3 = tk.Button(self.aba_3, text='Calcular', bg='#F0F0F0', fg='#000000',
+                                         command=self.perda_por_cura_do_concreto)
+        self.botao_calcular_3.place(relx=0.04, rely=0.88, relwidth=0.08, relheight=0.05)
+
+        self.botao_inserir_7 = tk.Button(self.aba_3, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                         command=self.insercao_7)
+        self.botao_inserir_7.place(relx=0.1475, rely=0.88, relwidth=0.08, relheight=0.05)
+
+        self.botao_apagar_4 = tk.Button(self.aba_3, text='Apagar', bg='#F0F0F0', fg='#000000',
+                                         command=self.apagando_4)
+        self.botao_apagar_4.place(relx=0.2525, rely=0.88, relwidth=0.08, relheight=0.05)
+
+        # 2.0 Quadrante:
+
+        self.fundo_do_quadro_7 = Label(self.aba_3, text='', relief="raised", bg='#F0F0F0', fg='#800000')
+        self.fundo_do_quadro_7.place(relx=0.385, rely=0.01, relwidth=0.402, relheight=0.98)
+
+        self.fundo_de_variaveis_3 = Label(self.aba_3, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_variaveis_3.place(relx=0.395, rely=0.04, relwidth=0.38, relheight=0.78)
+
+        self.fundo_de_variaveis_3 = Label(self.aba_3, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_variaveis_3.place(relx=0.395, rely=0.845, relwidth=0.38, relheight=0.125)
+
+        self.lista_de_variaveis_4 = ttk.Combobox(self.aba_3, values=['',
+                                                                     'n (Cabos)',
+                                                                     'Ac (m²)',
+                                                                     'Ap (cm²)',
+                                                                     'Ep (GPa)',
+                                                                     'Ic (m^4)',
+                                                                     'Mg (kN.m)',
+                                                                     'ycin (m)',
+                                                                     'fck₂₈ (MPa)',
+                                                                     'Nº de Cordoalhas'])
+        self.lista_de_variaveis_4.place(relx=0.42, rely=0.88, relwidth=0.135, relheight=0.05)
+        self.lista_de_variaveis_4.current(0)
+
+        self.variavel_n_ppec_texto = Label(self.aba_3, text='n :', bg='#F0F0F0', fg='#000000')
+        self.variavel_n_ppec_texto.place(relx=0.42, rely=0.13, relwidth=0.02, relheight=0.035)
+
+        self.variavel_ppec_ac_texto = Label(self.aba_3, text='Ac :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ppec_ac_texto.place(relx=0.42, rely=0.37, relwidth=0.034, relheight=0.035)
+
+        self.variavel_ppec_ap_texto = Label(self.aba_3, text='Ap :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ppec_ap_texto.place(relx=0.42, rely=0.6, relwidth=0.034, relheight=0.035)
+
+        self.variavel_ep_ppec_texto = Label(self.aba_3, text='Ep :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ep_ppec_texto.place(relx=0.535, rely=0.13, relwidth=0.030, relheight=0.035)
+
+        self.variavel_ppec_ic_texto = Label(self.aba_3, text='Ic :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ppec_ic_texto.place(relx=0.535, rely=0.37, relwidth=0.03, relheight=0.035)
+
+        self.variavel_ppec_mg_texto = Label(self.aba_3, text='Mg :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ppec_mg_texto.place(relx=0.535, rely=0.6, relwidth=0.034, relheight=0.035)
+
+        self.variavel_ycin_ppec_texto = Label(self.aba_3, text='ycin :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ycin_ppec_texto.place(relx=0.65, rely=0.13, relwidth=0.038, relheight=0.035)
+
+        self.variavel_ppec_fck_texto = Label(self.aba_3, text='fck₂₈ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ppec_fck_texto.place(relx=0.65, rely=0.37, relwidth=0.045, relheight=0.035)
+
+        self.variavel_ppec_ncord_texto = Label(self.aba_3, text='Nº Cd. :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ppec_ncord_texto.place(relx=0.65, rely=0.6, relwidth=0.058, relheight=0.035)
+
+        self.entrada_das_variaveis_5 = Entry(self.aba_3, text="")
+        self.entrada_das_variaveis_5.place(relx=0.5725, rely=0.88, relwidth=0.08, relheight=0.05)
+
+        self.botao_inserir_9 = tk.Button(self.aba_3, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                         command=self.insercao_8)
+        self.botao_inserir_9.place(relx=0.67, rely=0.88, relwidth=0.08, relheight=0.05)
+
+        # 3.0 Quadrante:
+
+        self.fundo_do_quadro_7 = Label(self.aba_3, text='', relief="raised", bg='#F0F0F0', fg='#800000')
+        self.fundo_do_quadro_7.place(relx=0.805, rely=0.01, relwidth=0.185, relheight=0.98)
+
+        self.fundo_de_resultados_5 = Label(self.aba_3, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_resultados_5.place(relx=0.815, rely=0.04, relwidth=0.163, relheight=0.61)
+
+        self.fundo_de_resultados_6 = Label(self.aba_3, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_resultados_6.place(relx=0.815, rely=0.675, relwidth=0.163, relheight=0.295)
+
+        self.variavel_ocp_ppec_texto = Label(self.aba_3, text='σcp :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ocp_ppec_texto.place(relx=0.8475, rely=0.1, relwidth=0.034, relheight=0.04)
+
+        self.variavel_ppec_ocg_texto = Label(self.aba_3, text='σcg :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ppec_ocg_texto.place(relx=0.8475, rely=0.28, relwidth=0.034, relheight=0.04)
+
+        self.variavel_ppec_dop_texto = Label(self.aba_3, text='Δσp :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ppec_dop_texto.place(relx=0.8475, rely=0.46, relwidth=0.045, relheight=0.04)
+
+        self.botao_aplicar_2 = tk.Button(self.aba_3, text='Aplicar', bg='#F0F0F0', fg='#000000',
+                                         command=self.aplicar_2)
+        self.botao_aplicar_2.place(relx=0.8475, rely=0.88, relwidth=0.1, relheight=0.05)
 
     # Widgets Dinâmicos da Aba 3
     def aba_3_funcoes_destrutivas(self):
 
         # 1.0 Quadrante:
 
-        pass
+        self.quadro_5 = ttk.Treeview(self.aba_3, columns=('Cabos', 'Dias', 'Forças', 'Alturas'))
+
+        self.quadro_5.column('#0', width=0, stretch=NO)
+        self.quadro_5.column('Cabos', anchor=CENTER, width=20)
+        self.quadro_5.column('Dias', anchor=CENTER, width=20)
+        self.quadro_5.column('Forças', anchor=CENTER, width=20)
+        self.quadro_5.column('Alturas', anchor=CENTER, width=20)
+
+        self.quadro_5.heading('Cabos', text='Cabos', anchor=CENTER)
+        self.quadro_5.heading('Dias', text='Dias', anchor=CENTER)
+        self.quadro_5.heading('Forças', text='Forças', anchor=CENTER)
+        self.quadro_5.heading('Alturas', text='Alturas', anchor=CENTER)
+
+        self.quadro_5.place(relx=0.025, rely=0.0665, relwidth=0.3, relheight=0.535)
+
+        self.y_scroll_5 = ttk.Scrollbar(self.aba_3, orient=tk.VERTICAL, command=self.quadro_3.yview)
+
+        self.quadro_5['yscroll'] = self.y_scroll_4.set
+
+        self.y_scroll_5.place(relx=0.325, rely=0.0665, relwidth=0.025, relheight=0.535)
+
+        for i in range(len(self.quadro_5_itens[0])):
+            self.quadro_5.insert(parent='', index=i, iid=i, text='', values=((self.quadro_5_itens[0][i]), 
+                                                                             '%.0f' % float(self.quadro_5_itens[1][i]), 
+                                                                             '%.2f' % float(self.quadro_5_itens[2][i]), 
+                                                                             '%.2f' % float(self.quadro_5_itens[3][i])))
+
+        self.lista_de_links_2 = ttk.Combobox(self.aba_3, values=self.links_2)
+        self.lista_de_links_2.place(relx=0.04, rely=0.81, relwidth=0.19, relheight=0.05)
+
+        # 2.0 Quadrante:
+
+        self.variavel_ppec_n = Label(self.aba_3, text=self.variaveis_3[0], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_n.place(relx=0.42, rely=0.2, relwidth=0.1, relheight=0.05)
+
+        self.variavel_ppec_ac = Label(self.aba_3, text=self.variaveis_3[1], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_ac.place(relx=0.42, rely=0.44, relwidth=0.1, relheight=0.05)
+
+        self.variavel_ppec_ap = Label(self.aba_3, text=self.variaveis_3[2], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_ap.place(relx=0.42, rely=0.67, relwidth=0.1, relheight=0.05)
+
+        self.variavel_ppec_ep = Label(self.aba_3, text=self.variaveis_3[3], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_ep.place(relx=0.535, rely=0.2, relwidth=0.1, relheight=0.05)
+
+        self.variavel_ppec_ic = Label(self.aba_3, text=self.variaveis_3[4], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_ic.place(relx=0.535, rely=0.44, relwidth=0.1, relheight=0.05)
+
+        self.variavel_ppec_mg = Label(self.aba_3, text=self.variaveis_3[5], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_mg.place(relx=0.535, rely=0.67, relwidth=0.1, relheight=0.05)
+
+        self.variavel_ppec_ycin = Label(self.aba_3, text=self.variaveis_3[6], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_ycin.place(relx=0.65, rely=0.2, relwidth=0.1, relheight=0.05)
+
+        self.variavel_ppec_fck = Label(self.aba_3, text=self.variaveis_3[7], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_fck.place(relx=0.65, rely=0.44, relwidth=0.1, relheight=0.05)
+
+        self.variavel_ppec_ncord = Label(self.aba_3, text=self.variaveis_3[8], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_ncord.place(relx=0.65, rely=0.67, relwidth=0.1, relheight=0.05)
+
+        # 3.0 Quadrante:
+
+        self.variavel_ppec_ocp = Label(self.aba_3, text=self.resultados_2[0], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_ocp.place(relx=0.8475, rely=0.17, relwidth=0.1, relheight=0.05)
+
+        self.variavel_ppec_ocg = Label(self.aba_3, text=self.resultados_2[1], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_ocg.place(relx=0.8475, rely=0.35, relwidth=0.1, relheight=0.05)
+
+        self.variavel_ppec_dop = Label(self.aba_3, text=self.resultados_2[2], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_dop.place(relx=0.8475, rely=0.53, relwidth=0.1, relheight=0.05)
+
+        self.variavel_ppec_p_individuais = Label(self.aba_3, text=self.p_individual, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ppec_p_individuais.place(relx=0.8475, rely=0.72, relwidth=0.1, relheight=0.05)
+
+        perdas_individuais_de_força = ['']
+
+        for i in range(len(self.quadro_5_itens[0])):
+            perdas_individuais_de_força.append(f'P_{self.quadro_5_itens[0][i]}')
+
+        self.lista_de_resultados = ttk.Combobox(self.aba_3, values=perdas_individuais_de_força)
+        self.lista_de_resultados.place(relx=0.8475, rely=0.8, relwidth=0.1, relheight=0.05)
+        self.lista_de_resultados.current(self.indice_da_lista_de_p_individual_para_exibir)
 
 programa()
