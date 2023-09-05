@@ -11,9 +11,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-from perdas_imediatas/atrito import atrito
-from perdas_imediatas/acomodacao_da_ancoragem import acomodacao_da_ancoragem
-from perdas_imediatas/encurtamento_imediato_do_concreto import encurtamento_imediato_do_concreto
+from perdas_imediatas.atrito import atrito
+from perdas_imediatas.acomodacao_da_ancoragem import acomodacao_da_ancoragem
+from perdas_imediatas.encurtamento_imediato_do_concreto import encurtamento_imediato_do_concreto
 
 root = Tk()
 
