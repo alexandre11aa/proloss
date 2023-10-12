@@ -15,6 +15,9 @@ from perdas_imediatas.atrito import atrito
 from perdas_imediatas.acomodacao_da_ancoragem import acomodacao_da_ancoragem
 from perdas_imediatas.encurtamento_imediato_do_concreto import encurtamento_imediato_do_concreto
 
+from itens_auxiliares.tabelas_informativas import tabelas_informativas
+from itens_auxiliares.calculos_auxiliares import calculos_auxiliares
+
 root = Tk()
 
 class funcoes():
@@ -449,6 +452,261 @@ class funcoes():
         menu_de_exemplos.add_command(label='Exemplo 2.0', command=self.exemplo_2)
         menu_de_exemplos.add_command(label='Exemplo 3.0', command=self.exemplo_3)
 
+        menu_de_tabelas = Menu(barra_de_menu)
+        barra_de_menu.add_cascade(label='Tabelas', menu = menu_de_tabelas)
+        menu_de_tabelas.add_command(label='Tabela 1', command=lambda: self.tabelas_auxiliares('numeros_usuais_para_determinacao_da_fluencia_e_retracao'))
+        menu_de_tabelas.add_command(label='Tabela 2', command=lambda: self.tabelas_auxiliares('fluencia_e_retracao_em_funcao_da_vel_de_endurecimento_do_cim'))
+
+        menu_de_calculos = Menu(barra_de_menu)
+        barra_de_menu.add_cascade(label='Cálculos', menu = menu_de_calculos)
+        menu_de_calculos.add_command(label='Cálculo 1', command=self.calculo_espessura_ficticia)
+        menu_de_calculos.add_command(label='Cálculo 2', command=self.calculo_idade_ficticia)
+
+    # Tabelas Informativas
+    def tabelas_auxiliares(self, img):
+
+        # Configurações da Página
+
+        self.janela_de_ajuda = tk.Toplevel()
+
+        self.janela_de_ajuda.geometry("650x500")
+
+        self.janela_de_ajuda.resizable(False, False)
+
+        self.janela_de_ajuda.grab_set()
+        
+        self.main_frame = Frame(self.janela_de_ajuda)
+        self.main_frame.pack(fill=BOTH, expand=1)
+
+        # Criando um Canvas
+
+        self.my_canvas = Canvas(self.main_frame)
+
+        self.my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
+
+        # Adicionando Imagem à Janela na Tela
+
+        self.informacoes = tk.PhotoImage(data=tabelas_informativas(img))
+
+        self.my_canvas.create_image(1, 1, image=self.informacoes, anchor=tk.NW)
+
+    def calculo_espessura_ficticia(self):
+
+        # Configurações da Página
+
+        self.janela_de_ajuda = tk.Toplevel()
+
+        self.janela_de_ajuda.geometry("303x350")
+
+        self.janela_de_ajuda.resizable(False, False)
+
+        self.janela_de_ajuda.grab_set()
+       
+        self.fundo_ef_0 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ef_0.place(relx=0.0225, rely=0.04, relwidth=0.955, relheight=0.94)
+
+        self.fundo_ef_1 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ef_1.place(relx=0.0545, rely=0.0825, relwidth=0.285, relheight=0.865)
+
+        self.fundo_ef_2 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ef_2.place(relx=0.3595, rely=0.0825, relwidth=0.285, relheight=0.3)
+
+        self.fundo_ef_3 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ef_3.place(relx=0.3595, rely=0.415, relwidth=0.285, relheight=0.5325)
+        
+        self.fundo_ef_4 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ef_4.place(relx=0.6625, rely=0.0825, relwidth=0.285, relheight=0.865)
+
+        self.texto_ef = Label(self.janela_de_ajuda, text='Espessura Fictícia', bg='#F0F0F0', fg='#000000')
+        self.texto_ef.place(relx=0.125, rely=0.01, relwidth=0.32, relheight=0.05)
+
+        # Variáveis
+
+        self.quadro_ef_1 = ttk.Treeview(self.janela_de_ajuda, columns=('U'))
+
+        self.quadro_ef_1.column('#0', width=0, stretch=NO)
+        self.quadro_ef_1.column('U', anchor=CENTER, width=20)
+
+        self.quadro_ef_1.heading('U', text='U', anchor=CENTER)
+
+        self.quadro_ef_1.place(relx=0.075, rely=0.118, relwidth=0.19, relheight=0.808)
+
+        self.y_scroll_ef_1 = ttk.Scrollbar(self.janela_de_ajuda, orient=tk.VERTICAL, command=self.quadro_ef_1.yview)
+
+        self.quadro_ef_1['yscroll'] = self.y_scroll_ef_1.set
+
+        self.y_scroll_ef_1.place(relx=0.268, rely=0.118, relwidth=0.05, relheight=0.808)
+
+        self.quadro_ef_1_itens = []
+
+        for i in range(len(self.quadro_ef_1_itens)):
+            self.quadro_ef_1.insert(parent='', index=i, iid=i, text='',
+                                 values=('%.4f' % float(self.quadro_ef_1_itens[i][1])))
+            
+        self.variavel_1 = Entry(self.janela_de_ajuda, text="")
+        self.variavel_1.place(relx=0.41, rely=0.12, relwidth=0.19, relheight=0.064)
+
+        self.botao_inserir_ef_1 = tk.Button(self.janela_de_ajuda, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                         command=self.insercao_1)
+        self.botao_inserir_ef_1.place(relx=0.41, rely=0.2075, relwidth=0.19, relheight=0.065)
+
+        self.botao_apagar_ef = tk.Button(self.janela_de_ajuda, text='Apagar', bg='#F0F0F0', fg='#000000',
+                                         command=self.insercao_1)
+        self.botao_apagar_ef.place(relx=0.41, rely=0.295, relwidth=0.19, relheight=0.065)
+
+        self.texto_ef = Label(self.janela_de_ajuda, text='Ac', bg='#F0F0F0', fg='#000000')
+        self.texto_ef.place(relx=0.41, rely=0.42, relwidth=0.05, relheight=0.05)
+
+        self.r1 = Label(self.janela_de_ajuda, text=str(self.variaveis_1[3]), relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.r1.place(relx=0.41, rely=0.48, relwidth=0.19, relheight=0.064)
+
+        self.texto_ef = Label(self.janela_de_ajuda, text='μ_ar', bg='#F0F0F0', fg='#000000')
+        self.texto_ef.place(relx=0.41, rely=0.54, relwidth=0.08, relheight=0.05)
+
+        self.r2 = Label(self.janela_de_ajuda, text=str(self.variaveis_1[3]), relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.r2.place(relx=0.41, rely=0.6, relwidth=0.19, relheight=0.064)
+
+        self.variavel_2 = Entry(self.janela_de_ajuda, text="")
+        self.variavel_2.place(relx=0.41, rely=0.6875, relwidth=0.19, relheight=0.064)
+
+        self.lista_variaveis_ef = ttk.Combobox(self.janela_de_ajuda, values=['', 
+                                                                             'Ac', 
+                                                                             'μ_ar'])
+        self.lista_variaveis_ef.place(relx=0.41, rely=0.775, relwidth=0.19, relheight=0.065)
+        self.lista_variaveis_ef.current(0)
+
+        self.botao_inserir_ef_2 = tk.Button(self.janela_de_ajuda, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                         command=self.insercao_1)
+        self.botao_inserir_ef_2.place(relx=0.41, rely=0.8625, relwidth=0.19, relheight=0.065)
+
+        self.botao_calcular_ef = tk.Button(self.janela_de_ajuda, text='Calcular', bg='#F0F0F0', fg='#000000',
+                                         command=self.insercao_1)
+        self.botao_calcular_ef.place(relx=0.71, rely=0.8625, relwidth=0.19, relheight=0.065)
+
+        # Resultados
+
+        self.quadro_ef_2 = ttk.Treeview(self.janela_de_ajuda, columns=('h_fic'))
+
+        self.quadro_ef_2.column('#0', width=0, stretch=NO)
+        self.quadro_ef_2.column('h_fic', anchor=CENTER, width=20)
+
+        self.quadro_ef_2.heading('h_fic', text='h_fic', anchor=CENTER)
+
+        self.quadro_ef_2.place(relx=0.685, rely=0.118, relwidth=0.19, relheight=0.715)
+
+        self.y_scroll_ef_2 = ttk.Scrollbar(self.janela_de_ajuda, orient=tk.VERTICAL, command=self.quadro_ef_2.yview)
+
+        self.quadro_ef_2['yscroll'] = self.y_scroll_ef_2.set
+
+        self.y_scroll_ef_2.place(relx=0.878, rely=0.118, relwidth=0.05, relheight=0.715)
+
+        self.quadro_ef_2_itens = []
+
+        for i in range(len(self.quadro_ef_2_itens)):
+            self.quadro_ef_2.insert(parent='', index=i, iid=i, text='',
+                                 values=('%.4f' % float(self.quadro_ef_2_itens[i][1])))
+
+    def calculo_idade_ficticia(self):
+
+        # Configurações da Página
+
+        self.janela_de_ajuda = tk.Toplevel()
+
+        self.janela_de_ajuda.geometry("375x350")
+
+        self.janela_de_ajuda.resizable(False, False)
+
+        self.janela_de_ajuda.grab_set()
+        
+        self.fundo_tf_0 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_tf_0.place(relx=0.02, rely=0.04, relwidth=0.955, relheight=0.94)
+
+        self.fundo_tf_1 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_tf_1.place(relx=0.0425, rely=0.08, relwidth=0.5175, relheight=0.865)
+
+        self.fundo_tf_2 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_tf_2.place(relx=0.575, rely=0.08, relwidth=0.375, relheight=0.35)
+
+        self.fundo_tf_3 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_tf_3.place(relx=0.575, rely=0.45, relwidth=0.375, relheight=0.495)
+
+        self.texto_tf = Label(self.janela_de_ajuda, text='Idade Fictícia', bg='#F0F0F0', fg='#000000')
+        self.texto_tf.place(relx=0.125, rely=0.01, relwidth=0.2, relheight=0.05)
+
+        # Variáveis
+
+        self.quadro_tf = ttk.Treeview(self.janela_de_ajuda, columns=('α', 'Ti', 'Δt'))
+
+        self.quadro_tf.column('#0', width=0, stretch=NO)
+        self.quadro_tf.column('α', anchor=CENTER, width=20)
+        self.quadro_tf.column('Ti', anchor=CENTER, width=20)
+        self.quadro_tf.column('Δt', anchor=CENTER, width=20)
+
+        self.quadro_tf.heading('α', text='α', anchor=CENTER)
+        self.quadro_tf.heading('Ti', text='Ti', anchor=CENTER)
+        self.quadro_tf.heading('Δt', text='Δt', anchor=CENTER)
+
+        self.quadro_tf.place(relx=0.062, rely=0.118, relwidth=0.436, relheight=0.808)
+
+        self.y_scroll_tf = ttk.Scrollbar(self.janela_de_ajuda, orient=tk.VERTICAL, command=self.quadro_tf.yview)
+
+        self.quadro_tf['yscroll'] = self.y_scroll_tf.set
+
+        self.y_scroll_tf.place(relx=0.5, rely=0.118, relwidth=0.05, relheight=0.808)
+
+        self.quadro_tf_itens = []
+
+        for i in range(len(self.quadro_tf_itens)):
+            self.quadro_tf.insert(parent='', index=i, iid=i, text='',
+                                 values=(self.quadro_1_itens[i][0], '%.4f' % float(self.quadro_tf_itens[i][1])))
+
+        self.lista_variaveis_if = ttk.Combobox(self.janela_de_ajuda, values=['', 
+                                                                             'α', 
+                                                                             'Ti', 
+                                                                             'Δt'])
+        self.lista_variaveis_if.place(relx=0.595, rely=0.125, relwidth=0.335, relheight=0.065)
+        self.lista_variaveis_if.current(0)
+
+        self.botao_calcular_if = tk.Button(self.janela_de_ajuda, text='Calcular', bg='#F0F0F0', fg='#000000',
+                                         command=self.insercao_1)
+        self.botao_calcular_if.place(relx=0.595, rely=0.225, relwidth=0.157, relheight=0.065)
+
+        self.variavel = Entry(self.janela_de_ajuda, text="")
+        self.variavel.place(relx=0.77, rely=0.225, relwidth=0.157, relheight=0.064)
+
+        self.botao_inserir_if = tk.Button(self.janela_de_ajuda, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                         command=self.insercao_1)
+        self.botao_inserir_if.place(relx=0.595, rely=0.325, relwidth=0.157, relheight=0.065)
+
+        self.botao_apagar_if = tk.Button(self.janela_de_ajuda, text='Apagar', bg='#F0F0F0', fg='#000000',
+                                         command=self.insercao_1)
+        self.botao_apagar_if.place(relx=0.77, rely=0.325, relwidth=0.157, relheight=0.065)
+
+        # Resultados
+
+        self.quadro_tf_res = ttk.Treeview(self.janela_de_ajuda, columns=('α', 't_fic'))
+
+        self.quadro_tf_res.column('#0', width=0, stretch=NO)
+        self.quadro_tf_res.column('α', anchor=CENTER, width=20)
+        self.quadro_tf_res.column('t_fic', anchor=CENTER, width=20)
+
+        self.quadro_tf_res.heading('α', text='α', anchor=CENTER)
+        self.quadro_tf_res.heading('t_fic', text='t_fic', anchor=CENTER)
+
+        self.quadro_tf_res.place(relx=0.595, rely=0.5025, relwidth=0.295, relheight=0.424)
+
+        self.y_scroll_tf_res = ttk.Scrollbar(self.janela_de_ajuda, orient=tk.VERTICAL, command=self.quadro_tf_res.yview)
+
+        self.quadro_tf_res['yscroll'] = self.y_scroll_tf_res.set
+
+        self.y_scroll_tf_res.place(relx=0.89, rely=0.5025, relwidth=0.05, relheight=0.424)
+
+        self.quadro_tf_res_itens = []
+
+        for i in range(len(self.quadro_tf_res_itens)):
+            self.quadro_tf.insert(parent='', index=i, iid=i, text='',
+                                 values=(self.quadro_1_itens[i][0], '%.4f' % float(self.quadro_tf_res_itens[i][1])))
+        
     # Opção Limpar
     def limpar(self):
         self.quadro_1_itens = []
@@ -535,7 +793,7 @@ class programa(funcoes):
 
     # Configurações da Tela
     def tela(self):
-        self.root.title("Cálculo de Perdas de Protensão")
+        self.root.title("ProLoss")
         self.root.configure(background='#F0F0F0')
         self.root.geometry('750x500')
         self.root.resizable(False, False)
