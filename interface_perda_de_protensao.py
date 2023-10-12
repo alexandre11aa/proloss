@@ -489,6 +489,8 @@ class funcoes():
 
         self.my_canvas.create_image(1, 1, image=self.informacoes, anchor=tk.NW)
 
+    # Cálculos Auxiliares
+
     def calculo_espessura_ficticia(self):
 
         # Configurações da Página
