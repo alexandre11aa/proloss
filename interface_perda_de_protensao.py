@@ -16,7 +16,8 @@ from perdas_imediatas.acomodacao_da_ancoragem import acomodacao_da_ancoragem
 from perdas_imediatas.encurtamento_imediato_do_concreto import encurtamento_imediato_do_concreto
 
 from itens_auxiliares.tabelas_informativas import tabelas_informativas
-from itens_auxiliares.calculos_auxiliares import calculos_auxiliares
+from itens_auxiliares.calculos_auxiliares import calculo_da_espessura_ficticia
+from itens_auxiliares.calculos_auxiliares import calculo_da_idade_ficticia
 
 root = Tk()
 
@@ -258,8 +259,6 @@ class funcoes():
     def insercao_2(self):
         self.quadro_2_itens.append((float(self.trecho.get()), self.lista_de_tipo.get()))
 
-        print(self.quadro_2_itens)
-
         self.destruicao_1()
 
     def insercao_3(self):
@@ -494,219 +493,317 @@ class funcoes():
 
         # Configurações da Página
 
-        self.janela_de_ajuda = tk.Toplevel()
+        self.janela = tk.Toplevel()
 
-        self.janela_de_ajuda.geometry("303x350")
+        self.janela.geometry("303x350")
 
-        self.janela_de_ajuda.resizable(False, False)
+        self.janela.resizable(False, False)
 
-        self.janela_de_ajuda.grab_set()
+        self.janela.grab_set()
        
-        self.fundo_ef_0 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ef_0 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_ef_0.place(relx=0.0225, rely=0.04, relwidth=0.955, relheight=0.94)
 
-        self.fundo_ef_1 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ef_1 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_ef_1.place(relx=0.0545, rely=0.0825, relwidth=0.285, relheight=0.865)
 
-        self.fundo_ef_2 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ef_2 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_ef_2.place(relx=0.3595, rely=0.0825, relwidth=0.285, relheight=0.3)
 
-        self.fundo_ef_3 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ef_3 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_ef_3.place(relx=0.3595, rely=0.415, relwidth=0.285, relheight=0.5325)
         
-        self.fundo_ef_4 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ef_4 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_ef_4.place(relx=0.6625, rely=0.0825, relwidth=0.285, relheight=0.865)
 
-        self.texto_ef = Label(self.janela_de_ajuda, text='Espessura Fictícia', bg='#F0F0F0', fg='#000000')
+        self.texto_ef = Label(self.janela, text='Espessura Fictícia', bg='#F0F0F0', fg='#000000')
         self.texto_ef.place(relx=0.125, rely=0.01, relwidth=0.32, relheight=0.05)
 
         # Variáveis
 
-        self.quadro_ef_1 = ttk.Treeview(self.janela_de_ajuda, columns=('U'))
+        self.quadro_ef_1 = ttk.Treeview(self.janela, columns=('U'))
 
         self.quadro_ef_1.column('#0', width=0, stretch=NO)
         self.quadro_ef_1.column('U', anchor=CENTER, width=20)
 
-        self.quadro_ef_1.heading('U', text='U', anchor=CENTER)
+        self.quadro_ef_1.heading('U', text='U (%)', anchor=CENTER)
 
         self.quadro_ef_1.place(relx=0.075, rely=0.118, relwidth=0.19, relheight=0.808)
 
-        self.y_scroll_ef_1 = ttk.Scrollbar(self.janela_de_ajuda, orient=tk.VERTICAL, command=self.quadro_ef_1.yview)
+        self.y_scroll_ef_1 = ttk.Scrollbar(self.janela, orient=tk.VERTICAL, command=self.quadro_ef_1.yview)
 
         self.quadro_ef_1['yscroll'] = self.y_scroll_ef_1.set
 
         self.y_scroll_ef_1.place(relx=0.268, rely=0.118, relwidth=0.05, relheight=0.808)
 
-        self.quadro_ef_1_itens = []
-
-        for i in range(len(self.quadro_ef_1_itens)):
+        for i in range(len(self.valores_de_U)):
             self.quadro_ef_1.insert(parent='', index=i, iid=i, text='',
-                                 values=('%.4f' % float(self.quadro_ef_1_itens[i][1])))
+                                    values=('%.4f' % float(self.valores_de_U[i])))
             
-        self.variavel_1 = Entry(self.janela_de_ajuda, text="")
+        self.variavel_1 = Entry(self.janela, text="")
         self.variavel_1.place(relx=0.41, rely=0.12, relwidth=0.19, relheight=0.064)
 
-        self.botao_inserir_ef_1 = tk.Button(self.janela_de_ajuda, text='Inserir', bg='#F0F0F0', fg='#000000',
-                                         command=self.insercao_1)
+        self.botao_inserir_ef_1 = tk.Button(self.janela, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                         command=lambda: self.calculo_espessura_ficticia_funcoes('i_U'))
         self.botao_inserir_ef_1.place(relx=0.41, rely=0.2075, relwidth=0.19, relheight=0.065)
 
-        self.botao_apagar_ef = tk.Button(self.janela_de_ajuda, text='Apagar', bg='#F0F0F0', fg='#000000',
-                                         command=self.insercao_1)
+        self.botao_apagar_ef = tk.Button(self.janela, text='Apagar', bg='#F0F0F0', fg='#000000',
+                                         command=lambda: self.calculo_espessura_ficticia_funcoes('a_U'))
         self.botao_apagar_ef.place(relx=0.41, rely=0.295, relwidth=0.19, relheight=0.065)
 
-        self.texto_ef = Label(self.janela_de_ajuda, text='Ac', bg='#F0F0F0', fg='#000000')
+        self.texto_ef = Label(self.janela, text='Ac', bg='#F0F0F0', fg='#000000')
         self.texto_ef.place(relx=0.41, rely=0.42, relwidth=0.05, relheight=0.05)
 
-        self.r1 = Label(self.janela_de_ajuda, text=str(self.variaveis_1[3]), relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.r1 = Label(self.janela, text=str(self.valor_de_Ac), relief="sunken", bg='#FFFFFF', fg='#000000')
         self.r1.place(relx=0.41, rely=0.48, relwidth=0.19, relheight=0.064)
 
-        self.texto_ef = Label(self.janela_de_ajuda, text='μ_ar', bg='#F0F0F0', fg='#000000')
+        self.texto_ef = Label(self.janela, text='μ_ar', bg='#F0F0F0', fg='#000000')
         self.texto_ef.place(relx=0.41, rely=0.54, relwidth=0.08, relheight=0.05)
 
-        self.r2 = Label(self.janela_de_ajuda, text=str(self.variaveis_1[3]), relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.r2 = Label(self.janela, text=str(self.valor_de_u_ar), relief="sunken", bg='#FFFFFF', fg='#000000')
         self.r2.place(relx=0.41, rely=0.6, relwidth=0.19, relheight=0.064)
 
-        self.variavel_2 = Entry(self.janela_de_ajuda, text="")
+        self.variavel_2 = Entry(self.janela, text="")
         self.variavel_2.place(relx=0.41, rely=0.6875, relwidth=0.19, relheight=0.064)
 
-        self.lista_variaveis_ef = ttk.Combobox(self.janela_de_ajuda, values=['', 
-                                                                             'Ac', 
-                                                                             'μ_ar'])
+        self.lista_variaveis_ef = ttk.Combobox(self.janela, values=['', 
+                                                                    'Ac (m²)', 
+                                                                    'μ_ar (m)'])
         self.lista_variaveis_ef.place(relx=0.41, rely=0.775, relwidth=0.19, relheight=0.065)
         self.lista_variaveis_ef.current(0)
 
-        self.botao_inserir_ef_2 = tk.Button(self.janela_de_ajuda, text='Inserir', bg='#F0F0F0', fg='#000000',
-                                         command=self.insercao_1)
-        self.botao_inserir_ef_2.place(relx=0.41, rely=0.8625, relwidth=0.19, relheight=0.065)
-
-        self.botao_calcular_ef = tk.Button(self.janela_de_ajuda, text='Calcular', bg='#F0F0F0', fg='#000000',
-                                         command=self.insercao_1)
-        self.botao_calcular_ef.place(relx=0.71, rely=0.8625, relwidth=0.19, relheight=0.065)
+        self.botao_inserir_ef_2 = tk.Button(self.janela, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                            command=lambda: self.calculo_espessura_ficticia_funcoes('Ac_u_ar'))
+        self.botao_inserir_ef_2.place(relx=0.41, rely=0.8625, relwidth=0.19, relheight=0.065)       
 
         # Resultados
+        
+        self.botao_calcular_ef = tk.Button(self.janela, text='Calcular', bg='#F0F0F0', fg='#000000',
+                                           command=lambda: self.calculo_espessura_ficticia_funcoes('h_fic'))
+        self.botao_calcular_ef.place(relx=0.71, rely=0.8625, relwidth=0.19, relheight=0.065)
 
-        self.quadro_ef_2 = ttk.Treeview(self.janela_de_ajuda, columns=('h_fic'))
+        self.quadro_ef_2 = ttk.Treeview(self.janela, columns=('h_fic'))
 
         self.quadro_ef_2.column('#0', width=0, stretch=NO)
         self.quadro_ef_2.column('h_fic', anchor=CENTER, width=20)
 
-        self.quadro_ef_2.heading('h_fic', text='h_fic', anchor=CENTER)
+        self.quadro_ef_2.heading('h_fic', text='h (cm)', anchor=CENTER)
 
         self.quadro_ef_2.place(relx=0.685, rely=0.118, relwidth=0.19, relheight=0.715)
 
-        self.y_scroll_ef_2 = ttk.Scrollbar(self.janela_de_ajuda, orient=tk.VERTICAL, command=self.quadro_ef_2.yview)
+        self.y_scroll_ef_2 = ttk.Scrollbar(self.janela, orient=tk.VERTICAL, command=self.quadro_ef_2.yview)
 
         self.quadro_ef_2['yscroll'] = self.y_scroll_ef_2.set
 
         self.y_scroll_ef_2.place(relx=0.878, rely=0.118, relwidth=0.05, relheight=0.715)
 
-        self.quadro_ef_2_itens = []
-
-        for i in range(len(self.quadro_ef_2_itens)):
+        for i in range(len(self.valores_de_h_fic)):
             self.quadro_ef_2.insert(parent='', index=i, iid=i, text='',
-                                 values=('%.4f' % float(self.quadro_ef_2_itens[i][1])))
+                                    values=('%.4f' % float(self.valores_de_h_fic[i])))
+
+    def calculo_espessura_ficticia_funcoes(self, funcao):
+        
+        if funcao == 'i_U':
+            self.valores_de_U.append(float(self.variavel_1.get()))
+
+        elif funcao == 'a_U':
+            selecionador = self.quadro_ef_1.selection()[0]
+
+            self.quadro_ef_1.delete(selecionador)
+
+            del (self.valores_de_U[int(selecionador)])
+
+        elif funcao == 'Ac_u_ar':
+            if self.lista_variaveis_ef.get() == 'Ac (m²)':
+                self.valor_de_Ac = float(self.variavel_2.get())
+
+            elif self.lista_variaveis_ef.get() == 'μ_ar (m)':
+                self.valor_de_u_ar = float(self.variavel_2.get())
+
+        elif funcao == 'h_fic':
+            self.valores_de_h_fic = calculo_da_espessura_ficticia(self.valor_de_Ac, 
+                                                                  self.valor_de_u_ar, 
+                                                                  self.valores_de_U)
+
+        self.janela.destroy()
+        self.calculo_espessura_ficticia()
 
     def calculo_idade_ficticia(self):
 
         # Configurações da Página
 
-        self.janela_de_ajuda = tk.Toplevel()
+        self.janela = tk.Toplevel()
 
-        self.janela_de_ajuda.geometry("375x350")
+        self.janela.geometry("375x350")
 
-        self.janela_de_ajuda.resizable(False, False)
+        self.janela.resizable(False, False)
 
-        self.janela_de_ajuda.grab_set()
+        self.janela.grab_set()
         
-        self.fundo_tf_0 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_tf_0 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_tf_0.place(relx=0.02, rely=0.04, relwidth=0.955, relheight=0.94)
 
-        self.fundo_tf_1 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_tf_1 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_tf_1.place(relx=0.0425, rely=0.08, relwidth=0.5175, relheight=0.865)
 
-        self.fundo_tf_2 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_tf_2 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_tf_2.place(relx=0.575, rely=0.08, relwidth=0.375, relheight=0.35)
 
-        self.fundo_tf_3 = Label(self.janela_de_ajuda, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_tf_3 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_tf_3.place(relx=0.575, rely=0.45, relwidth=0.375, relheight=0.495)
 
-        self.texto_tf = Label(self.janela_de_ajuda, text='Idade Fictícia', bg='#F0F0F0', fg='#000000')
+        self.texto_tf = Label(self.janela, text='Idade Fictícia', bg='#F0F0F0', fg='#000000')
         self.texto_tf.place(relx=0.125, rely=0.01, relwidth=0.2, relheight=0.05)
 
         # Variáveis
 
-        self.quadro_tf = ttk.Treeview(self.janela_de_ajuda, columns=('α', 'Ti', 'Δt'))
+        self.quadro_tf = ttk.Treeview(self.janela, columns=('Ti (°C)', 'Δt (dias)'))
 
         self.quadro_tf.column('#0', width=0, stretch=NO)
-        self.quadro_tf.column('α', anchor=CENTER, width=20)
-        self.quadro_tf.column('Ti', anchor=CENTER, width=20)
-        self.quadro_tf.column('Δt', anchor=CENTER, width=20)
+        self.quadro_tf.column('Ti (°C)', anchor=CENTER, width=20)
+        self.quadro_tf.column('Δt (dias)', anchor=CENTER, width=20)
 
-        self.quadro_tf.heading('α', text='α', anchor=CENTER)
-        self.quadro_tf.heading('Ti', text='Ti', anchor=CENTER)
-        self.quadro_tf.heading('Δt', text='Δt', anchor=CENTER)
+        self.quadro_tf.heading('Ti (°C)', text='Ti (°C)', anchor=CENTER)
+        self.quadro_tf.heading('Δt (dias)', text='Δt (dias)', anchor=CENTER)
 
         self.quadro_tf.place(relx=0.062, rely=0.118, relwidth=0.436, relheight=0.808)
 
-        self.y_scroll_tf = ttk.Scrollbar(self.janela_de_ajuda, orient=tk.VERTICAL, command=self.quadro_tf.yview)
+        self.y_scroll_tf = ttk.Scrollbar(self.janela, orient=tk.VERTICAL, command=self.quadro_tf.yview)
 
         self.quadro_tf['yscroll'] = self.y_scroll_tf.set
 
         self.y_scroll_tf.place(relx=0.5, rely=0.118, relwidth=0.05, relheight=0.808)
 
-        self.quadro_tf_itens = []
+        if len(self.valores_de_Ti) > len(self.valores_de_delta_t):
+            indice_da_tabela_1 = len(self.valores_de_Ti)
 
-        for i in range(len(self.quadro_tf_itens)):
+            for i in range(len(self.valores_de_Ti) - len(self.valores_de_delta_t)):
+                self.valores_de_delta_t.append('')
+
+        elif len(self.valores_de_Ti) < len(self.valores_de_delta_t):
+            indice_da_tabela_1 = len(self.valores_de_delta_t)
+
+            for i in range(len(self.valores_de_delta_t) - len(self.valores_de_Ti)):
+                self.valores_de_Ti.append('')
+
+        else:
+            indice_da_tabela_1 = len(self.valores_de_delta_t)
+
+        for i in range(indice_da_tabela_1):
             self.quadro_tf.insert(parent='', index=i, iid=i, text='',
-                                 values=(self.quadro_1_itens[i][0], '%.4f' % float(self.quadro_tf_itens[i][1])))
+                                  values=(self.valores_de_Ti[i], self.valores_de_delta_t[i]))
 
-        self.lista_variaveis_if = ttk.Combobox(self.janela_de_ajuda, values=['', 
-                                                                             'α', 
-                                                                             'Ti', 
-                                                                             'Δt'])
+        self.lista_variaveis_if = ttk.Combobox(self.janela, values=['', 
+                                                                    'α', 
+                                                                    'Ti', 
+                                                                    'Δt'])
         self.lista_variaveis_if.place(relx=0.595, rely=0.125, relwidth=0.335, relheight=0.065)
         self.lista_variaveis_if.current(0)
 
-        self.botao_calcular_if = tk.Button(self.janela_de_ajuda, text='Calcular', bg='#F0F0F0', fg='#000000',
-                                         command=self.insercao_1)
-        self.botao_calcular_if.place(relx=0.595, rely=0.225, relwidth=0.157, relheight=0.065)
-
-        self.variavel = Entry(self.janela_de_ajuda, text="")
+        self.variavel = Entry(self.janela, text="")
         self.variavel.place(relx=0.77, rely=0.225, relwidth=0.157, relheight=0.064)
 
-        self.botao_inserir_if = tk.Button(self.janela_de_ajuda, text='Inserir', bg='#F0F0F0', fg='#000000',
-                                         command=self.insercao_1)
+        self.botao_inserir_if = tk.Button(self.janela, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                          command=lambda: self.calculo_idade_ficticia_funcoes('i_alpha_Ti_delta_t'))
         self.botao_inserir_if.place(relx=0.595, rely=0.325, relwidth=0.157, relheight=0.065)
 
-        self.botao_apagar_if = tk.Button(self.janela_de_ajuda, text='Apagar', bg='#F0F0F0', fg='#000000',
-                                         command=self.insercao_1)
+        self.botao_apagar_if = tk.Button(self.janela, text='Apagar', bg='#F0F0F0', fg='#000000',
+                                         command=lambda: self.calculo_idade_ficticia_funcoes('a_alpha_Ti_delta_t'))
         self.botao_apagar_if.place(relx=0.77, rely=0.325, relwidth=0.157, relheight=0.065)
 
         # Resultados
 
-        self.quadro_tf_res = ttk.Treeview(self.janela_de_ajuda, columns=('α', 't_fic'))
+        self.botao_calcular_if = tk.Button(self.janela, text='Calcular', bg='#F0F0F0', fg='#000000',
+                                         command=lambda: self.calculo_idade_ficticia_funcoes('t_fic'))
+        self.botao_calcular_if.place(relx=0.595, rely=0.225, relwidth=0.157, relheight=0.065)
+
+        self.quadro_tf_res = ttk.Treeview(self.janela, columns=('α', 't_fic (dias)'))
 
         self.quadro_tf_res.column('#0', width=0, stretch=NO)
-        self.quadro_tf_res.column('α', anchor=CENTER, width=20)
-        self.quadro_tf_res.column('t_fic', anchor=CENTER, width=20)
+        self.quadro_tf_res.column('α', anchor=CENTER, width=10)
+        self.quadro_tf_res.column('t_fic (dias)', anchor=CENTER, width=30)
 
         self.quadro_tf_res.heading('α', text='α', anchor=CENTER)
-        self.quadro_tf_res.heading('t_fic', text='t_fic', anchor=CENTER)
+        self.quadro_tf_res.heading('t_fic (dias)', text='t_fic (dias)', anchor=CENTER)
 
         self.quadro_tf_res.place(relx=0.595, rely=0.5025, relwidth=0.295, relheight=0.424)
 
-        self.y_scroll_tf_res = ttk.Scrollbar(self.janela_de_ajuda, orient=tk.VERTICAL, command=self.quadro_tf_res.yview)
+        self.y_scroll_tf_res = ttk.Scrollbar(self.janela, orient=tk.VERTICAL, command=self.quadro_tf_res.yview)
 
         self.quadro_tf_res['yscroll'] = self.y_scroll_tf_res.set
 
         self.y_scroll_tf_res.place(relx=0.89, rely=0.5025, relwidth=0.05, relheight=0.424)
 
-        self.quadro_tf_res_itens = []
+        if len(self.valores_de_alpha) > len(self.valores_de_i_fic):
+            indice_da_tabela_2 = len(self.valores_de_alpha)
 
-        for i in range(len(self.quadro_tf_res_itens)):
-            self.quadro_tf.insert(parent='', index=i, iid=i, text='',
-                                 values=(self.quadro_1_itens[i][0], '%.4f' % float(self.quadro_tf_res_itens[i][1])))
+            for i in range(len(self.valores_de_alpha) - len(self.valores_de_i_fic)):
+                self.valores_de_i_fic.append('')
+
+        elif len(self.valores_de_alpha) < len(self.valores_de_i_fic):
+            indice_da_tabela_2 = len(self.valores_de_i_fic)
+
+            for i in range(len(self.valores_de_i_fic) - len(self.valores_de_alpha)):
+                self.valores_de_delta_t.append('')
+
+        else:
+            indice_da_tabela_2 = len(self.valores_de_alpha)
+
+        for i in range(indice_da_tabela_2):
+            self.quadro_tf_res.insert(parent='', index=i, iid=i, text='',
+                                      values=(self.valores_de_alpha[i], self.valores_de_i_fic[i]))
+
+    def calculo_idade_ficticia_funcoes(self, funcao):
         
+        if funcao == 'i_alpha_Ti_delta_t':
+            if self.lista_variaveis_if.get() == 'α':
+                self.valores_de_alpha = list(filter(lambda item: item != '', self.valores_de_alpha))
+
+                self.valores_de_alpha.append(float(self.variavel.get()))
+            
+            elif self.lista_variaveis_if.get() == 'Ti':
+                self.valores_de_Ti = list(filter(lambda item: item != '', self.valores_de_Ti))
+
+                self.valores_de_Ti.append(float(self.variavel.get()))
+            
+            elif self.lista_variaveis_if.get() == 'Δt':
+                self.valores_de_delta_t = list(filter(lambda item: item != '', self.valores_de_delta_t))
+
+                self.valores_de_delta_t.append(float(self.variavel.get()))
+
+        elif funcao == 'a_alpha_Ti_delta_t':
+
+            # Tabela 1
+
+            if self.quadro_tf.selection() != ():
+
+                del (self.valores_de_Ti[int(self.quadro_tf.selection()[0])])
+
+                del (self.valores_de_delta_t[int(self.quadro_tf.selection()[0])])
+                
+                self.quadro_tf.delete(self.quadro_tf.selection()[0])
+
+            # Tabela 2
+
+            if self.quadro_tf_res.selection() != ():
+
+                del (self.valores_de_alpha[int(self.quadro_tf_res.selection()[0])])
+
+                del (self.valores_de_i_fic[int(self.quadro_tf_res.selection()[0])])
+
+                self.quadro_tf_res.delete(self.quadro_tf_res.selection()[0])
+
+        elif funcao == 't_fic':
+
+            if (len(self.valores_de_Ti) == len(self.valores_de_delta_t)) and (len(self.valores_de_alpha) != 0):
+
+                self.valores_de_i_fic = calculo_da_idade_ficticia(self.valores_de_alpha, 
+                                                                  self.valores_de_Ti, 
+                                                                  self.valores_de_delta_t)
+
+        self.janela.destroy()
+        self.calculo_idade_ficticia()
+
     # Opção Limpar
     def limpar(self):
         self.quadro_1_itens = []
@@ -781,6 +878,26 @@ class programa(funcoes):
         self.p_individual = ''
 
         self.indice_da_lista_de_p_individual_para_exibir = 0
+
+        # Variáveis de Cálculo da Espessura Fictícia
+
+        self.valores_de_U = []
+
+        self.valor_de_Ac = ''
+
+        self.valor_de_u_ar = ''
+
+        self.valores_de_h_fic = []
+
+        # Variáveis de Cálculo da Idade Fictícia
+
+        self.valores_de_Ti = []
+
+        self.valores_de_delta_t = []
+
+        self.valores_de_alpha = []
+
+        self.valores_de_i_fic = []
 
         # Funções
 
