@@ -453,8 +453,9 @@ class funcoes():
 
         menu_de_tabelas = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Tabelas', menu = menu_de_tabelas)
-        menu_de_tabelas.add_command(label='Tabela 1', command=lambda: self.tabelas_auxiliares('numeros_usuais_para_determinacao_da_fluencia_e_retracao'))
-        menu_de_tabelas.add_command(label='Tabela 2', command=lambda: self.tabelas_auxiliares('fluencia_e_retracao_em_funcao_da_vel_de_endurecimento_do_cim'))
+        menu_de_tabelas.add_command(label='Tabela 1', command=lambda: self.tabelas_auxiliares('numeros_usuais_para_determinacao_da_fluencia_e_retracao', '650x500'))
+        menu_de_tabelas.add_command(label='Tabela 2', command=lambda: self.tabelas_auxiliares('fluencia_e_retracao_em_funcao_da_vel_de_endurecimento_do_cim', '650x500'))
+        menu_de_tabelas.add_command(label='Tabela 3', command=lambda: self.tabelas_auxiliares('variacao_de_bs_t', '645x350'))
 
         menu_de_calculos = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Cálculos', menu = menu_de_calculos)
@@ -462,13 +463,13 @@ class funcoes():
         menu_de_calculos.add_command(label='Cálculo 2', command=self.calculo_idade_ficticia)
 
     # Tabelas Informativas
-    def tabelas_auxiliares(self, img):
+    def tabelas_auxiliares(self, img, geometria):
 
         # Configurações da Página
 
         self.janela_de_ajuda = tk.Toplevel()
 
-        self.janela_de_ajuda.geometry("650x500")
+        self.janela_de_ajuda.geometry(geometria)
 
         self.janela_de_ajuda.resizable(False, False)
 
@@ -933,23 +934,29 @@ class programa(funcoes):
 
         self.abas = ttk.Notebook(self.frame)
 
-        # Perda de Protensão por Atrito
+        # Perda de Protensão Imediato por Atrito
         
         self.aba_1 = Frame(self.abas)
         self.aba_1.configure(background='#F0F0F0')
-        self.abas.add(self.aba_1, text=" PPAT ")
+        self.abas.add(self.aba_1, text=" PIAT ")
 
-        # Perda de Protensão por Acomodação e Ancoragem
+        # Perda de Protensão Imediata por Acomodação e Ancoragem
 
         self.aba_2 = Frame(self.abas)
         self.aba_2.configure(background='#F0F0F0')
-        self.abas.add(self.aba_2, text=" PPAC ")
+        self.abas.add(self.aba_2, text=" PIAC ")
 
-        # Perda de Protensão por Encurtamento Imediato do Concreto
+        # Perda de Protensão Imediata por Encurtamento do Concreto
 
         self.aba_3 = Frame(self.abas)
         self.aba_3.configure(background='#F0F0F0')
-        self.abas.add(self.aba_3, text=" PPEC ")
+        self.abas.add(self.aba_3, text=" PIEC ")
+
+        # Perda de Protenção Progressiva por Retração do Concreto
+
+        self.aba_4 = Frame(self.abas)
+        self.aba_4.configure(background='#F0F0F0')
+        self.abas.add(self.aba_4, text=" PPRC ")
 
         # Abrindo Abas
 
@@ -963,6 +970,9 @@ class programa(funcoes):
 
         self.aba_3_funcoes()
         self.aba_3_funcoes_destrutivas()
+
+        self.aba_4_funcoes()
+        self.aba_4_funcoes_destrutivas()
 
     # Widgets Estáticos da Aba 1
     def aba_1_funcoes(self):
@@ -1584,9 +1594,9 @@ class programa(funcoes):
 
         self.quadro_5.place(relx=0.025, rely=0.0665, relwidth=0.3, relheight=0.535)
 
-        self.y_scroll_5 = ttk.Scrollbar(self.aba_3, orient=tk.VERTICAL, command=self.quadro_3.yview)
+        self.y_scroll_5 = ttk.Scrollbar(self.aba_3, orient=tk.VERTICAL, command=self.quadro_5.yview)
 
-        self.quadro_5['yscroll'] = self.y_scroll_4.set
+        self.quadro_5['yscroll'] = self.y_scroll_5.set
 
         self.y_scroll_5.place(relx=0.325, rely=0.0665, relwidth=0.025, relheight=0.535)
 
@@ -1650,5 +1660,13 @@ class programa(funcoes):
         self.lista_de_resultados = ttk.Combobox(self.aba_3, values=perdas_individuais_de_força)
         self.lista_de_resultados.place(relx=0.8475, rely=0.8, relwidth=0.1, relheight=0.05)
         self.lista_de_resultados.current(self.indice_da_lista_de_p_individual_para_exibir)
+
+    # Widgets Estáticos da Aba 4
+    def aba_4_funcoes(self):
+        pass
+
+    # Widgets Dinâmicos da Aba 4
+    def aba_4_funcoes_destrutivas(self):
+        pass
 
 programa()
