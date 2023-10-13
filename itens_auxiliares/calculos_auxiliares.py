@@ -1,6 +1,4 @@
 '''
-Cálculo de perda de protensão por acomodação de ancoragem explicado por Cholfe e Bonilha (2013).
-
 CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 159-163.
 '''
 
@@ -31,3 +29,13 @@ def calculo_da_idade_ficticia(a, Ti, delta_t):
         t_fic.append('%.4f' % (a[i] * constante))
 
     return t_fic
+
+'''
+CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 162.
+
+print('Aplicação numérica (Espessura fictícia): ' + str(calculo_da_espessura_ficticia(0.86, 8.2, [40, 60, 80])))
+
+CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 163.
+
+print('Aplicação numérica (Idade fictícia): ' + str(calculo_da_idade_ficticia([2, 1, 3], [30, 26, 20], [7, 12, 9])))
+'''
