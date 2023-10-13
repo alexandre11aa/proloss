@@ -4,7 +4,7 @@ Cálculo de perda de protensão por retração do concreto explicado por Cholfe 
 CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 164-169.
 '''
 
-def retracao_do_concreto(U, t0, t, h, abatimento):
+def retracao_do_concreto(U, t0, t, h, abatimento, Bs_t0, Bs_t):
 
     def calculo_de_Bst(t_fic, h_fic):
 
@@ -52,16 +52,22 @@ def retracao_do_concreto(U, t0, t, h, abatimento):
 
         # Terceira Variável
 
-        Bs_t0 = calculo_de_Bst(t0[i], h[i])
+        if t0 != [] and t != []:
 
-        if t[i] == '∞':
-            Bs_t = 1
-        
-        else:
-            Bs_t = calculo_de_Bst(t[i], h[i])
+            Bs_t0 = calculo_de_Bst(t0[i], h[i])
 
-        # Resultado
+            if t[i] == '∞':
+                Bs_t = 1
+            
+            else:
+                Bs_t = calculo_de_Bst(t[i], h[i])
 
-        ecs.append(e1s * e2s * (Bs_t - Bs_t0))
+            # Resultado
+
+            ecs.append(e1s * e2s * (Bs_t - Bs_t0))
+
+        elif t0 == [] and t == []:
+
+            ecs.append(e1s * e2s * (Bs_t[i] - Bs_t0[i]))
 
     return ecs
