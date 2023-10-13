@@ -1,4 +1,6 @@
 '''
+Cálculos auxiliares explicado por Cholfe e Bonilha (2013).
+
 CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 159-163.
 '''
 
