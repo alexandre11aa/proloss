@@ -292,7 +292,7 @@ class funcoes():
 
     def exemplo_4(self):
 
-        # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 156-158.
+        # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 166-168.
 
         self.quadro_6_itens = [[80, 70], [18, 18], ['∞', '∞'], [51.9, 33.9], ['5 - 9', '10 - 15']]
 
@@ -313,7 +313,7 @@ class funcoes():
 
     def insercao_3(self):
         if str(self.lista_de_links.get()) != "":
-            lista_excel = np.asarray(pd.read_excel(str(self.lista_de_links.get()), index_col=None, header=None))
+            lista_excel = np.asarray(pd.read_excel(self.lista_de_links.get(), index_col=None, header=None))
 
             for i in range(len(lista_excel)):
                 self.quadro_1_itens.append((lista_excel[i][0], lista_excel[i][1]))
@@ -340,6 +340,9 @@ class funcoes():
 
         elif decisao == 'Nº de Cordoalhas':
             self.variaveis_1[0] = self.entrada_das_variaveis_1.get()
+
+        elif decisao == 'Planilha em Excel':
+            self.insercao_3()
 
         self.destruicao_1()
 
@@ -430,58 +433,72 @@ class funcoes():
 
         self.destruicao_3()
 
+    def insercao_9(self):
+
+        if (self.variavel_U_tabela.get()  != '' and 
+            self.variavel_t0_tabela.get() != '' and 
+            self.variavel_h_tabela.get()  != ''):
+
+            if self.variavel_t_tabela_lista.get() == '= ∞':
+
+                self.quadro_6_itens[0].append(self.variavel_U_tabela.get())
+                self.quadro_6_itens[1].append(self.variavel_t0_tabela.get())
+                self.quadro_6_itens[2].append('∞')
+                self.quadro_6_itens[3].append(self.variavel_h_tabela.get())
+                self.quadro_6_itens[4].append(self.variavel_abatimento_tabela_lista.get())
+
+            elif self.variavel_t_tabela_lista.get() == '≠ ∞' and self.variavel_t_tabela.get() != '':
+
+                self.quadro_6_itens[0].append(self.variavel_U_tabela.get())
+                self.quadro_6_itens[1].append(self.variavel_t0_tabela.get())
+                self.quadro_6_itens[2].append(self.variavel_t_tabela.get())
+                self.quadro_6_itens[3].append(self.variavel_h_tabela.get())
+                self.quadro_6_itens[4].append(self.variavel_abatimento_tabela_lista.get())
+
+        if self.lista_de_links_3.get() != '':
+
+            lista_excel = np.asarray(pd.read_excel(self.lista_de_links_3.get(), index_col=None, header=None))
+
+            for i in range(len(lista_excel)):
+                self.quadro_6_itens[0].append(lista_excel[i][0])
+                self.quadro_6_itens[1].append(lista_excel[i][1])
+                self.quadro_6_itens[2].append(lista_excel[i][2])
+                self.quadro_6_itens[3].append(lista_excel[i][3])
+                self.quadro_6_itens[4].append(lista_excel[i][4])
+
+        self.destruicao_4()
+
+    def insercao_10(self):
+
+        if self.variavel_Bst0_tabela.get() != '' and self.variavel_Bst_tabela.get() != '':
+
+            self.quadro_8_itens[0].append(self.variavel_Bst0_tabela.get())
+            self.quadro_8_itens[1].append(self.variavel_Bst_tabela.get())
+
+        self.destruicao_4()
+
     # Apagando
-    def apagando_1(self):
-        selecionador = self.quadro_1.selection()[0]
+    def apagando(self, quadro, quadro_itens, destruir, modelo):
+        selecionador = quadro.selection()[0]
 
-        self.quadro_1.delete(selecionador)
+        quadro.delete(selecionador)
 
-        del (self.quadro_1_itens[int(selecionador)])
+        if modelo == 1:
+            del (quadro_itens[int(selecionador)])
 
-        self.destruicao_1()
+        elif modelo == 2:
+            for i in range(len(quadro_itens)):
+                del (quadro_itens[i][int(selecionador)])
 
-    def apagando_2(self):
-        selecionador = self.quadro_2.selection()[0]
-
-        self.quadro_2.delete(selecionador)
-
-        del (self.quadro_2_itens[int(selecionador)])
-
-        self.destruicao_1()
-
-    def apagando_3(self):
-        selecionador = self.quadro_4.selection()[0]
-
-        self.quadro_4.delete(selecionador)
-
-        del (self.quadro_4_itens[int(selecionador)])
-
-        self.destruicao_2()
-
-    def apagando_4(self):
-        selecionador = self.quadro_5.selection()[0]
-
-        self.quadro_5.delete(selecionador)
-
-        for i in range(len(self.quadro_5_itens)):
-            del (self.quadro_5_itens[i][int(selecionador)])
-
-        self.destruicao_3()
+        destruir()
 
     # Procurar
-    def procurar_1(self):
+    def procurar(self, links, destruir):
         arquivo = askopenfilename(filetypes=[('Arquivos do Excel', '*.xlsx')])
 
-        self.links_1.append(arquivo)
+        links.append(arquivo)
 
-        self.destruicao_1()
-
-    def procurar_2(self):
-        arquivo = askopenfilename(filetypes=[('Arquivos do Excel', '*.xlsx')])
-
-        self.links_2.append(arquivo)
-
-        self.destruicao_3()
+        destruir()
 
     # Menu de Opções
     def menus(self):
@@ -948,7 +965,9 @@ class funcoes():
 
         self.quadro_8_itens = [[], []]
 
-        self.quadro_9_itens = []       
+        self.quadro_9_itens = []
+
+        self.links_3 = []   
 
 class programa(funcoes):
 
@@ -1062,7 +1081,8 @@ class programa(funcoes):
                                          command=self.insercao_1)
         self.botao_inserir_1.place(relx=0.025, rely=0.89, relwidth=0.08, relheight=0.05)
 
-        self.botao_apagar_1 = tk.Button(self.aba_1, text='Apagar', bg='#F0F0F0', fg='#000000', command=self.apagando_1)
+        self.botao_apagar_1 = tk.Button(self.aba_1, text='Apagar', bg='#F0F0F0', fg='#000000', 
+                                        command=lambda: self.apagando(self.quadro_1, self.quadro_1_itens, self.destruicao_1, 1))
         self.botao_apagar_1.place(relx=0.115, rely=0.89, relwidth=0.08, relheight=0.05)
 
         # 2.0 Quadrante:
@@ -1099,7 +1119,8 @@ class programa(funcoes):
                                         command=self.insercao_2)
         self.botao_inserir_2.place(relx=0.25, rely=0.89, relwidth=0.08, relheight=0.05)
 
-        self.botao_apagar_2 = tk.Button(self.aba_1, text='Apagar', bg='#F0F0F0', fg='#000000', command=self.apagando_2)
+        self.botao_apagar_2 = tk.Button(self.aba_1, text='Apagar', bg='#F0F0F0', fg='#000000', 
+                                        command=lambda: self.apagando(self.quadro_2, self.quadro_2_itens, self.destruicao_1, 1))
         self.botao_apagar_2.place(relx=0.34, rely=0.89, relwidth=0.08, relheight=0.05)
 
         # 3.0 Quadrante:
@@ -1120,7 +1141,7 @@ class programa(funcoes):
         self.fundo_de_resultados_2.place(relx=0.465, rely=0.72, relwidth=0.115, relheight=0.25)
 
         self.botao_procurar_1 = tk.Button(self.aba_1, text='Procurar', bg='#F0F0F0', fg='#000000',
-                                         command=self.procurar_1)
+                                         command=lambda: self.procurar(self.links_1, self.destruicao_1))
         self.botao_procurar_1.place(relx=0.4825, rely=0.8175, relwidth=0.08, relheight=0.05)
 
         self.botao_calcular_1 = tk.Button(self.aba_1, text='Calcular', bg='#F0F0F0', fg='#000000', 
@@ -1164,7 +1185,8 @@ class programa(funcoes):
                                                                   'fptk (MPa)', 
                                                                   'fpyk (MPa)', 
                                                                   'Ap⁽⁰⁾ (cm² / Cord.)', 
-                                                                  'Nº de Cordoalhas'])
+                                                                  'Nº de Cordoalhas',
+                                                                  'Planilha em Excel'])
         self.lista_variaveis_1.place(relx=0.63, rely=0.056, relwidth=0.145, relheight=0.05)
         self.lista_variaveis_1.current(0)
 
@@ -1314,7 +1336,7 @@ class programa(funcoes):
         self.botao_inserir_5.place(relx=0.0325, rely=0.7425, relwidth=0.08, relheight=0.05)
 
         self.botao_apagar_3 = tk.Button(self.aba_2, text='Apagar', bg='#F0F0F0', fg='#000000',
-                                         command=self.apagando_3)
+                                         command=lambda: self.apagando(self.quadro_4, self.quadro_4_itens, self.destruicao_2, 1))
         self.botao_apagar_3.place(relx=0.0325, rely=0.8175, relwidth=0.08, relheight=0.05)
 
         self.botao_calcular_2 = tk.Button(self.aba_2, text='Calcular', bg='#F0F0F0', fg='#000000', 
@@ -1528,7 +1550,7 @@ class programa(funcoes):
         self.altura_ppec.place(relx=0.2625, rely=0.75, relwidth=0.07, relheight=0.04)
 
         self.botao_procurar_2 = tk.Button(self.aba_3, text='Procurar', bg='#F0F0F0', fg='#000000',
-                                         command=self.procurar_2)
+                                         command=lambda: self.procurar(self.links_2, self.destruicao_3))
         self.botao_procurar_2.place(relx=0.2525, rely=0.81, relwidth=0.08, relheight=0.05)
 
         self.botao_calcular_3 = tk.Button(self.aba_3, text='Calcular', bg='#F0F0F0', fg='#000000',
@@ -1540,7 +1562,7 @@ class programa(funcoes):
         self.botao_inserir_7.place(relx=0.1475, rely=0.88, relwidth=0.08, relheight=0.05)
 
         self.botao_apagar_4 = tk.Button(self.aba_3, text='Apagar', bg='#F0F0F0', fg='#000000',
-                                         command=self.apagando_4)
+                                         command=lambda: self.apagando(self.quadro_5, self.quadro_5_itens, self.destruicao_3, 2))
         self.botao_apagar_4.place(relx=0.2525, rely=0.88, relwidth=0.08, relheight=0.05)
 
         # 2.0 Quadrante:
@@ -1761,13 +1783,15 @@ class programa(funcoes):
         self.variavel_abatimento_tabela_lista.place(relx=0.308, rely=0.79, relwidth=0.135, relheight=0.0425)
         self.variavel_abatimento_tabela_lista.current(0)
 
-        self.botao_inserir_10 = tk.Button(self.aba_4, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.procurar_2)
+        self.botao_inserir_10 = tk.Button(self.aba_4, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_9)
         self.botao_inserir_10.place(relx=0.028, rely=0.88, relwidth=0.08, relheight=0.05)
 
-        self.botao_apagar_5 = tk.Button(self.aba_4, text='Apagar', bg='#F0F0F0', fg='#000000', command=self.procurar_2)
+        self.botao_apagar_5 = tk.Button(self.aba_4, text='Apagar', bg='#F0F0F0', fg='#000000', 
+                                        command=lambda: self.apagando(self.quadro_6, self.quadro_6_itens, self.destruicao_4, 2))
         self.botao_apagar_5.place(relx=0.132, rely=0.88, relwidth=0.08, relheight=0.05)
 
-        self.botao_procurar_3 = tk.Button(self.aba_4, text='Procurar', bg='#F0F0F0', fg='#000000', command=self.procurar_2)
+        self.botao_procurar_3 = tk.Button(self.aba_4, text='Procurar', bg='#F0F0F0', fg='#000000', 
+                                          command=lambda: self.procurar(self.links_3, self.destruicao_4))
         self.botao_procurar_3.place(relx=0.3625, rely=0.88, relwidth=0.08, relheight=0.05)
 
         # 2.0 Quadrante:
@@ -1807,10 +1831,11 @@ class programa(funcoes):
         self.variavel_Bst_tabela = Entry(self.aba_4, text="")
         self.variavel_Bst_tabela.place(relx=0.72, rely=0.79, relwidth=0.1, relheight=0.0425)
 
-        self.botao_inserir_11 = tk.Button(self.aba_4, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.procurar_2)
+        self.botao_inserir_11 = tk.Button(self.aba_4, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
         self.botao_inserir_11.place(relx=0.6535, rely=0.88, relwidth=0.08, relheight=0.05)
 
-        self.botao_apagar_6 = tk.Button(self.aba_4, text='Apagar', bg='#F0F0F0', fg='#000000', command=self.procurar_2)
+        self.botao_apagar_6 = tk.Button(self.aba_4, text='Apagar', bg='#F0F0F0', fg='#000000', 
+                                        command=lambda: self.apagando(self.quadro_8, self.quadro_8_itens, self.destruicao_4, 2))
         self.botao_apagar_6.place(relx=0.7425, rely=0.88, relwidth=0.08, relheight=0.05)
 
         # 4.0 Quadrante:
@@ -1862,7 +1887,7 @@ class programa(funcoes):
                                                                               self.quadro_6_itens[3][i],
                                                                               self.quadro_6_itens[4][i])))
             
-        self.lista_de_links_3 = ttk.Combobox(self.aba_4, values=[])
+        self.lista_de_links_3 = ttk.Combobox(self.aba_4, values=self.links_3)
         self.lista_de_links_3.place(relx=0.236, rely=0.88, relwidth=0.105, relheight=0.05)
 
         # 2º Quadrante
