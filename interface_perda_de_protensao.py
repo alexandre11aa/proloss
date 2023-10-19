@@ -16,10 +16,13 @@ from perdas_imediatas.acomodacao_da_ancoragem import acomodacao_da_ancoragem
 from perdas_imediatas.encurtamento_imediato_do_concreto import encurtamento_imediato_do_concreto
 
 from itens_auxiliares.tabelas_informativas import tabelas_informativas
+
 from itens_auxiliares.calculos_auxiliares import calculo_da_espessura_ficticia
 from itens_auxiliares.calculos_auxiliares import calculo_da_idade_ficticia
 
 from perdas_progressivas.retracao_do_concreto import retracao_do_concreto
+from perdas_progressivas.fluencia_do_concreto import fluencia_do_concreto
+from perdas_progressivas.fluencia_do_concreto import superposicao_de_efeitos
 
 root = Tk()
 
@@ -107,6 +110,26 @@ class funcoes():
                                                    self.quadro_6_itens[4])
             
         self.destruicao_4()
+
+    def perda_por_fluencia_do_concreto(self, calculo):
+
+        if calculo == 0:
+
+            self.quadro_9_itens = fluencia_do_concreto(self.quadro_8_itens[0],
+                                                       self.quadro_8_itens[1], 
+                                                       self.quadro_8_itens[2], 
+                                                       self.quadro_8_itens[3], 
+                                                       self.quadro_8_itens[4],
+                                                       self.quadro_8_itens[5],
+                                                       self.quadro_8_itens[6])
+
+        elif calculo == 1:
+            
+            self.resultado_ecc, self.quadro_11_itens = superposicao_de_efeitos(self.quadro_9_itens,
+                                                                               self.quadro_10_itens,
+                                                                               self.fck_ecc)
+
+        self.destruicao_5()
 
     # Aplicações
     def aplicar_1(self):
@@ -227,58 +250,99 @@ class funcoes():
 
         self.aba_4_funcoes_destrutivas()
 
-    def exemplo_1_0(self):
+    def destruicao_5(self):
 
-        # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 138-142.
-        
-        self.quadro_1_itens = [('A', 1.245), ('B', 1.07), ('C', 0.175), ('D', 0.175), ('E', 1.07), ('F', 1.245)]
-        self.quadro_2_itens = [(0.8, 'Reto'), (8.43, 'Curvo'), (2.04, 'Reto'), (8.43, 'Curvo'), (0.8, 'Reto')]
+        self.quadro_8.destroy()
+        self.y_scroll_8.destroy()
+        self.lista_de_links_4.destroy()
+        self.quadro_9.destroy()
+        self.y_scroll_9.destroy()
+        self.quadro_10.destroy()
+        self.y_scroll_10.destroy()
+        self.quadro_11.destroy()
+        self.y_scroll_11.destroy()
 
-        self.variaveis_1 = [12, 1.014, 1900, 1710, 0.2]
+        self.aba_5_funcoes_destrutivas()
 
-        self.destruicao_1()
+    # Exemplos
+    def exemplos(self, ex):
 
-    def exemplo_1_1(self):
+        if ex == '1.1':
 
-        # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 142-144.
+            # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 138-142.
+            
+            self.quadro_1_itens = [('A', 1.245), ('B', 1.07), ('C', 0.175), ('D', 0.175), ('E', 1.07), ('F', 1.245)]
+            self.quadro_2_itens = [(0.8, 'Reto'), (8.43, 'Curvo'), (2.04, 'Reto'), (8.43, 'Curvo'), (0.8, 'Reto')]
 
-        self.quadro_1_itens = [('A', 0.11), ('B', 0.07), ('C', 0.16), ('D', 0.18), ('E', 0.15), ('F', 0.04), ('G', 0.11)]
-        self.quadro_2_itens = [(2.8, 'Curvo'), (3.5, 'Curvo'), (0.7, 'Curvo'), (0.9, 'Curvo'), (4.5, 'Curvo'), (3.6, 'Curvo')]
+            self.variaveis_1 = [12, 1.014, 1900, 1710, 0.2]
 
-        self.variaveis_1 = [3, 1.4, 2100, 1890, 0.05]
+            self.destruicao_1()
 
-        self.destruicao_1()
+        elif ex == '1.2':
 
-    def exemplo_2(self):
+            # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 142-144.
 
-        # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 151-154.
+            self.quadro_1_itens = [('A', 0.11), ('B', 0.07), ('C', 0.16), ('D', 0.18), ('E', 0.15), ('F', 0.04), ('G', 0.11)]
+            self.quadro_2_itens = [(2.8, 'Curvo'), (3.5, 'Curvo'), (0.7, 'Curvo'), (0.9, 'Curvo'), (4.5, 'Curvo'), (3.6, 'Curvo')]
 
-        self.quadro_4_itens = [3.5, 2]
+            self.variaveis_1 = [3, 1.4, 2100, 1890, 0.05]
 
-        self.variaveis_2 = [5.5, 9.5, 200, 1177.68, 1093.37, 1084.66, 1.4, 6]
+            self.destruicao_1()
 
-        self.destruicao_2()
+        elif ex == '2':
 
-    def exemplo_3(self):
+            # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 151-154.
 
-        # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 156-158.
+            self.quadro_4_itens = [3.5, 2]
 
-        self.quadro_5_itens = [['C1.1', 'C2.1', 'C3.1', 'C4.1', 'C5.1', 'C1.2', 'C2.2', 'C3.2', 'C4.2', 'C5.2'],
-                               [ 14, 28, 14, 28, 14, 14, 28, 14, 28, 14],
-                               [-924, -945, -934, -892, -913, -924, -945, -934, -892, -913],
-                               [8, 8, 8, 20, 20, 8, 8, 8, 20, 20]]
-        
-        self.variaveis_3 = [5, 2.678, 1.014, 200, 2, 5000, 1.454, 30, 7]
+            self.variaveis_2 = [5.5, 9.5, 200, 1177.68, 1093.37, 1084.66, 1.4, 6]
 
-        self.destruicao_3()
+            self.destruicao_2()
 
-    def exemplo_4(self):
+        elif ex == '3':
 
-        # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 166-168.
+            # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 156-158.
 
-        self.quadro_6_itens = [[80, 70], [18, 18], ['∞', '∞'], [51.9, 33.9], ['5 - 9', '10 - 15']]
+            self.quadro_5_itens = [['C1.1', 'C2.1', 'C3.1', 'C4.1', 'C5.1', 'C1.2', 'C2.2', 'C3.2', 'C4.2', 'C5.2'],
+                                [ 14, 28, 14, 28, 14, 14, 28, 14, 28, 14],
+                                [-924, -945, -934, -892, -913, -924, -945, -934, -892, -913],
+                                [8, 8, 8, 20, 20, 8, 8, 8, 20, 20]]
+            
+            self.variaveis_3 = [5, 2.678, 1.014, 200, 2, 5000, 1.454, 30, 7]
 
-        self.destruicao_4()
+            self.destruicao_3()
+
+        elif ex == '4':
+
+            # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 166-168.
+
+            self.quadro_6_itens = [[80, 70], [18, 18], ['∞', '∞'], [51.9, 33.9], ['5 - 9', '10 - 15']]
+
+            self.destruicao_4()
+
+        elif ex == '5.1':
+
+            # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 175-177.
+
+            self.quadro_8_itens = [[75, 75], [30, 30], [38, 160], ['∞', '∞'], [17.9, 17.9], ['10 - 15', '10 - 15'], ['II', 'II']]
+
+            self.quadro_10_itens = [-19.134 + 7.281, 986]
+
+            self.fck_ecc = 30
+
+            self.destruicao_5()
+
+        elif ex == '5.2':
+
+            # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 175-177.
+
+            self.quadro_8_itens = [[70, 70, 70], [28, 28, 28], [18, 35, 76], ['∞', '∞', '∞'], [40, 40, 40], ['5 - 9', '5 - 9', '5 - 9'], ['III', 'III', 'III']]
+
+            self.quadro_10_itens = [-22240.04 + 3794.65, -2471.11, 7083.08]
+
+            self.fck_ecc = 40
+
+            self.destruicao_5()
 
     # Inserções
     def insercao_1(self):
@@ -449,7 +513,44 @@ class funcoes():
         self.destruicao_4()
 
     def insercao_10(self):
-        pass
+        
+
+        if (self.variavel_U_tabela_2.get()  != '' and 
+            self.variavel_t0_tabela_2.get() != '' and 
+            self.variavel_h_tabela_2.get()  != ''):
+
+            if self.variavel_t_tabela_lista_2.get() == '= ∞':
+
+                self.quadro_8_itens[0].append(self.variavel_U_tabela_2.get())
+                self.quadro_8_itens[1].append(self.variavel_Ti_tabela_2.get())
+                self.quadro_8_itens[2].append(self.variavel_t0_tabela_2.get())
+                self.quadro_8_itens[3].append('∞')
+                self.quadro_8_itens[4].append(self.variavel_h_tabela_2.get())
+                self.quadro_8_itens[5].append(self.variavel_abatimento_tabela_lista_2.get())
+                self.quadro_8_itens[6].append(self.variavel_CP_tabela_lista_2.get())
+
+            elif self.variavel_t_tabela_lista_2.get() == '≠ ∞' and self.variavel_t_tabela_2.get() != '':
+
+                self.quadro_8_itens[0].append(self.variavel_U_tabela_2.get())
+                self.quadro_8_itens[1].append(self.variavel_Ti_tabela_2.get())
+                self.quadro_8_itens[2].append(self.variavel_t0_tabela_2.get())
+                self.quadro_8_itens[3].append(self.variavel_t_tabela_2.get())
+                self.quadro_8_itens[4].append(self.variavel_h_tabela_2.get())
+                self.quadro_8_itens[5].append(self.variavel_abatimento_tabela_lista_2.get())
+                self.quadro_8_itens[6].append(self.variavel_CP_tabela_lista_2.get())
+
+        if self.lista_de_links_4.get() != '':
+
+            lista_excel = np.asarray(pd.read_excel(self.lista_de_links_4.get(), index_col=None, header=None))
+
+            for i in range(len(lista_excel)):
+                self.quadro_8_itens[0].append(lista_excel[i][0])
+                self.quadro_8_itens[1].append(lista_excel[i][1])
+                self.quadro_8_itens[2].append(lista_excel[i][2])
+                self.quadro_8_itens[3].append(lista_excel[i][3])
+                self.quadro_8_itens[4].append(lista_excel[i][4])
+
+        self.destruicao_5()
 
     # Apagando
     def apagando(self, quadro, quadro_itens, destruir, modelo):
@@ -487,17 +588,18 @@ class funcoes():
 
         menu_de_exemplos = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Exemplos', menu = menu_de_exemplos)
-        menu_de_exemplos.add_command(label='Exemplo 1.0', command=self.exemplo_1_0)
-        menu_de_exemplos.add_command(label='Exemplo 1.1', command=self.exemplo_1_1)
-        menu_de_exemplos.add_command(label='Exemplo 2.0', command=self.exemplo_2)
-        menu_de_exemplos.add_command(label='Exemplo 3.0', command=self.exemplo_3)
-        menu_de_exemplos.add_command(label='Exemplo 4.0', command=self.exemplo_4)
+        menu_de_exemplos.add_command(label='PIAT 1', command=lambda: self.exemplos('1.1'))
+        menu_de_exemplos.add_command(label='PIAT 2', command=lambda: self.exemplos('1.2'))
+        menu_de_exemplos.add_command(label='PIAC'  , command=lambda: self.exemplos('2'))
+        menu_de_exemplos.add_command(label='PIEC'  , command=lambda: self.exemplos('3'))
+        menu_de_exemplos.add_command(label='PPRC'  , command=lambda: self.exemplos('4'))
+        menu_de_exemplos.add_command(label='PPFC 1', command=lambda: self.exemplos('5.1'))
+        menu_de_exemplos.add_command(label='PPFC 2', command=lambda: self.exemplos('5.2'))
 
         menu_de_tabelas = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Tabelas', menu = menu_de_tabelas)
         menu_de_tabelas.add_command(label='Tabela 1', command=lambda: self.tabelas_auxiliares('numeros_usuais_para_determinacao_da_fluencia_e_retracao', '650x500'))
         menu_de_tabelas.add_command(label='Tabela 2', command=lambda: self.tabelas_auxiliares('fluencia_e_retracao_em_funcao_da_vel_de_endurecimento_do_cim', '650x500'))
-        menu_de_tabelas.add_command(label='Tabela 3', command=lambda: self.tabelas_auxiliares('variacao_de_bs_t', '645x350'))
 
         menu_de_calculos = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Cálculos', menu = menu_de_calculos)
@@ -941,15 +1043,19 @@ class funcoes():
 
         # Variáveis de Perda por Fluência do Concreto
 
-        self.quadro_8_itens = [[], [], [], [], []]
+        self.quadro_8_itens = [[], [], [], [], [], [], []]
 
         self.quadro_9_itens = []
 
-        self.quadro_10_itens = [[], []]
+        self.quadro_10_itens = []
 
         self.quadro_11_itens = []
 
-        self.links_4 = []  
+        self.links_4 = []
+
+        self.resultado_ecc = ''
+
+        self.fck_ecc = ''
 
 class programa(funcoes):
 
@@ -1870,103 +1976,107 @@ class programa(funcoes):
         # 1.0 Quadrante:
 
         self.fundo_do_quadro_9 = Label(self.aba_5, text='', relief="raised", bg='#F0F0F0', fg='#800000')
-        self.fundo_do_quadro_9.place(relx=0.005, rely=0.01, relwidth=0.466, relheight=0.98)
+        self.fundo_do_quadro_9.place(relx=0.005, rely=0.01, relwidth=0.545, relheight=0.98)
 
         self.fundo_tabelas_calculo_automatico_pprc = Label(self.aba_5, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_tabelas_calculo_automatico_pprc.place(relx=0.015, rely=0.04, relwidth=0.4455, relheight=0.58)
+        self.fundo_tabelas_calculo_automatico_pprc.place(relx=0.015, rely=0.04, relwidth=0.5225, relheight=0.58)
 
         self.fundo_variaveis_calculo_automatico_pprc = Label(self.aba_5, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_variaveis_calculo_automatico_pprc.place(relx=0.015, rely=0.645, relwidth=0.4455, relheight=0.325)
+        self.fundo_variaveis_calculo_automatico_pprc.place(relx=0.015, rely=0.645, relwidth=0.5225, relheight=0.325)
 
-        self.variavel_t0_texto = Label(self.aba_5, text='t₀ :', bg='#F0F0F0', fg='#000000')
-        self.variavel_t0_texto.place(relx=0.028, rely=0.6915, relwidth=0.02, relheight=0.035)
+        self.variavel_t0_texto_2 = Label(self.aba_5, text='t₀ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_t0_texto_2.place(relx=0.028, rely=0.6915, relwidth=0.02, relheight=0.035)
 
-        self.variavel_t0_tabela = Entry(self.aba_5, text="")
-        self.variavel_t0_tabela.place(relx=0.058, rely=0.6915, relwidth=0.1, relheight=0.0425)
+        self.variavel_t0_tabela_2 = Entry(self.aba_5, text="")
+        self.variavel_t0_tabela_2.place(relx=0.058, rely=0.6915, relwidth=0.08, relheight=0.0425)
 
-        self.variavel_U_texto = Label(self.aba_5, text='U :', bg='#F0F0F0', fg='#000000')
-        self.variavel_U_texto.place(relx=0.1695, rely=0.6915, relwidth=0.02, relheight=0.035)
+        self.variavel_Ti_texto_2 = Label(self.aba_5, text='Ti :', bg='#F0F0F0', fg='#000000')
+        self.variavel_Ti_texto_2.place(relx=0.155, rely=0.6915, relwidth=0.02, relheight=0.035)
 
-        self.variavel_U_tabela = Entry(self.aba_5, text="")
-        self.variavel_U_tabela.place(relx=0.1995, rely=0.6915, relwidth=0.1, relheight=0.0425)
+        self.variavel_Ti_tabela_2 = Entry(self.aba_5, text="")
+        self.variavel_Ti_tabela_2.place(relx=0.185, rely=0.6915, relwidth=0.08, relheight=0.0425)
 
-        self.variavel_h_texto = Label(self.aba_5, text='h :', bg='#F0F0F0', fg='#000000')
-        self.variavel_h_texto.place(relx=0.311, rely=0.6915, relwidth=0.02, relheight=0.035)
+        self.variavel_U_texto_2 = Label(self.aba_5, text='U :', bg='#F0F0F0', fg='#000000')
+        self.variavel_U_texto_2.place(relx=0.285, rely=0.6915, relwidth=0.02, relheight=0.035)
 
-        self.variavel_h_tabela = Entry(self.aba_5, text="")
-        self.variavel_h_tabela.place(relx=0.341, rely=0.6915, relwidth=0.1, relheight=0.0425)
+        self.variavel_U_tabela_2 = Entry(self.aba_5, text="")
+        self.variavel_U_tabela_2.place(relx=0.315, rely=0.6915, relwidth=0.08, relheight=0.0425)
 
-        self.variavel_t_texto = Label(self.aba_5, text='t :', bg='#F0F0F0', fg='#000000')
-        self.variavel_t_texto.place(relx=0.028, rely=0.79, relwidth=0.02, relheight=0.035)
+        self.variavel_h_texto_2 = Label(self.aba_5, text='h :', bg='#F0F0F0', fg='#000000')
+        self.variavel_h_texto_2.place(relx=0.4125, rely=0.6915, relwidth=0.02, relheight=0.035)
 
-        self.variavel_t_tabela = Entry(self.aba_5, text="")
-        self.variavel_t_tabela.place(relx=0.058, rely=0.79, relwidth=0.1, relheight=0.0425)
+        self.variavel_h_tabela_2 = Entry(self.aba_5, text="")
+        self.variavel_h_tabela_2.place(relx=0.4425, rely=0.6915, relwidth=0.08, relheight=0.0425)
 
-        self.variavel_t_tabela_lista = ttk.Combobox(self.aba_5, values=['≠ ∞', '= ∞'])
-        self.variavel_t_tabela_lista.place(relx=0.168, rely=0.79, relwidth=0.07, relheight=0.0425)
-        self.variavel_t_tabela_lista.current(1)
+        self.variavel_t_texto_2 = Label(self.aba_5, text='t :', bg='#F0F0F0', fg='#000000')
+        self.variavel_t_texto_2.place(relx=0.028, rely=0.79, relwidth=0.02, relheight=0.035)
 
-        self.variavel_abatimento_texto = Label(self.aba_5, text='Abto. :', bg='#F0F0F0', fg='#000000')
-        self.variavel_abatimento_texto.place(relx=0.245, rely=0.79, relwidth=0.06, relheight=0.035)
+        self.variavel_t_tabela_2 = Entry(self.aba_5, text="")
+        self.variavel_t_tabela_2.place(relx=0.058, rely=0.79, relwidth=0.05, relheight=0.0425)
 
-        self.variavel_abatimento_tabela_lista = ttk.Combobox(self.aba_5, values=['0 - 4', '5 - 9', '10 - 15'])
-        self.variavel_abatimento_tabela_lista.place(relx=0.308, rely=0.79, relwidth=0.135, relheight=0.0425)
-        self.variavel_abatimento_tabela_lista.current(0)
+        self.variavel_t_tabela_lista_2 = ttk.Combobox(self.aba_5, values=['≠ ∞', '= ∞'])
+        self.variavel_t_tabela_lista_2.place(relx=0.12, rely=0.7875, relwidth=0.06, relheight=0.0425)
+        self.variavel_t_tabela_lista_2.current(1)
 
-        self.botao_inserir_10 = tk.Button(self.aba_5, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_9)
+        self.variavel_abatimento_texto_2 = Label(self.aba_5, text='Abto. :', bg='#F0F0F0', fg='#000000')
+        self.variavel_abatimento_texto_2.place(relx=0.2, rely=0.79, relwidth=0.06, relheight=0.035)
+
+        self.variavel_abatimento_tabela_lista_2 = ttk.Combobox(self.aba_5, values=['0 - 4', '5 - 9', '10 - 15'])
+        self.variavel_abatimento_tabela_lista_2.place(relx=0.26, rely=0.79, relwidth=0.09, relheight=0.0425)
+        self.variavel_abatimento_tabela_lista_2.current(0)
+
+        self.variavel_CP_texto_2 = Label(self.aba_5, text='CP :', bg='#F0F0F0', fg='#000000')
+        self.variavel_CP_texto_2.place(relx=0.37, rely=0.79, relwidth=0.04, relheight=0.035)
+
+        self.variavel_CP_tabela_lista_2 = ttk.Combobox(self.aba_5, values=['I', 'II', 'III', 'IV', 'V'])
+        self.variavel_CP_tabela_lista_2.place(relx=0.41, rely=0.79, relwidth=0.11, relheight=0.0425)
+        self.variavel_CP_tabela_lista_2.current(0)
+
+        self.botao_inserir_10 = tk.Button(self.aba_5, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
         self.botao_inserir_10.place(relx=0.028, rely=0.88, relwidth=0.08, relheight=0.05)
 
         self.botao_apagar_5 = tk.Button(self.aba_5, text='Apagar', bg='#F0F0F0', fg='#000000', 
-                                        command=lambda: self.apagando(self.quadro_6, self.quadro_6_itens, self.destruicao_4, 2))
+                                        command=lambda: self.apagando(self.quadro_8, self.quadro_8_itens, self.destruicao_5, 2))
         self.botao_apagar_5.place(relx=0.132, rely=0.88, relwidth=0.08, relheight=0.05)
 
         self.botao_procurar_3 = tk.Button(self.aba_5, text='Procurar', bg='#F0F0F0', fg='#000000', 
                                           command=lambda: self.procurar(self.links_3, self.destruicao_4))
-        self.botao_procurar_3.place(relx=0.3625, rely=0.88, relwidth=0.08, relheight=0.05)
+        self.botao_procurar_3.place(relx=0.44, rely=0.88, relwidth=0.08, relheight=0.05)
 
         # 2.0 Quadrante:
 
         self.fundo_do_quadro_10 = Label(self.aba_5, text='', relief="raised", bg='#F0F0F0', fg='#800000')
-        self.fundo_do_quadro_10.place(relx=0.481, rely=0.01, relwidth=0.14, relheight=0.98)
+        self.fundo_do_quadro_10.place(relx=0.56, rely=0.01, relwidth=0.14, relheight=0.98)
 
         self.fundo_tabelas_calculo_automatico_pprc_2 = Label(self.aba_5, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_tabelas_calculo_automatico_pprc_2.place(relx=0.492, rely=0.04, relwidth=0.1175, relheight=0.78)
+        self.fundo_tabelas_calculo_automatico_pprc_2.place(relx=0.571, rely=0.04, relwidth=0.1175, relheight=0.78)
 
         self.fundo_variaveis_calculo_automatico_pprc_2 = Label(self.aba_5, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_variaveis_calculo_automatico_pprc_2.place(relx=0.492, rely=0.8505, relwidth=0.1175, relheight=0.12)
+        self.fundo_variaveis_calculo_automatico_pprc_2.place(relx=0.571, rely=0.8505, relwidth=0.1175, relheight=0.12)
 
-        self.botao_calcular_4 = tk.Button(self.aba_5, text='Calcular', bg='#F0F0F0', fg='#000000', command=lambda: self.perda_por_retracao_do_concreto(0))
-        self.botao_calcular_4.place(relx=0.511, rely=0.88, relwidth=0.08, relheight=0.05)
+        self.botao_calcular_4 = tk.Button(self.aba_5, text='Calcular', bg='#F0F0F0', fg='#000000', command=lambda: self.perda_por_fluencia_do_concreto(0))
+        self.botao_calcular_4.place(relx=0.59, rely=0.88, relwidth=0.08, relheight=0.05)
 
         # 3.0 Quadrante:
 
         self.fundo_do_quadro_11 = Label(self.aba_5, text='', relief="raised", bg='#F0F0F0', fg='#800000')
-        self.fundo_do_quadro_11.place(relx=0.6345, rely=0.01, relwidth=0.14, relheight=0.98)
+        self.fundo_do_quadro_11.place(relx=0.71, rely=0.01, relwidth=0.14, relheight=0.98)
 
         self.fundo_tabelas_calculo_automatico_pprc_3 = Label(self.aba_5, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_tabelas_calculo_automatico_pprc_3.place(relx=0.6445, rely=0.04, relwidth=0.1175, relheight=0.58)      
+        self.fundo_tabelas_calculo_automatico_pprc_3.place(relx=0.721, rely=0.04, relwidth=0.1175, relheight=0.58)      
 
         self.fundo_variaveis_calculo_automatico_pprc_3 = Label(self.aba_5, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_variaveis_calculo_automatico_pprc_3.place(relx=0.6445, rely=0.645, relwidth=0.1175, relheight=0.325)
-
-        self.variavel_Bst0_texto = Label(self.aba_5, text='Bs(t₀) :', bg='#F0F0F0', fg='#000000')
-        #self.variavel_Bst0_texto.place(relx=0.6535, rely=0.6915, relwidth=0.06, relheight=0.035)
+        self.fundo_variaveis_calculo_automatico_pprc_3.place(relx=0.721, rely=0.645, relwidth=0.1175, relheight=0.325)
 
         self.variavel_Bst0_tabela = Entry(self.aba_5, text="")
-        #self.variavel_Bst0_tabela.place(relx=0.72, rely=0.6915, relwidth=0.1, relheight=0.0425)
-
-        self.variavel_Bst_texto = Label(self.aba_5, text='Bs(t) :', bg='#F0F0F0', fg='#000000')
-        #self.variavel_Bst_texto.place(relx=0.6535, rely=0.79, relwidth=0.058, relheight=0.035)
-
-        self.variavel_Bst_tabela = Entry(self.aba_5, text="")
-        #self.variavel_Bst_tabela.place(relx=0.72, rely=0.79, relwidth=0.1, relheight=0.0425)
+        self.variavel_Bst0_tabela.place(relx=0.74, rely=0.6915, relwidth=0.08, relheight=0.05)
 
         self.botao_inserir_11 = tk.Button(self.aba_5, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
-        #self.botao_inserir_11.place(relx=0.6535, rely=0.88, relwidth=0.08, relheight=0.05)
+        self.botao_inserir_11.place(relx=0.74, rely=0.79, relwidth=0.08, relheight=0.05)
 
         self.botao_apagar_6 = tk.Button(self.aba_5, text='Apagar', bg='#F0F0F0', fg='#000000', 
-                                        command=lambda: self.apagando(self.quadro_8, self.quadro_8_itens, self.destruicao_4, 2))
-        #self.botao_apagar_6.place(relx=0.7425, rely=0.88, relwidth=0.08, relheight=0.05)
+                                        command=lambda: self.apagando(self.quadro_10, self.quadro_10_itens, self.destruicao_5, 1))
+        self.botao_apagar_6.place(relx=0.74, rely=0.88, relwidth=0.08, relheight=0.05)
 
         # 4.0 Quadrante:
 
@@ -1974,12 +2084,18 @@ class programa(funcoes):
         self.fundo_do_quadro_12.place(relx=0.86, rely=0.01, relwidth=0.14, relheight=0.98)
 
         self.fundo_tabelas_calculo_automatico_pprc_4 = Label(self.aba_5, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_tabelas_calculo_automatico_pprc_4.place(relx=0.871, rely=0.04, relwidth=0.1175, relheight=0.78)
+        self.fundo_tabelas_calculo_automatico_pprc_4.place(relx=0.871, rely=0.04, relwidth=0.1175, relheight=0.66)
 
         self.fundo_variaveis_calculo_automatico_pprc_4 = Label(self.aba_5, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_variaveis_calculo_automatico_pprc_4.place(relx=0.871, rely=0.8505, relwidth=0.1175, relheight=0.12)
 
-        self.botao_calcular_5 = tk.Button(self.aba_5, text='Calcular', bg='#F0F0F0', fg='#000000', command=lambda: self.perda_por_retracao_do_concreto(1))
+        self.fundo_de_ecc = Label(self.aba_5, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_ecc.place(relx=0.871, rely=0.73, relwidth=0.1175, relheight=0.09)
+
+        self.ecc_texto = Label(self.aba_5, text='εcc :', bg='#F0F0F0', fg='#000000')
+        self.ecc_texto.place(relx=0.8785, rely=0.718, relwidth=0.04, relheight=0.02)
+
+        self.botao_calcular_5 = tk.Button(self.aba_5, text='Calcular', bg='#F0F0F0', fg='#000000', command=lambda: self.perda_por_fluencia_do_concreto(1))
         self.botao_calcular_5.place(relx=0.89, rely=0.88, relwidth=0.08, relheight=0.05)
 
     # Widgets Dinâmicos da Aba 5
@@ -1987,55 +2103,61 @@ class programa(funcoes):
 
         # 1º Quadrante
         
-        self.quadro_8 = ttk.Treeview(self.aba_5, columns=('U', 't₀', 't', 'h', 'Abatimento'))
+        self.quadro_8 = ttk.Treeview(self.aba_5, columns=('U', 'Ti', 't₀', 't', 'h', 'Abatimento', 'CP'))
 
         self.quadro_8.column('#0', width=0, stretch=NO)
         self.quadro_8.column('U', anchor=CENTER, width=20)
+        self.quadro_8.column('Ti', anchor=CENTER, width=20)
         self.quadro_8.column('t₀', anchor=CENTER, width=20)
         self.quadro_8.column('t', anchor=CENTER, width=20)
         self.quadro_8.column('h', anchor=CENTER, width=20)
         self.quadro_8.column('Abatimento', anchor=CENTER, width=20)
+        self.quadro_8.column('CP', anchor=CENTER, width=20)
 
         self.quadro_8.heading('U', text='U', anchor=CENTER)
+        self.quadro_8.heading('Ti', text='Ti', anchor=CENTER)
         self.quadro_8.heading('t₀', text='t₀', anchor=CENTER)
         self.quadro_8.heading('t', text='t', anchor=CENTER)
         self.quadro_8.heading('h', text='h', anchor=CENTER)
         self.quadro_8.heading('Abatimento', text='Abto.', anchor=CENTER)
+        self.quadro_8.heading('CP', text='CP', anchor=CENTER)
 
-        self.quadro_8.place(relx=0.025, rely=0.0665, relwidth=0.4025, relheight=0.535)
+        self.quadro_8.place(relx=0.025, rely=0.0665, relwidth=0.48, relheight=0.535)
 
         self.y_scroll_8 = ttk.Scrollbar(self.aba_5, orient=tk.VERTICAL, command=self.quadro_8.yview)
 
-        self.quadro_6['yscroll'] = self.y_scroll_5.set
+        self.quadro_8['yscroll'] = self.y_scroll_8.set
 
-        self.y_scroll_6.place(relx=0.4275, rely=0.0665, relwidth=0.025, relheight=0.535)
+        self.y_scroll_8.place(relx=0.505, rely=0.0665, relwidth=0.025, relheight=0.535)
 
         for i in range(len(self.quadro_8_itens[0])):
             self.quadro_8.insert(parent='', index=i, iid=i, text='', values=((self.quadro_8_itens[0][i], 
                                                                               self.quadro_8_itens[1][i], 
                                                                               self.quadro_8_itens[2][i], 
                                                                               self.quadro_8_itens[3][i],
-                                                                              self.quadro_8_itens[4][i])))
+                                                                              self.quadro_8_itens[4][i],
+                                                                              self.quadro_8_itens[5][i],
+                                                                              self.quadro_8_itens[6][i])))
             
         self.lista_de_links_4 = ttk.Combobox(self.aba_5, values=self.links_3)
-        self.lista_de_links_4.place(relx=0.236, rely=0.88, relwidth=0.105, relheight=0.05)
+        self.lista_de_links_4.place(relx=0.236, rely=0.88, relwidth=0.185, relheight=0.05)
 
         # 2º Quadrante
 
-        self.quadro_9 = ttk.Treeview(self.aba_5, columns=('εcs'))
+        self.quadro_9 = ttk.Treeview(self.aba_5, columns=('φ'))
 
         self.quadro_9.column('#0', width=0, stretch=NO)
-        self.quadro_9.column('εcs', anchor=CENTER, width=20)
+        self.quadro_9.column('φ', anchor=CENTER, width=20)
 
-        self.quadro_9.heading('εcs', text='εcs', anchor=CENTER)
+        self.quadro_9.heading('φ', text='φ', anchor=CENTER)
 
-        self.quadro_9.place(relx=0.5025, rely=0.0665, relwidth=0.075, relheight=0.735)
+        self.quadro_9.place(relx=0.581, rely=0.0665, relwidth=0.075, relheight=0.735)
 
         self.y_scroll_9 = ttk.Scrollbar(self.aba_5, orient=tk.VERTICAL, command=self.quadro_9.yview)
 
-        self.quadro_9['yscroll'] = self.y_scroll_5.set
+        self.quadro_9['yscroll'] = self.y_scroll_9.set
 
-        self.y_scroll_9.place(relx=0.5782, rely=0.0665, relwidth=0.025, relheight=0.735)
+        self.y_scroll_9.place(relx=0.6567, rely=0.0665, relwidth=0.025, relheight=0.735)
 
         for i in range(len(self.quadro_9_itens)):
             self.quadro_9.insert(parent='', index=i, iid=i, text='', values=((self.quadro_9_itens[i])))
@@ -2049,17 +2171,16 @@ class programa(funcoes):
 
         self.quadro_10.heading('σ', text='σ', anchor=CENTER)
 
-        #self.quadro_10.place(relx=0.655, rely=0.0665, relwidth=0.075, relheight=0.735)
+        self.quadro_10.place(relx=0.731, rely=0.0665, relwidth=0.075, relheight=0.535)
 
         self.y_scroll_10 = ttk.Scrollbar(self.aba_5, orient=tk.VERTICAL, command=self.quadro_10.yview)
 
-        self.quadro_10['yscroll'] = self.y_scroll_5.set
+        self.quadro_10['yscroll'] = self.y_scroll_10.set
 
-        #self.y_scroll_10.place(relx=0.803, rely=0.0665, relwidth=0.025, relheight=0.535)
+        self.y_scroll_10.place(relx=0.8067, rely=0.0665, relwidth=0.025, relheight=0.535)
 
-        for i in range(len(self.quadro_10_itens[0])):
-            self.quadro_10.insert(parent='', index=i, iid=i, text='', values=((self.quadro_10_itens[0][i], 
-                                                                               self.quadro_10_itens[1][i])))
+        for i in range(len(self.quadro_10_itens)):
+            self.quadro_10.insert(parent='', index=i, iid=i, text='', values=((self.quadro_10_itens[i])))
 
         # 4º Quadrante
 
@@ -2068,17 +2189,20 @@ class programa(funcoes):
         self.quadro_11.column('#0', width=0, stretch=NO)
         self.quadro_11.column('εcc', anchor=CENTER, width=20)
 
-        self.quadro_11.heading('εcc', text='εcc', anchor=CENTER)
+        self.quadro_11.heading('εcc', text='σ . φ', anchor=CENTER)
 
-        self.quadro_11.place(relx=0.8815, rely=0.0665, relwidth=0.075, relheight=0.735)
+        self.quadro_11.place(relx=0.881, rely=0.0665, relwidth=0.075, relheight=0.616)
 
         self.y_scroll_11 = ttk.Scrollbar(self.aba_5, orient=tk.VERTICAL, command=self.quadro_11.yview)
 
         self.quadro_11['yscroll'] = self.y_scroll_11.set
 
-        self.y_scroll_11.place(relx=0.9572, rely=0.0665, relwidth=0.025, relheight=0.735)
+        self.y_scroll_11.place(relx=0.9567, rely=0.0665, relwidth=0.025, relheight=0.616)
 
         for i in range(len(self.quadro_11_itens)):
             self.quadro_11.insert(parent='', index=i, iid=i, text='', values=((self.quadro_11_itens[i])))
+
+        self.ecc = Label(self.aba_5, text=self.resultado_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.ecc.place(relx=0.89, rely=0.7525, relwidth=0.08, relheight=0.0475) 
 
 programa()
