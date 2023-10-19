@@ -24,7 +24,7 @@ def calculo_de_Bft(t_fic, h_fic):
 
     return (t_fic**2 + A * t_fic + B) / (t_fic**2 + C * t_fic + D)
 
-def fluencia_do_concreto(U, h, CP, t0, t, abatimento):
+def fluencia_do_concreto(U, Ti, t0, t, h, abatimento, CP):
 
     Q = []
 
@@ -33,20 +33,37 @@ def fluencia_do_concreto(U, h, CP, t0, t, abatimento):
         # Primeira Variável
 
         if CP[i] == 'I' or CP[i] == 'II':
+
+            if t[i] == '∞':
+                fc = 1.267
+
             coeficiente = 0.25
 
+            alpha = 2
+
         elif CP[i] == 'III' or CP[i] == 'IV':
+
+            if t[i] == '∞':
+                fc = 1.433
+        
             coeficiente = 0.38
 
+            alpha = 1
+
         elif CP[i] == 'V':
+            
+            if t[i] == '∞':
+                fc = 1.208
+
             coeficiente = 0.20
 
-        d0  = t0[i] / (3 * ((U[i] + 10) / 30))
-        fc0 = math.e**(coeficiente * (1 - (28/d0)**(1/2)))
+            alpha = 3
 
-        d   = t[i]  / (3 * ((U[i] + 10) / 30))
-        fc  = math.e**(coeficiente * (1 - (28/d )**(1/2)))
+        fc0 = math.e**(coeficiente * (1 - (28/(t0[i] / (alpha * ((Ti[i] + 10) / 30))))**(1/2)))
 
+        if t[i] != '∞':
+            fc = math.e**(coeficiente * (1 - (28/(t[i] / (alpha * ((Ti[i] + 10) / 30))))**(1/2)))
+ 
         Qa = 0.8 * (1 - (fc0 / fc))
 
         # Segunda Variável
@@ -60,7 +77,7 @@ def fluencia_do_concreto(U, h, CP, t0, t, abatimento):
         elif abatimento[i] == '10 - 15' and U[i] <= 90:
             Q1c = (4.45 - 0.035 * U[i]) * 1.25
 
-        Q2c = (42 * h[i]) / (20 + h[i])
+        Q2c = (42 + h[i]) / (20 + h[i])
 
         Qf = Q1c * Q2c
 
@@ -68,11 +85,11 @@ def fluencia_do_concreto(U, h, CP, t0, t, abatimento):
 
         Bft0 = calculo_de_Bft(t0[i], h[i])
 
-        if t0 == '∞':
+        if t[i] == '∞':
             Bft = 1
             Bd = 1
 
-        else:
+        elif t[i] != '∞':
             Bft = calculo_de_Bft(t[i], h[i])
             Bd = (t[i] - t0[i] + 20) / (t[i] - t0[i] + 70)
 
@@ -82,6 +99,24 @@ def fluencia_do_concreto(U, h, CP, t0, t, abatimento):
 
         # Valor da Deformação por Fluência
 
-        Q.append(Qa + Qf * (Bft - Bft0) * Qd * Bd)
+        Q.append('%.4f' % (Qa + Qf * (Bft - Bft0) + Qd * Bd))
 
     return Q
+
+def superposicao_de_efeitos(Q, o, fck):
+    
+    Q_o = []
+
+    ecc = 0
+
+    Eci_28 = 1 / (5600000 * fck**(1/2))
+
+    for i in range(len(Q)):
+
+        ecc += float(Q[i]) * float(o[i])
+
+        Q_o.append('%.3f' % (float(Q[i]) * float(o[i])))
+
+    ecc *= Eci_28
+
+    return '%.2e' % ecc, Q_o
