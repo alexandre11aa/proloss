@@ -64,5 +64,3 @@ def relaxacao_relativa(delta_o_pr, delta_p_cs, opi):
     delta_o_pr_rel = delta_o_pr * (1 - 2 * abs(delta_p_cs) / opi)
 
     return delta_o_pr_rel
-
-print(relaxacao_pura(22, 1.014 * 10**(-4), 130, 0, 0, 0, 1, 1, 1900, 0, '∞', 'Cordoalha - RB'))
