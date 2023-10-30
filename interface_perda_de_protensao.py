@@ -1701,7 +1701,7 @@ class programa(funcoes):
                                                                      'Ac (m²)',
                                                                      'Ap (cm²)',
                                                                      'Ep (GPa)',
-                                                                     'Ic (m^4)',
+                                                                     'Ic (m⁴)',
                                                                      'Mg (kN.m)',
                                                                      'ycin (m)',
                                                                      'fck₂₈ (MPa)',
@@ -2246,10 +2246,164 @@ class programa(funcoes):
 
     # Widgets Estáticos da Aba 6
     def aba_6_funcoes(self):
-        pass
+
+        # 1.0 Quadrante
+
+        self.fundo_do_quadro_13 = Label(self.aba_6, text='', relief="raised", bg='#F0F0F0', fg='#800000')
+        self.fundo_do_quadro_13.place(relx=0.005, rely=0.011, relwidth=0.7835, relheight=0.98)
+
+        self.fundo_de_variaveis_4 = Label(self.aba_6, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_variaveis_4.place(relx=0.018, rely=0.041, relwidth=0.759, relheight=0.78)
+
+        self.fundo_insercao_de_variaveis = Label(self.aba_6, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_insercao_de_variaveis.place(relx=0.018, rely=0.8485, relwidth=0.759, relheight=0.12)
+
+        self.variavel_n_ppra_texto = Label(self.aba_6, text='n :', bg='#F0F0F0', fg='#000000')
+        self.variavel_n_ppra_texto.place(relx=0.078, rely=0.125, relwidth=0.02, relheight=0.035)
+
+        self.variavel_ap_ppra_texto = Label(self.aba_6, text='Ap :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ap_ppra_texto.place(relx=0.254, rely=0.125, relwidth=0.03, relheight=0.05)
+
+        self.variavel_p0_ppra_texto = Label(self.aba_6, text='P₀ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_p0_ppra_texto.place(relx=0.4415, rely=0.125, relwidth=0.03, relheight=0.05)
+
+        self.variavel_Mg_ppra_texto = Label(self.aba_6, text='Mg :', bg='#F0F0F0', fg='#000000')
+        self.variavel_Mg_ppra_texto.place(relx=0.6175, rely=0.125, relwidth=0.03, relheight=0.05)
+
+        self.variavel_ep_ppra_texto = Label(self.aba_6, text='ep :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ep_ppra_texto.place(relx=0.078, rely=0.3625, relwidth=0.03, relheight=0.05)
+
+        self.variavel_Ep_ppra_texto = Label(self.aba_6, text='Ep :', bg='#F0F0F0', fg='#000000')
+        self.variavel_Ep_ppra_texto.place(relx=0.254, rely=0.3625, relwidth=0.03, relheight=0.05)
+
+        self.variavel_Ic_ppra_texto = Label(self.aba_6, text='Ic :', bg='#F0F0F0', fg='#000000')
+        self.variavel_Ic_ppra_texto.place(relx=0.4415, rely=0.3625, relwidth=0.03, relheight=0.05)
+
+        self.variavel_Eci28_ppra_texto = Label(self.aba_6, text='Eci₂₈ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_Eci28_ppra_texto.place(relx=0.6175, rely=0.3625, relwidth=0.04, relheight=0.05)
+
+        self.variavel_fptk_ppra_texto = Label(self.aba_6, text='fptk :', bg='#F0F0F0', fg='#000000')
+        self.variavel_fptk_ppra_texto.place(relx=0.078, rely=0.6, relwidth=0.035, relheight=0.05)
+
+        self.variavel_t0_ppra_texto = Label(self.aba_6, text='t₀ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_t0_ppra_texto.place(relx=0.254, rely=0.6, relwidth=0.03, relheight=0.05)
+
+        self.variavel_t_ppra_texto = Label(self.aba_6, text='t :', bg='#F0F0F0', fg='#000000')
+        self.variavel_t_ppra_texto.place(relx=0.4415, rely=0.6, relwidth=0.02, relheight=0.05)
+
+        self.variavel_relaxacao_ppra_texto = Label(self.aba_6, text='Relaxação :', bg='#F0F0F0', fg='#000000')
+        self.variavel_relaxacao_ppra_texto.place(relx=0.6175, rely=0.6, relwidth=0.088, relheight=0.05)
+
+        self.lista_ppra_1 = ttk.Combobox(self.aba_6, values=['', 'Cordoalhas RN', 'Cordoalhas RB', 'Fios RN', 'Fios RB', 'Barras'])
+        self.lista_ppra_1.place(relx=0.041, rely=0.8825, relwidth=0.135, relheight=0.05)
+        self.lista_ppra_1.current(0)
+
+        self.botao_inserir_13 = tk.Button(self.aba_6, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
+        self.botao_inserir_13.place(relx=0.195, rely=0.8825, relwidth=0.08, relheight=0.05)
+
+        self.lista_ppra_2 = ttk.Combobox(self.aba_6, values=['', 'Nº de Cord. | Fios | Bar.', 'Ap (cm²)', 'P₀ (kN / (C. | F. | B.)', 
+                                                             'Mg (kN . m)', 'Ep (GPa)', 'Ic (m⁴)', 'Eci₂₈ (GPa)', 'fptk (MPa)', 
+                                                             't₀ (dias)', 't = ∞ (dias)', 't ≠ ∞ (dias)'])
+        self.lista_ppra_2.place(relx=0.2922, rely=0.8825, relwidth=0.206, relheight=0.05)
+        self.lista_ppra_2.current(0)
+
+        self.variaveis_ppra = Entry(self.aba_6, text="")
+        self.variaveis_ppra.place(relx=0.5170, rely=0.8825, relwidth=0.135, relheight=0.05)
+
+        self.botao_inserir_14 = tk.Button(self.aba_6, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
+        self.botao_inserir_14.place(relx=0.6725, rely=0.8825, relwidth=0.08, relheight=0.05)
+
+        # 2.0 Quadrante
+
+        self.fundo_do_quadro_14 = Label(self.aba_6, text='', relief="raised", bg='#F0F0F0', fg='#800000')
+        self.fundo_do_quadro_14.place(relx=0.805, rely=0.011, relwidth=0.1865, relheight=0.98)
+
+        self.fundo_de_respostas_1 = Label(self.aba_6, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_respostas_1.place(relx=0.816, rely=0.041, relwidth=0.163, relheight=0.365)
+
+        self.fundo_de_respostas_2 = Label(self.aba_6, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_respostas_2.place(relx=0.816, rely=0.44, relwidth=0.163, relheight=0.290)
+
+        self.fundo_de_respostas_3 = Label(self.aba_6, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_respostas_3.place(relx=0.816, rely=0.764, relwidth=0.163, relheight=0.2075)
+
+        self.variavel_w_ppra_texto = Label(self.aba_6, text='Ψ₁₀₀₀ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_w_ppra_texto.place(relx=0.85, rely=0.0675, relwidth=0.04, relheight=0.035)
+
+        self.variavel_delta_o_pr_ppra_texto = Label(self.aba_6, text='Δσₚᵣ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_delta_o_pr_ppra_texto.place(relx=0.85, rely=0.18, relwidth=0.04, relheight=0.035)
+
+        self.botao_calcular_6 = tk.Button(self.aba_6, text='Calcular', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
+        self.botao_calcular_6.place(relx=0.85, rely=0.318, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_delta_o_p_cs_ppra_texto = Label(self.aba_6, text='Δσₚ,c+s :', bg='#F0F0F0', fg='#000000')
+        self.variavel_delta_o_p_cs_ppra_texto.place(relx=0.825, rely=0.42, relwidth=0.0675, relheight=0.035)
+
+        self.variavel_delta_o_p_cs_ppra_entrada = Entry(self.aba_6, text="")
+        self.variavel_delta_o_p_cs_ppra_entrada.place(relx=0.85, rely=0.565, relwidth=0.0985, relheight=0.05)
+
+        self.botao_inserir_15 = tk.Button(self.aba_6, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
+        self.botao_inserir_15.place(relx=0.85, rely=0.65, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_delta_o_pr_rel_ppra_texto = Label(self.aba_6, text='Δσₚᵣ,ᵣₑₗ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_delta_o_pr_rel_ppra_texto.place(relx=0.825, rely=0.745, relwidth=0.067, relheight=0.035)
+
+        self.botao_calcular_7 = tk.Button(self.aba_6, text='Calcular', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
+        self.botao_calcular_7.place(relx=0.85, rely=0.89, relwidth=0.0985, relheight=0.05)
 
     # Widgets Dinâmicos da Aba 6
     def aba_6_funcoes_destrutivas(self):
-        pass
+
+        # 1.0 Quadrante
+
+        self.variavel_n_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_n_ppra.place(relx=0.078, rely=0.2025, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_ap_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ap_ppra.place(relx=0.254, rely=0.2025, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_p0_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_p0_ppra.place(relx=0.4415, rely=0.2025, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_Mg_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Mg_ppra.place(relx=0.6175, rely=0.2025, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_ep_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ep_ppra.place(relx=0.078, rely=0.44, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_Ep_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Ep_ppra.place(relx=0.254, rely=0.44, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_Ic_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Ic_ppra.place(relx=0.4415, rely=0.44, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_Eci28_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Eci28_ppra.place(relx=0.6175, rely=0.44, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_fptk_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_fptk_ppra.place(relx=0.078, rely=0.6775, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_t0_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_t0_ppra.place(relx=0.254, rely=0.6775, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_t_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_t_ppra.place(relx=0.4415, rely=0.6775, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_relaxacao_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_relaxacao_ppra.place(relx=0.6175, rely=0.6775, relwidth=0.0985, relheight=0.05)
+
+        # 2.0 Quadrante
+
+        self.variavel_w_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_w_ppra.place(relx=0.85, rely=0.12, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_delta_o_pr_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_delta_o_pr_ppra.place(relx=0.85, rely=0.2375, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_delta_o_p_cs_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_delta_o_p_cs_ppra.place(relx=0.85, rely=0.48, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_delta_o_pr_rel_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_delta_o_pr_rel_ppra.place(relx=0.85, rely=0.805, relwidth=0.0985, relheight=0.05)
 
 programa()
