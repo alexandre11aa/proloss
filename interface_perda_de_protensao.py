@@ -23,6 +23,8 @@ from itens_auxiliares.calculos_auxiliares import calculo_da_idade_ficticia
 from perdas_progressivas.retracao_do_concreto import retracao_do_concreto
 from perdas_progressivas.fluencia_do_concreto import fluencia_do_concreto
 from perdas_progressivas.fluencia_do_concreto import superposicao_de_efeitos
+from perdas_progressivas.relaxacao import relaxacao_pura
+from perdas_progressivas.relaxacao import relaxacao_relativa
 
 root = Tk()
 
@@ -130,6 +132,33 @@ class funcoes():
                                                                                self.fck_ecc)
 
         self.destruicao_5()
+
+    def perda_por_relaxacao(self, calculo):
+
+        if calculo == 0:
+        
+            (self.valores_variaveis_ppra[12], 
+             self.valores_variaveis_ppra[13], 
+             self.valores_variaveis_ppra[16]) = relaxacao_pura(self.valores_variaveis_ppra[0],
+                                                               self.valores_variaveis_ppra[1],
+                                                               self.valores_variaveis_ppra[2],
+                                                               self.valores_variaveis_ppra[3],
+                                                               self.valores_variaveis_ppra[4],
+                                                               self.valores_variaveis_ppra[5],
+                                                               self.valores_variaveis_ppra[6],
+                                                               self.valores_variaveis_ppra[7],
+                                                               self.valores_variaveis_ppra[8],
+                                                               self.valores_variaveis_ppra[9],
+                                                               self.valores_variaveis_ppra[10],
+                                                               self.valores_variaveis_ppra[11])
+            
+        elif calculo == 1:
+
+            self.valores_variaveis_ppra[15] = relaxacao_relativa(self.valores_variaveis_ppra[13],
+                                                                 self.valores_variaveis_ppra[14],
+                                                                 self.valores_variaveis_ppra[16])
+            
+        self.destruicao_6()
 
     # Aplicações
     def aplicar_1(self):
@@ -264,6 +293,27 @@ class funcoes():
 
         self.aba_5_funcoes_destrutivas()
 
+    def destruicao_6(self):
+        
+        self.variavel_n_ppra.destroy()
+        self.variavel_ap_ppra.destroy()
+        self.variavel_p0_ppra.destroy()
+        self.variavel_Mg_ppra.destroy()
+        self.variavel_ep_ppra.destroy()
+        self.variavel_Ep_ppra.destroy()
+        self.variavel_Ic_ppra.destroy()
+        self.variavel_Eci28_ppra.destroy()
+        self.variavel_fptk_ppra.destroy()
+        self.variavel_t0_ppra.destroy()
+        self.variavel_t_ppra.destroy()
+        self.variavel_relaxacao_ppra.destroy()
+        self.variavel_w_ppra.destroy()
+        self.variavel_delta_o_pr_ppra.destroy()
+        self.variavel_delta_o_p_cs_ppra.destroy()
+        self.variavel_delta_o_pr_rel_ppra.destroy()
+
+        self.aba_6_funcoes_destrutivas()
+
     # Exemplos
     def exemplos(self, ex):
 
@@ -343,6 +393,32 @@ class funcoes():
             self.fck_ecc = 40
 
             self.destruicao_5()
+
+        elif ex == '6.0':
+            
+            self.valores_variaveis_ppra = [22, 1.014, 130, 0, 0, 0, 1, 1, 1900, 0, '∞', 'Cord. - RB', '', '', -217063, '', '']
+
+            self.destruicao_6()
+
+        elif ex == '8.0':
+
+            # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 162.
+
+            self.valores_de_U = [40, 60, 80]
+
+            self.valor_de_Ac = 0.86
+
+            self.valor_de_u_ar = 8.2
+
+        elif ex == '9.0':
+
+            # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 163.
+
+            self.valores_de_Ti = [30, 26, 20]
+
+            self.valores_de_delta_t = [7, 12, 9]
+
+            self.valores_de_alpha = [2, 1, 3]
 
     # Inserções
     def insercao_1(self):
@@ -602,23 +678,28 @@ class funcoes():
 
         menu_de_exemplos = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Exemplos', menu = menu_de_exemplos)
-        menu_de_exemplos.add_command(label='1.0. PIAT', command=lambda: self.exemplos('1.0'))
-        menu_de_exemplos.add_command(label='1.1. PIAT', command=lambda: self.exemplos('1.1'))
-        menu_de_exemplos.add_command(label='2.0. PIAC'  , command=lambda: self.exemplos('2'))
-        menu_de_exemplos.add_command(label='3.0. PIEC'  , command=lambda: self.exemplos('3'))
-        menu_de_exemplos.add_command(label='4.0. PPRC'  , command=lambda: self.exemplos('4'))
-        menu_de_exemplos.add_command(label='5.0. PPFC', command=lambda: self.exemplos('5.0'))
-        menu_de_exemplos.add_command(label='5.1. PPFC', command=lambda: self.exemplos('5.1'))
+        menu_de_exemplos.add_command(label='E.1.0. PIAT', command=lambda: self.exemplos('1.0'))
+        menu_de_exemplos.add_command(label='E.1.1. PIAT', command=lambda: self.exemplos('1.1'))
+        menu_de_exemplos.add_command(label='E.2.0. PIAC', command=lambda: self.exemplos('2'))
+        menu_de_exemplos.add_command(label='E.3.0. PIEC', command=lambda: self.exemplos('3'))
+        menu_de_exemplos.add_command(label='E.4.0. PPRC', command=lambda: self.exemplos('4'))
+        menu_de_exemplos.add_command(label='E.5.0. PPFC', command=lambda: self.exemplos('5.0'))
+        menu_de_exemplos.add_command(label='E.5.1. PPFC', command=lambda: self.exemplos('5.1'))
+        menu_de_exemplos.add_command(label='E.6.0. PPRA', command=lambda: self.exemplos('6.0'))
+        menu_de_exemplos.add_command(label='E.8.0. ESFI', command=lambda: self.exemplos('8.0'))
+        menu_de_exemplos.add_command(label='E.9.0. IDFI', command=lambda: self.exemplos('9.0'))
+        menu_de_exemplos.add_command(label='E.0.0. ECRF', command=lambda: self.exemplos('0.0'))
 
         menu_de_tabelas = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Tabelas', menu = menu_de_tabelas)
-        menu_de_tabelas.add_command(label='Tabela 1', command=lambda: self.tabelas_auxiliares('numeros_usuais_para_determinacao_da_fluencia_e_retracao', '650x500'))
-        menu_de_tabelas.add_command(label='Tabela 2', command=lambda: self.tabelas_auxiliares('fluencia_e_retracao_em_funcao_da_vel_de_endurecimento_do_cim', '650x500'))
+        menu_de_tabelas.add_command(label='T.1.0. Fluência e Retração', command=lambda: self.tabelas_auxiliares('numeros_usuais_para_determinacao_da_fluencia_e_retracao', '650x500'))
+        menu_de_tabelas.add_command(label='T.2.0. Endurecimento do Cimento', command=lambda: self.tabelas_auxiliares('fluencia_e_retracao_em_funcao_da_vel_de_endurecimento_do_cim', '650x500'))
 
         menu_de_calculos = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Cálculos', menu = menu_de_calculos)
-        menu_de_calculos.add_command(label='Cálculo 1', command=self.calculo_espessura_ficticia)
-        menu_de_calculos.add_command(label='Cálculo 2', command=self.calculo_idade_ficticia)
+        menu_de_calculos.add_command(label='C.1.0. ESFI', command=self.calculo_espessura_ficticia)
+        menu_de_calculos.add_command(label='C.2.0. IDFI', command=self.calculo_idade_ficticia)
+        menu_de_calculos.add_command(label='C.3.0. ECRF', command=self.calculo_efeito_conjunto_r_f)
 
     # Tabelas Informativas
     def tabelas_auxiliares(self, img, geometria):
@@ -964,6 +1045,145 @@ class funcoes():
         self.janela.destroy()
         self.calculo_idade_ficticia()
 
+    def calculo_efeito_conjunto_r_f(self):
+
+        # Configurações da Página
+
+        self.janela = tk.Toplevel()
+
+        self.janela.geometry("375x350")
+
+        self.janela.resizable(False, False)
+
+        self.janela.grab_set()
+
+        self.fundo_ecrf_0 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ecrf_0.place(relx=0.02, rely=0.04, relwidth=0.955, relheight=0.94)
+
+        self.fundo_ecrf_1 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ecrf_1.place(relx=0.044, rely=0.0825, relwidth=0.71, relheight=0.7)
+
+        self.fundo_ecrf_2 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ecrf_2.place(relx=0.7715, rely=0.0825, relwidth=0.18, relheight=0.7)
+
+        self.fundo_ecrf_3 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ecrf_3.place(relx=0.044, rely=0.7975, relwidth=0.9075, relheight=0.16)
+
+        self.texto_ecrf = Label(self.janela, text='Efeito Conjunto de Retração e Fluência', bg='#F0F0F0', fg='#000000')
+        self.texto_ecrf.place(relx=0.125, rely=0.01, relwidth=0.55, relheight=0.05)
+
+        self.texto_ecrf = Label(self.janela, text='Δσₚ,c+s', bg='#F0F0F0', fg='#000000')
+        self.texto_ecrf.place(relx=0.8, rely=0.0525, relwidth=0.12, relheight=0.05)
+
+        # Variáveis
+
+        self.quadro_ecrf = ttk.Treeview(self.janela, columns=('Ep', 'εcs', 'εcc', 'Eci₂₈', 'αcP₀', 'αP₀', 'φ'))
+
+        self.quadro_ecrf.column('#0', width=0, stretch=NO)
+        self.quadro_ecrf.column('Ep', anchor=CENTER, width=20)
+        self.quadro_ecrf.column('εcs', anchor=CENTER, width=20)
+        self.quadro_ecrf.column('εcc', anchor=CENTER, width=20)
+        self.quadro_ecrf.column('Eci₂₈', anchor=CENTER, width=20)
+        self.quadro_ecrf.column('αcP₀', anchor=CENTER, width=20)
+        self.quadro_ecrf.column('αP₀', anchor=CENTER, width=20)
+        self.quadro_ecrf.column('φ', anchor=CENTER, width=20)
+
+        self.quadro_ecrf.heading('Ep', text='Ep', anchor=CENTER)
+        self.quadro_ecrf.heading('εcs', text='εcs', anchor=CENTER)
+        self.quadro_ecrf.heading('εcc', text='εcc', anchor=CENTER)
+        self.quadro_ecrf.heading('Eci₂₈', text='Eci₂₈', anchor=CENTER)
+        self.quadro_ecrf.heading('αcP₀', text='αcP₀', anchor=CENTER)
+        self.quadro_ecrf.heading('αP₀', text='αP₀', anchor=CENTER)
+        self.quadro_ecrf.heading('φ', text='φ', anchor=CENTER)
+
+        self.quadro_ecrf.place(relx=0.063, rely=0.12, relwidth=0.63, relheight=0.6215)
+
+        self.y_scroll_ecrf = ttk.Scrollbar(self.janela, orient=tk.VERTICAL, command=self.quadro_ecrf.yview)
+
+        self.quadro_ecrf['yscroll'] = self.y_scroll_ecrf.set
+
+        self.y_scroll_ecrf.place(relx=0.6925, rely=0.12, relwidth=0.05, relheight=0.6215)
+
+        if len(self.valores_de_Ti) > len(self.valores_de_delta_t):
+            indice_da_tabela_1 = len(self.valores_de_Ti)
+
+            for i in range(len(self.valores_de_Ti) - len(self.valores_de_delta_t)):
+                self.valores_de_delta_t.append('')
+
+        elif len(self.valores_de_Ti) < len(self.valores_de_delta_t):
+            indice_da_tabela_1 = len(self.valores_de_delta_t)
+
+            for i in range(len(self.valores_de_delta_t) - len(self.valores_de_Ti)):
+                self.valores_de_Ti.append('')
+
+        else:
+            indice_da_tabela_1 = len(self.valores_de_delta_t)
+
+        for i in range(indice_da_tabela_1):
+            self.quadro_ecrf.insert(parent='', index=i, iid=i, text='',
+                                    values=(self.valores_de_Ti[i], self.valores_de_delta_t[i]))
+
+        self.lista_variaveis_if = ttk.Combobox(self.janela, values=['', 'Ep', 
+                                                                    'εcs', 'εcc', 
+                                                                    'Eci₂₈', 'αcP₀', 
+                                                                    'αP₀', 'φ'])
+        self.lista_variaveis_if.place(relx=0.063, rely=0.84, relwidth=0.165, relheight=0.065)
+        self.lista_variaveis_if.current(0)
+
+        self.variavel = Entry(self.janela, text="")
+        self.variavel.place(relx=0.25, rely=0.84, relwidth=0.157, relheight=0.064)
+
+        self.botao_inserir_if = tk.Button(self.janela, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                          command=lambda: self.calculo_idade_ficticia_funcoes('i_alpha_Ti_delta_t'))
+        self.botao_inserir_if.place(relx=0.427, rely=0.84, relwidth=0.157, relheight=0.065)
+
+        self.botao_apagar_if = tk.Button(self.janela, text='Apagar', bg='#F0F0F0', fg='#000000',
+                                         command=lambda: self.calculo_idade_ficticia_funcoes('a_alpha_Ti_delta_t'))
+        self.botao_apagar_if.place(relx=0.6, rely=0.84, relwidth=0.157, relheight=0.065)
+
+        # Resultados
+
+        self.botao_calcular_if = tk.Button(self.janela, text='Calcular', bg='#F0F0F0', fg='#000000',
+                                         command=lambda: self.calculo_idade_ficticia_funcoes('t_fic'))
+        self.botao_calcular_if.place(relx=0.775, rely=0.84, relwidth=0.157, relheight=0.065)
+
+        self.quadro_ecrf_res = ttk.Treeview(self.janela, columns=('Δσₚ,c+s'))
+
+        self.quadro_ecrf_res.column('#0', width=0, stretch=NO)
+        self.quadro_ecrf_res.column('Δσₚ,c+s', anchor=CENTER, width=10)
+
+        self.quadro_ecrf_res.heading('Δσₚ,c+s', text='', anchor=CENTER)
+
+        self.quadro_ecrf_res.place(relx=0.79, rely=0.12, relwidth=0.1012, relheight=0.6215)
+
+        self.y_scroll_ecrf_res = ttk.Scrollbar(self.janela, orient=tk.VERTICAL, command=self.quadro_ecrf_res.yview)
+
+        self.quadro_ecrf_res['yscroll'] = self.y_scroll_ecrf_res.set
+
+        self.y_scroll_ecrf_res.place(relx=0.89, rely=0.12, relwidth=0.05, relheight=0.6215)
+
+        if len(self.valores_de_alpha) > len(self.valores_de_i_fic):
+            indice_da_tabela_2 = len(self.valores_de_alpha)
+
+            for i in range(len(self.valores_de_alpha) - len(self.valores_de_i_fic)):
+                self.valores_de_i_fic.append('')
+
+        elif len(self.valores_de_alpha) < len(self.valores_de_i_fic):
+            indice_da_tabela_2 = len(self.valores_de_i_fic)
+
+            for i in range(len(self.valores_de_i_fic) - len(self.valores_de_alpha)):
+                self.valores_de_delta_t.append('')
+
+        else:
+            indice_da_tabela_2 = len(self.valores_de_alpha)
+
+        for i in range(indice_da_tabela_2):
+            self.quadro_ecrf_res.insert(parent='', index=i, iid=i, text='',
+                                        values=(self.valores_de_alpha[i], self.valores_de_i_fic[i]))
+
+    def calculo_efeito_conjunto_r_f_funcoes(self):
+        pass
+
     # Opção Limpar
     def limpar(self):
         self.variaveis_iniciais()
@@ -1070,6 +1290,13 @@ class funcoes():
         self.resultado_ecc = ''
 
         self.fck_ecc = ''
+
+        # Variáveis de Relaxação Pura e Relativa
+
+        self.valores_variaveis_ppra = ['', '', '', '', 
+                                       '', '', '', '', 
+                                       '', '', '', '', 
+                                       '', '', '', '', '']
 
 class programa(funcoes):
 
@@ -2333,7 +2560,7 @@ class programa(funcoes):
         self.variavel_delta_o_pr_ppra_texto = Label(self.aba_6, text='Δσₚᵣ :', bg='#F0F0F0', fg='#000000')
         self.variavel_delta_o_pr_ppra_texto.place(relx=0.85, rely=0.18, relwidth=0.04, relheight=0.035)
 
-        self.botao_calcular_6 = tk.Button(self.aba_6, text='Calcular', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
+        self.botao_calcular_6 = tk.Button(self.aba_6, text='Calcular', bg='#F0F0F0', fg='#000000', command=lambda: self.perda_por_relaxacao(0))
         self.botao_calcular_6.place(relx=0.85, rely=0.318, relwidth=0.0985, relheight=0.05)
 
         self.variavel_delta_o_p_cs_ppra_texto = Label(self.aba_6, text='Δσₚ,c+s :', bg='#F0F0F0', fg='#000000')
@@ -2345,10 +2572,10 @@ class programa(funcoes):
         self.botao_inserir_15 = tk.Button(self.aba_6, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
         self.botao_inserir_15.place(relx=0.85, rely=0.65, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_delta_o_pr_rel_ppra_texto = Label(self.aba_6, text='Δσₚᵣ,ᵣₑₗ :', bg='#F0F0F0', fg='#000000')
-        self.variavel_delta_o_pr_rel_ppra_texto.place(relx=0.825, rely=0.745, relwidth=0.067, relheight=0.035)
+        self.variavel_delta_o_pr_rel_ppra_texto = Label(self.aba_6, text='Δσₚᵣ,rel :', bg='#F0F0F0', fg='#000000')
+        self.variavel_delta_o_pr_rel_ppra_texto.place(relx=0.825, rely=0.745, relwidth=0.0675, relheight=0.035)
 
-        self.botao_calcular_7 = tk.Button(self.aba_6, text='Calcular', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
+        self.botao_calcular_7 = tk.Button(self.aba_6, text='Calcular', bg='#F0F0F0', fg='#000000', command=lambda: self.perda_por_relaxacao(1))
         self.botao_calcular_7.place(relx=0.85, rely=0.89, relwidth=0.0985, relheight=0.05)
 
     # Widgets Dinâmicos da Aba 6
@@ -2356,54 +2583,54 @@ class programa(funcoes):
 
         # 1.0 Quadrante
 
-        self.variavel_n_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_n_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[0], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_n_ppra.place(relx=0.078, rely=0.2025, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_ap_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ap_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[1], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_ap_ppra.place(relx=0.254, rely=0.2025, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_p0_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_p0_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[2], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_p0_ppra.place(relx=0.4415, rely=0.2025, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_Mg_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Mg_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[3], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_Mg_ppra.place(relx=0.6175, rely=0.2025, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_ep_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ep_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[4], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_ep_ppra.place(relx=0.078, rely=0.44, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_Ep_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Ep_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[5], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_Ep_ppra.place(relx=0.254, rely=0.44, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_Ic_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Ic_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[6], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_Ic_ppra.place(relx=0.4415, rely=0.44, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_Eci28_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Eci28_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[7], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_Eci28_ppra.place(relx=0.6175, rely=0.44, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_fptk_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_fptk_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[8], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_fptk_ppra.place(relx=0.078, rely=0.6775, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_t0_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_t0_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[9], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_t0_ppra.place(relx=0.254, rely=0.6775, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_t_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_t_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[10], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_t_ppra.place(relx=0.4415, rely=0.6775, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_relaxacao_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_relaxacao_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[11], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_relaxacao_ppra.place(relx=0.6175, rely=0.6775, relwidth=0.0985, relheight=0.05)
 
         # 2.0 Quadrante
 
-        self.variavel_w_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_w_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[12], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_w_ppra.place(relx=0.85, rely=0.12, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_delta_o_pr_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_delta_o_pr_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[13], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_delta_o_pr_ppra.place(relx=0.85, rely=0.2375, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_delta_o_p_cs_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_delta_o_p_cs_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[14], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_delta_o_p_cs_ppra.place(relx=0.85, rely=0.48, relwidth=0.0985, relheight=0.05)
 
-        self.variavel_delta_o_pr_rel_ppra = Label(self.aba_6, text=self.fck_ecc, relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_delta_o_pr_rel_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[15], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_delta_o_pr_rel_ppra.place(relx=0.85, rely=0.805, relwidth=0.0985, relheight=0.05)
 
 programa()
