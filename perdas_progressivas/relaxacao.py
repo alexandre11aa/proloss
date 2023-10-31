@@ -1,5 +1,5 @@
 '''
-Cálculo de perda de protensão por relaxação pura e relativa explicado do aço de protensão por Cholfe e Bonilha (2013).
+Cálculo de perda de protensão por relaxação pura e relativa explicado por Cholfe e Bonilha (2013).
 
 CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 189-193.
 '''
@@ -20,16 +20,24 @@ def interpolacao_linear(op0, tabela):
 
 def relaxacao_pura(n, Ap, P0, Mg, ep, Ep, Ic, Eci28, fptk, t0, t, relaxacao):
 
+    # Ajustando Unidades de Medida
+
+    Ap *= 10**(-4)
+
+    fptk *= 1000
+
+    # Calculando
+
     opi = ((n * P0) / (n * Ap)) + ((Mg * ep * Ep) / (Ic * Eci28))
 
-    op0 = opi / (1000 * fptk)
+    op0 = opi / fptk
 
     if op0 >= 0.5 and op0 <= 0.8:
 
-        if relaxacao == 'Cordoalha - RN':
+        if relaxacao == 'Cord. - RN':
             tabela = [0.000, 3.500, 7.000, 12.00]
 
-        elif relaxacao == 'Cordoalha - RB':
+        elif relaxacao == 'Cord. - RB':
             tabela = [0.000, 1.300, 2.500, 3.500]
 
         elif relaxacao == 'Fios - RN':
@@ -57,10 +65,10 @@ def relaxacao_pura(n, Ap, P0, Mg, ep, Ep, Ic, Eci28, fptk, t0, t, relaxacao):
 
     delta_o_pr = w * opi / (100 * 1000)
 
-    return delta_o_pr, (opi / 1000)
+    return ('%.2f' % w1000), ('%.2f' % delta_o_pr), ('%.2f' % opi)
 
 def relaxacao_relativa(delta_o_pr, delta_p_cs, opi):
 
-    delta_o_pr_rel = delta_o_pr * (1 - 2 * abs(delta_p_cs) / opi)
+    delta_o_pr_rel = float(delta_o_pr) * (1 - 2 * abs(float(delta_p_cs)) / float(opi))
 
-    return delta_o_pr_rel
+    return ('%.2f' % delta_o_pr_rel)
