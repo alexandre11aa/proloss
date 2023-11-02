@@ -19,6 +19,7 @@ from itens_auxiliares.tabelas_informativas import tabelas_informativas
 
 from itens_auxiliares.calculos_auxiliares import calculo_da_espessura_ficticia
 from itens_auxiliares.calculos_auxiliares import calculo_da_idade_ficticia
+from itens_auxiliares.calculos_auxiliares import efeito_conjunto_retracao_e_fluencia
 
 from perdas_progressivas.retracao_do_concreto import retracao_do_concreto
 from perdas_progressivas.fluencia_do_concreto import fluencia_do_concreto
@@ -396,7 +397,7 @@ class funcoes():
 
         elif ex == '6.0':
             
-            self.valores_variaveis_ppra = [22, 1.014, 130, 0, 0, 0, 1, 1, 1900, 0, '∞', 'Cord. - RB', '', '', -217063, '', '']
+            self.valores_variaveis_ppra = [22, 1.014, 130, 0, 0, 0, 1, 1, 1900, 0, '∞', 'Cord. RB', '', '', -217063, '', '']
 
             self.destruicao_6()
 
@@ -419,6 +420,10 @@ class funcoes():
             self.valores_de_delta_t = [7, 12, 9]
 
             self.valores_de_alpha = [2, 1, 3]
+
+        elif ex == '0.0':
+
+            self.valores_de_ecrf = [1, [200], [-18], [-117.637], [32], [-29143.6], [1242603.5], [1.95], []]
 
     # Inserções
     def insercao_1(self):
@@ -642,6 +647,68 @@ class funcoes():
 
         self.destruicao_5()
 
+    def insercao_12(self, tipo):
+
+        if tipo == 0 and self.lista_ppra_1.get() != '':
+
+            if self.lista_ppra_1.get() == 'Cordoalhas RN':
+                self.valores_variaveis_ppra[11] = 'Cord. RN'
+            
+            elif self.lista_ppra_1.get() == 'Cordoalhas RB':
+                self.valores_variaveis_ppra[11] = 'Cord. RB'
+            
+            elif self.lista_ppra_1.get() == 'Fios RN':
+                self.valores_variaveis_ppra[11] = 'Fios RN'
+            
+            elif self.lista_ppra_1.get() == 'Fios RB':
+                self.valores_variaveis_ppra[11] = 'Fios RB'
+            
+            elif self.lista_ppra_1.get() == 'Barras':
+                self.valores_variaveis_ppra[11] = 'Barras'
+
+        elif tipo == 1 and self.lista_ppra_2.get() != '':
+
+            if self.lista_ppra_2.get() == 'Nº de Cord. | Fios | Bar.':
+                self.valores_variaveis_ppra[0] = float(self.variaveis_ppra.get())
+
+            elif self.lista_ppra_2.get() == 'Ap (cm²)':
+                self.valores_variaveis_ppra[1] = float(self.variaveis_ppra.get())
+
+            elif self.lista_ppra_2.get() == 'P₀ (kN / (C. | F. | B.)':
+                self.valores_variaveis_ppra[2] = float(self.variaveis_ppra.get())
+
+            elif self.lista_ppra_2.get() == 'Mg (kN . m)':
+                self.valores_variaveis_ppra[3] = float(self.variaveis_ppra.get())
+
+            elif self.lista_ppra_2.get() == 'ep':
+                self.valores_variaveis_ppra[4] = float(self.variaveis_ppra.get())
+
+            elif self.lista_ppra_2.get() == 'Ep (GPa)':
+                self.valores_variaveis_ppra[5] = float(self.variaveis_ppra.get())
+
+            elif self.lista_ppra_2.get() == 'Ic (m⁴)':
+                self.valores_variaveis_ppra[6] = float(self.variaveis_ppra.get())
+
+            elif self.lista_ppra_2.get() == 'Eci₂₈ (GPa)':
+                self.valores_variaveis_ppra[7] = float(self.variaveis_ppra.get())
+
+            elif self.lista_ppra_2.get() == 'fptk (MPa)':
+                self.valores_variaveis_ppra[8] = float(self.variaveis_ppra.get())
+
+            elif self.lista_ppra_2.get() == 't₀ (dias)':
+                self.valores_variaveis_ppra[9] = float(self.variaveis_ppra.get())
+
+            elif self.lista_ppra_2.get() == 't = ∞ (dias)':
+                self.valores_variaveis_ppra[10] = '∞'
+
+            elif self.lista_ppra_2.get() == 't ≠ ∞ (dias)':
+                self.valores_variaveis_ppra[10] = float(self.variaveis_ppra.get())
+
+        elif tipo == 2 and self.variavel_delta_o_p_cs_ppra_entrada.get() != '':
+            self.valores_variaveis_ppra[14] = float(self.variavel_delta_o_p_cs_ppra_entrada.get())
+
+        self.destruicao_6()
+
     # Apagando
     def apagando(self, quadro, quadro_itens, destruir, modelo):
         selecionador = quadro.selection()[0]
@@ -785,11 +852,11 @@ class funcoes():
         self.variavel_1.place(relx=0.41, rely=0.12, relwidth=0.19, relheight=0.064)
 
         self.botao_inserir_ef_1 = tk.Button(self.janela, text='Inserir', bg='#F0F0F0', fg='#000000',
-                                         command=lambda: self.calculo_espessura_ficticia_funcoes('i_U'))
+                                         command=lambda: self.calculo_espessura_ficticia_funcoes('inserir_1'))
         self.botao_inserir_ef_1.place(relx=0.41, rely=0.2075, relwidth=0.19, relheight=0.065)
 
         self.botao_apagar_ef = tk.Button(self.janela, text='Apagar', bg='#F0F0F0', fg='#000000',
-                                         command=lambda: self.calculo_espessura_ficticia_funcoes('a_U'))
+                                         command=lambda: self.calculo_espessura_ficticia_funcoes('apagar'))
         self.botao_apagar_ef.place(relx=0.41, rely=0.295, relwidth=0.19, relheight=0.065)
 
         self.texto_ef = Label(self.janela, text='Ac', bg='#F0F0F0', fg='#000000')
@@ -814,13 +881,13 @@ class funcoes():
         self.lista_variaveis_ef.current(0)
 
         self.botao_inserir_ef_2 = tk.Button(self.janela, text='Inserir', bg='#F0F0F0', fg='#000000',
-                                            command=lambda: self.calculo_espessura_ficticia_funcoes('Ac_u_ar'))
+                                            command=lambda: self.calculo_espessura_ficticia_funcoes('inserir_2'))
         self.botao_inserir_ef_2.place(relx=0.41, rely=0.8625, relwidth=0.19, relheight=0.065)       
 
         # Resultados
         
         self.botao_calcular_ef = tk.Button(self.janela, text='Calcular', bg='#F0F0F0', fg='#000000',
-                                           command=lambda: self.calculo_espessura_ficticia_funcoes('h_fic'))
+                                           command=lambda: self.calculo_espessura_ficticia_funcoes('calcular'))
         self.botao_calcular_ef.place(relx=0.71, rely=0.8625, relwidth=0.19, relheight=0.065)
 
         self.quadro_ef_2 = ttk.Treeview(self.janela, columns=('h_fic'))
@@ -844,24 +911,24 @@ class funcoes():
 
     def calculo_espessura_ficticia_funcoes(self, funcao):
         
-        if funcao == 'i_U':
+        if funcao == 'inserir_1':
             self.valores_de_U.append(float(self.variavel_1.get()))
 
-        elif funcao == 'a_U':
+        elif funcao == 'apagar':
             selecionador = self.quadro_ef_1.selection()[0]
 
             self.quadro_ef_1.delete(selecionador)
 
             del (self.valores_de_U[int(selecionador)])
 
-        elif funcao == 'Ac_u_ar':
+        elif funcao == 'inserir_2':
             if self.lista_variaveis_ef.get() == 'Ac (m²)':
                 self.valor_de_Ac = float(self.variavel_2.get())
 
             elif self.lista_variaveis_ef.get() == 'μ_ar (m)':
                 self.valor_de_u_ar = float(self.variavel_2.get())
 
-        elif funcao == 'h_fic':
+        elif funcao == 'calcular':
             self.valores_de_h_fic = calculo_da_espessura_ficticia(self.valor_de_Ac, 
                                                                   self.valor_de_u_ar, 
                                                                   self.valores_de_U)
@@ -945,17 +1012,17 @@ class funcoes():
         self.variavel.place(relx=0.77, rely=0.225, relwidth=0.157, relheight=0.064)
 
         self.botao_inserir_if = tk.Button(self.janela, text='Inserir', bg='#F0F0F0', fg='#000000',
-                                          command=lambda: self.calculo_idade_ficticia_funcoes('i_alpha_Ti_delta_t'))
+                                          command=lambda: self.calculo_idade_ficticia_funcoes('inserir'))
         self.botao_inserir_if.place(relx=0.595, rely=0.325, relwidth=0.157, relheight=0.065)
 
         self.botao_apagar_if = tk.Button(self.janela, text='Apagar', bg='#F0F0F0', fg='#000000',
-                                         command=lambda: self.calculo_idade_ficticia_funcoes('a_alpha_Ti_delta_t'))
+                                         command=lambda: self.calculo_idade_ficticia_funcoes('apagar'))
         self.botao_apagar_if.place(relx=0.77, rely=0.325, relwidth=0.157, relheight=0.065)
 
         # Resultados
 
         self.botao_calcular_if = tk.Button(self.janela, text='Calcular', bg='#F0F0F0', fg='#000000',
-                                         command=lambda: self.calculo_idade_ficticia_funcoes('t_fic'))
+                                         command=lambda: self.calculo_idade_ficticia_funcoes('calcular'))
         self.botao_calcular_if.place(relx=0.595, rely=0.225, relwidth=0.157, relheight=0.065)
 
         self.quadro_tf_res = ttk.Treeview(self.janela, columns=('α', 't_fic (dias)'))
@@ -996,7 +1063,7 @@ class funcoes():
 
     def calculo_idade_ficticia_funcoes(self, funcao):
         
-        if funcao == 'i_alpha_Ti_delta_t':
+        if funcao == 'inserir':
             if self.lista_variaveis_if.get() == 'α':
                 self.valores_de_alpha = list(filter(lambda item: item != '', self.valores_de_alpha))
 
@@ -1012,7 +1079,7 @@ class funcoes():
 
                 self.valores_de_delta_t.append(float(self.variavel.get()))
 
-        elif funcao == 'a_alpha_Ti_delta_t':
+        elif funcao == 'apagar':
 
             # Tabela 1
 
@@ -1034,7 +1101,7 @@ class funcoes():
 
                 self.quadro_tf_res.delete(self.quadro_tf_res.selection()[0])
 
-        elif funcao == 't_fic':
+        elif funcao == 'calcular':
 
             if (len(self.valores_de_Ti) == len(self.valores_de_delta_t)) and (len(self.valores_de_alpha) != 0):
 
@@ -1104,55 +1171,49 @@ class funcoes():
 
         self.y_scroll_ecrf.place(relx=0.6925, rely=0.12, relwidth=0.05, relheight=0.6215)
 
-        if len(self.valores_de_Ti) > len(self.valores_de_delta_t):
-            indice_da_tabela_1 = len(self.valores_de_Ti)
+        for i in range(1, 8):
+            if self.valores_de_ecrf[0] < len(self.valores_de_ecrf[i]):
+                self.valores_de_ecrf[0] = len(self.valores_de_ecrf[i])
 
-            for i in range(len(self.valores_de_Ti) - len(self.valores_de_delta_t)):
-                self.valores_de_delta_t.append('')
+        for i in range(1, 8):
+            if len(self.valores_de_ecrf[i]) < self.valores_de_ecrf[0]:
+                for j in range(self.valores_de_ecrf[0] - len(self.valores_de_ecrf[i])):
+                    self.valores_de_ecrf[i].append('')
 
-        elif len(self.valores_de_Ti) < len(self.valores_de_delta_t):
-            indice_da_tabela_1 = len(self.valores_de_delta_t)
-
-            for i in range(len(self.valores_de_delta_t) - len(self.valores_de_Ti)):
-                self.valores_de_Ti.append('')
-
-        else:
-            indice_da_tabela_1 = len(self.valores_de_delta_t)
-
-        for i in range(indice_da_tabela_1):
+        for i in range(self.valores_de_ecrf[0]):
             self.quadro_ecrf.insert(parent='', index=i, iid=i, text='',
-                                    values=(self.valores_de_Ti[i], self.valores_de_delta_t[i]))
+                                    values=(self.valores_de_ecrf[1][i], self.valores_de_ecrf[2][i],
+                                            self.valores_de_ecrf[3][i], self.valores_de_ecrf[4][i],
+                                            self.valores_de_ecrf[5][i], self.valores_de_ecrf[6][i],
+                                            self.valores_de_ecrf[7][i]))
 
-        self.lista_variaveis_if = ttk.Combobox(self.janela, values=['', 'Ep', 
-                                                                    'εcs', 'εcc', 
-                                                                    'Eci₂₈', 'αcP₀', 
-                                                                    'αP₀', 'φ'])
-        self.lista_variaveis_if.place(relx=0.063, rely=0.84, relwidth=0.165, relheight=0.065)
-        self.lista_variaveis_if.current(0)
+        self.lista_variaveis_ecrf = ttk.Combobox(self.janela, values=['', 'Ep', 'εcs', 'εcc', 'Eci₂₈', 'αcP₀', 'αP₀', 'φ'])
+        self.lista_variaveis_ecrf.place(relx=0.063, rely=0.84, relwidth=0.165, relheight=0.065)
+        self.lista_variaveis_ecrf.current(0)
 
         self.variavel = Entry(self.janela, text="")
         self.variavel.place(relx=0.25, rely=0.84, relwidth=0.157, relheight=0.064)
 
-        self.botao_inserir_if = tk.Button(self.janela, text='Inserir', bg='#F0F0F0', fg='#000000',
-                                          command=lambda: self.calculo_idade_ficticia_funcoes('i_alpha_Ti_delta_t'))
-        self.botao_inserir_if.place(relx=0.427, rely=0.84, relwidth=0.157, relheight=0.065)
+        self.botao_inserir_ecrf = tk.Button(self.janela, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                          command=lambda: self.calculo_efeito_conjunto_r_f_funcoes('inserir'))
+        self.botao_inserir_ecrf.place(relx=0.427, rely=0.84, relwidth=0.157, relheight=0.065)
 
-        self.botao_apagar_if = tk.Button(self.janela, text='Apagar', bg='#F0F0F0', fg='#000000',
-                                         command=lambda: self.calculo_idade_ficticia_funcoes('a_alpha_Ti_delta_t'))
-        self.botao_apagar_if.place(relx=0.6, rely=0.84, relwidth=0.157, relheight=0.065)
+        self.botao_apagar_ecrf = tk.Button(self.janela, text='Apagar', bg='#F0F0F0', fg='#000000',
+                                         command=lambda: self.calculo_efeito_conjunto_r_f_funcoes('apagar'))
+        self.botao_apagar_ecrf.place(relx=0.6, rely=0.84, relwidth=0.157, relheight=0.065)
 
         # Resultados
 
-        self.botao_calcular_if = tk.Button(self.janela, text='Calcular', bg='#F0F0F0', fg='#000000',
-                                         command=lambda: self.calculo_idade_ficticia_funcoes('t_fic'))
-        self.botao_calcular_if.place(relx=0.775, rely=0.84, relwidth=0.157, relheight=0.065)
+        self.botao_calcular_ecrf = tk.Button(self.janela, text='Calcular', bg='#F0F0F0', fg='#000000',
+                                         command=lambda: self.calculo_efeito_conjunto_r_f_funcoes('calcular'))
+        self.botao_calcular_ecrf.place(relx=0.775, rely=0.84, relwidth=0.157, relheight=0.065)
 
         self.quadro_ecrf_res = ttk.Treeview(self.janela, columns=('Δσₚ,c+s'))
 
         self.quadro_ecrf_res.column('#0', width=0, stretch=NO)
         self.quadro_ecrf_res.column('Δσₚ,c+s', anchor=CENTER, width=10)
 
-        self.quadro_ecrf_res.heading('Δσₚ,c+s', text='', anchor=CENTER)
+        self.quadro_ecrf_res.heading('Δσₚ,c+s', text='Δσ', anchor=CENTER)
 
         self.quadro_ecrf_res.place(relx=0.79, rely=0.12, relwidth=0.1012, relheight=0.6215)
 
@@ -1162,27 +1223,61 @@ class funcoes():
 
         self.y_scroll_ecrf_res.place(relx=0.89, rely=0.12, relwidth=0.05, relheight=0.6215)
 
-        if len(self.valores_de_alpha) > len(self.valores_de_i_fic):
-            indice_da_tabela_2 = len(self.valores_de_alpha)
-
-            for i in range(len(self.valores_de_alpha) - len(self.valores_de_i_fic)):
-                self.valores_de_i_fic.append('')
-
-        elif len(self.valores_de_alpha) < len(self.valores_de_i_fic):
-            indice_da_tabela_2 = len(self.valores_de_i_fic)
-
-            for i in range(len(self.valores_de_i_fic) - len(self.valores_de_alpha)):
-                self.valores_de_delta_t.append('')
-
-        else:
-            indice_da_tabela_2 = len(self.valores_de_alpha)
-
-        for i in range(indice_da_tabela_2):
+        for i in range(len(self.valores_de_ecrf[8])):
             self.quadro_ecrf_res.insert(parent='', index=i, iid=i, text='',
-                                        values=(self.valores_de_alpha[i], self.valores_de_i_fic[i]))
+                                        values=(self.valores_de_ecrf[8][i]))
 
-    def calculo_efeito_conjunto_r_f_funcoes(self):
-        pass
+    def calculo_efeito_conjunto_r_f_funcoes(self, funcao):
+        
+        if funcao == 'inserir':
+            
+            matriz = [[valor for valor in sublista if valor != ''] for sublista in self.valores_de_ecrf[1:]]
+
+            self.valores_de_ecrf = [self.valores_de_ecrf[0]]
+
+            for i in range(len(matriz)):
+                self.valores_de_ecrf.append(matriz[i])
+            
+            if self.lista_variaveis_if.get() == 'Ep':
+                self.valores_de_ecrf[1].append(self.variavel.get())
+
+            elif self.lista_variaveis_if.get() == 'εcs':
+                self.valores_de_ecrf[2].append(self.variavel.get())
+
+            elif self.lista_variaveis_if.get() == 'εcc':
+                self.valores_de_ecrf[3].append(self.variavel.get())
+
+            elif self.lista_variaveis_if.get() == 'Eci₂₈':
+                self.valores_de_ecrf[4].append(self.variavel.get())
+
+            elif self.lista_variaveis_if.get() == 'αcP₀':
+                self.valores_de_ecrf[5].append(self.variavel.get())
+
+            elif self.lista_variaveis_if.get() == 'αP₀':
+                self.valores_de_ecrf[6].append(self.variavel.get())
+
+            elif self.lista_variaveis_if.get() == 'φ':
+                self.valores_de_ecrf[7].append(self.variavel.get())
+
+        elif funcao == 'apagar':
+
+            for i in range(1,8):
+            
+                del (self.valores_de_ecrf[i][int(self.quadro_ecrf.selection()[0])])
+
+            self.quadro_ecrf.delete(self.quadro_ecrf.selection()[0])
+
+            self.valores_de_ecrf[0] -= 1
+
+        elif funcao == 'calcular':
+            
+            self.valores_de_ecrf[8] = efeito_conjunto_retracao_e_fluencia(self.valores_de_ecrf[1], self.valores_de_ecrf[2],
+                                                                          self.valores_de_ecrf[3], self.valores_de_ecrf[4],
+                                                                          self.valores_de_ecrf[5], self.valores_de_ecrf[6],
+                                                                          self.valores_de_ecrf[7])
+
+        self.janela.destroy()
+        self.calculo_efeito_conjunto_r_f()
 
     # Opção Limpar
     def limpar(self):
@@ -1297,6 +1392,12 @@ class funcoes():
                                        '', '', '', '', 
                                        '', '', '', '', 
                                        '', '', '', '', '']
+        
+        # Variáveis 
+
+        self.valores_de_ecrf = [ 0, [], [], 
+                                [], [], [], 
+                                [], [], []]
 
 class programa(funcoes):
 
@@ -2525,19 +2626,29 @@ class programa(funcoes):
         self.lista_ppra_1.place(relx=0.041, rely=0.8825, relwidth=0.135, relheight=0.05)
         self.lista_ppra_1.current(0)
 
-        self.botao_inserir_13 = tk.Button(self.aba_6, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
+        self.botao_inserir_13 = tk.Button(self.aba_6, text='Inserir', bg='#F0F0F0', fg='#000000', command=lambda: self.insercao_12(0))
         self.botao_inserir_13.place(relx=0.195, rely=0.8825, relwidth=0.08, relheight=0.05)
 
-        self.lista_ppra_2 = ttk.Combobox(self.aba_6, values=['', 'Nº de Cord. | Fios | Bar.', 'Ap (cm²)', 'P₀ (kN / (C. | F. | B.)', 
-                                                             'Mg (kN . m)', 'Ep (GPa)', 'Ic (m⁴)', 'Eci₂₈ (GPa)', 'fptk (MPa)', 
-                                                             't₀ (dias)', 't = ∞ (dias)', 't ≠ ∞ (dias)'])
+        self.lista_ppra_2 = ttk.Combobox(self.aba_6, values=['', 
+                                                             'Nº de Cord. | Fios | Bar.', 
+                                                             'Ap (cm²)', 
+                                                             'P₀ (kN / (C. | F. | B.)', 
+                                                             'Mg (kN . m)', 
+                                                             'ep', 
+                                                             'Ep (GPa)', 
+                                                             'Ic (m⁴)', 
+                                                             'Eci₂₈ (GPa)', 
+                                                             'fptk (MPa)', 
+                                                             't₀ (dias)', 
+                                                             't = ∞ (dias)', 
+                                                             't ≠ ∞ (dias)'])
         self.lista_ppra_2.place(relx=0.2922, rely=0.8825, relwidth=0.206, relheight=0.05)
         self.lista_ppra_2.current(0)
 
         self.variaveis_ppra = Entry(self.aba_6, text="")
         self.variaveis_ppra.place(relx=0.5170, rely=0.8825, relwidth=0.135, relheight=0.05)
 
-        self.botao_inserir_14 = tk.Button(self.aba_6, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
+        self.botao_inserir_14 = tk.Button(self.aba_6, text='Inserir', bg='#F0F0F0', fg='#000000', command=lambda: self.insercao_12(1))
         self.botao_inserir_14.place(relx=0.6725, rely=0.8825, relwidth=0.08, relheight=0.05)
 
         # 2.0 Quadrante
@@ -2569,7 +2680,7 @@ class programa(funcoes):
         self.variavel_delta_o_p_cs_ppra_entrada = Entry(self.aba_6, text="")
         self.variavel_delta_o_p_cs_ppra_entrada.place(relx=0.85, rely=0.565, relwidth=0.0985, relheight=0.05)
 
-        self.botao_inserir_15 = tk.Button(self.aba_6, text='Inserir', bg='#F0F0F0', fg='#000000', command=self.insercao_10)
+        self.botao_inserir_15 = tk.Button(self.aba_6, text='Inserir', bg='#F0F0F0', fg='#000000', command=lambda: self.insercao_12(2))
         self.botao_inserir_15.place(relx=0.85, rely=0.65, relwidth=0.0985, relheight=0.05)
 
         self.variavel_delta_o_pr_rel_ppra_texto = Label(self.aba_6, text='Δσₚᵣ,rel :', bg='#F0F0F0', fg='#000000')
