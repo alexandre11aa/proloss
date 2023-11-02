@@ -34,10 +34,20 @@ def calculo_da_idade_ficticia(a, Ti, delta_t):
 
 def efeito_conjunto_retracao_e_fluencia(Ep, Ecs, Ecc, Eci28, ocP0, oP0, y):
 
-    return (Ep * (Ecs + Ecc)) / (1 - (Ep * ocP0  / (Eci28 * oP0)) * (1 + y / 2))
+    lista_de_resultados = []
 
-'''
-CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 182-189.
+    for i in range(len(Ep)):
 
-print(efeito_conjunto_retracao_e_fluencia(200 * 10**6, -18 * 10**(-5), -0.0011763725, 32 * 10**6, -29143.6, 1242603.5, 1.95))
-'''
+        # Ajustando unidades de medidas
+
+        Ep[i] *= 10**6
+
+        Ecs[i] *= 10**(-5)
+
+        Ecc[i] *= 10**(-5)
+
+        Eci28[i] *= 10**6
+
+        lista_de_resultados.append('%.2f' % ((Ep[i] * (Ecs[i] + Ecc[i])) / (1 - (Ep[i] * ocP0[i]  / (Eci28[i] * oP0[i])) * (1 + y[i] / 2))))
+
+    return lista_de_resultados
