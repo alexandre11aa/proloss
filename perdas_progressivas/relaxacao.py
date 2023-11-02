@@ -34,16 +34,16 @@ def relaxacao_pura(n, Ap, P0, Mg, ep, Ep, Ic, Eci28, fptk, t0, t, relaxacao):
 
     if op0 >= 0.5 and op0 <= 0.8:
 
-        if relaxacao == 'Cord. - RN':
+        if relaxacao == 'Cord. RN':
             tabela = [0.000, 3.500, 7.000, 12.00]
 
-        elif relaxacao == 'Cord. - RB':
+        elif relaxacao == 'Cord. RB':
             tabela = [0.000, 1.300, 2.500, 3.500]
 
-        elif relaxacao == 'Fios - RN':
+        elif relaxacao == 'Fios RN':
             tabela = [0.000, 2.500, 5.000, 8.500]
 
-        elif relaxacao == 'Fios - RB':
+        elif relaxacao == 'Fios RB':
             tabela = [0.000, 1.000, 2.000, 3.000]
 
         elif relaxacao == 'Barras':
