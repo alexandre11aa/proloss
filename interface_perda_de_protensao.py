@@ -340,7 +340,7 @@ class funcoes():
 
             self.destruicao_1()
 
-        elif ex == '2':
+        elif ex == '2.0':
 
             # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 151-154.
 
@@ -350,7 +350,7 @@ class funcoes():
 
             self.destruicao_2()
 
-        elif ex == '3':
+        elif ex == '3.0':
 
             # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 156-158.
 
@@ -363,7 +363,7 @@ class funcoes():
 
             self.destruicao_3()
 
-        elif ex == '4':
+        elif ex == '4.0':
 
             # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 166-168.
 
@@ -401,7 +401,7 @@ class funcoes():
 
             self.destruicao_6()
 
-        elif ex == '8.0':
+        elif ex == '7.0':
 
             # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 162.
 
@@ -411,7 +411,7 @@ class funcoes():
 
             self.valor_de_u_ar = 8.2
 
-        elif ex == '9.0':
+        elif ex == '8.0':
 
             # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 163.
 
@@ -421,7 +421,7 @@ class funcoes():
 
             self.valores_de_alpha = [2, 1, 3]
 
-        elif ex == '0.0':
+        elif ex == '9.0':
 
             self.valores_de_ecrf = [1, [200], [-18], [-117.637], [32], [-29143.6], [1242603.5], [1.95], []]
 
@@ -454,13 +454,13 @@ class funcoes():
         if decisao == 'μ':
             self.variaveis_1[4] = self.entrada_das_variaveis_1.get()
         
-        elif decisao == 'fptk (MPa)':
+        elif decisao == 'fptk':
             self.variaveis_1[2] = self.entrada_das_variaveis_1.get()
 
-        elif decisao == 'fpyk (MPa)':
+        elif decisao == 'fpyk':
             self.variaveis_1[3] = self.entrada_das_variaveis_1.get()
 
-        elif decisao == 'Ap⁽⁰⁾ (cm² / Cord.)':
+        elif decisao == 'Aₚ⁽⁰⁾':
             self.variaveis_1[1] = self.entrada_das_variaveis_1.get()
 
         elif decisao == 'Nº de Cordoalhas':
@@ -481,28 +481,28 @@ class funcoes():
     def insercao_6(self):
         decisao = self.lista_de_variaveis_2.get()
 
-        if decisao == 'a (m)':
+        if decisao == 'a':
             self.variaveis_2[0] = float(self.entrada_das_variaveis_2.get())
         
-        elif decisao == 'l/2 (m)':
+        elif decisao == 'l/2':
             self.variaveis_2[1] = float(self.entrada_das_variaveis_2.get())
 
-        elif decisao == 'Ep (GPa)':
+        elif decisao == 'Eₚ':
             self.variaveis_2[2] = float(self.entrada_das_variaveis_2.get())
 
-        elif decisao == 'Pi (kN/Cabo)':
+        elif decisao == 'Pᵢ':
             self.variaveis_2[3] = float(self.entrada_das_variaveis_2.get())
 
-        elif decisao == 'P₀(x = a) (kN)':
+        elif decisao == 'P₀(x = a)':
             self.variaveis_2[4] = float(self.entrada_das_variaveis_2.get())
 
-        elif decisao == 'P₀(x = l/2) (kN)':
+        elif decisao == 'P₀(x = l/2)':
             self.variaveis_2[5] = float(self.entrada_das_variaveis_2.get())
 
-        elif decisao == 'Ap⁽⁰⁾ (cm²)':
+        elif decisao == 'Aₚ⁽⁰⁾':
             self.variaveis_2[6] = float(self.entrada_das_variaveis_2.get())
 
-        elif decisao == 'Nº de Cord.':
+        elif decisao == 'Nº de Cordoalhas':
             self.variaveis_2[7] = float(self.entrada_das_variaveis_2.get())
 
         self.destruicao_2()
@@ -529,28 +529,28 @@ class funcoes():
 
     def insercao_8(self):
 
-        if self.lista_de_variaveis_4.get() == 'n (Cabos)':
+        if self.lista_de_variaveis_4.get() == 'n':
             self.variaveis_3[0] = self.entrada_das_variaveis_5.get()
 
-        elif self.lista_de_variaveis_4.get() == 'Ac (m²)':
+        elif self.lista_de_variaveis_4.get() == 'Ac':
             self.variaveis_3[1] = self.entrada_das_variaveis_5.get()
 
-        elif self.lista_de_variaveis_4.get() == 'Ap (cm²)':
+        elif self.lista_de_variaveis_4.get() == 'Aₚ⁽⁰⁾':
             self.variaveis_3[2] = self.entrada_das_variaveis_5.get()
 
-        elif self.lista_de_variaveis_4.get() == 'Ep (GPa)':
+        elif self.lista_de_variaveis_4.get() == 'Eₚ':
             self.variaveis_3[3] = self.entrada_das_variaveis_5.get()
 
-        elif self.lista_de_variaveis_4.get() == 'Ic (m^4)':
+        elif self.lista_de_variaveis_4.get() == 'Ic':
             self.variaveis_3[4] = self.entrada_das_variaveis_5.get()
 
-        elif self.lista_de_variaveis_4.get() == 'Mg (kN.m)':
+        elif self.lista_de_variaveis_4.get() == 'Mg':
             self.variaveis_3[5] = self.entrada_das_variaveis_5.get()
 
-        elif self.lista_de_variaveis_4.get() == 'ycin (m)':
+        elif self.lista_de_variaveis_4.get() == 'ycin':
             self.variaveis_3[6] = self.entrada_das_variaveis_5.get()
 
-        elif self.lista_de_variaveis_4.get() == 'fck₂₈ (MPa)':
+        elif self.lista_de_variaveis_4.get() == 'fck₂₈':
             self.variaveis_3[7] = self.entrada_das_variaveis_5.get()
 
         elif self.lista_de_variaveis_4.get() == 'Nº de Cordoalhas':
@@ -668,40 +668,40 @@ class funcoes():
 
         elif tipo == 1 and self.lista_ppra_2.get() != '':
 
-            if self.lista_ppra_2.get() == 'Nº de Cord. | Fios | Bar.':
+            if self.lista_ppra_2.get() == 'Nº de Cordoalhas':
                 self.valores_variaveis_ppra[0] = float(self.variaveis_ppra.get())
 
-            elif self.lista_ppra_2.get() == 'Ap (cm²)':
+            elif self.lista_ppra_2.get() == 'Aₚ⁽⁰⁾':
                 self.valores_variaveis_ppra[1] = float(self.variaveis_ppra.get())
 
-            elif self.lista_ppra_2.get() == 'P₀ (kN / (C. | F. | B.)':
+            elif self.lista_ppra_2.get() == 'P₀':
                 self.valores_variaveis_ppra[2] = float(self.variaveis_ppra.get())
 
-            elif self.lista_ppra_2.get() == 'Mg (kN . m)':
+            elif self.lista_ppra_2.get() == 'Mg':
                 self.valores_variaveis_ppra[3] = float(self.variaveis_ppra.get())
 
-            elif self.lista_ppra_2.get() == 'ep':
+            elif self.lista_ppra_2.get() == 'eₚ':
                 self.valores_variaveis_ppra[4] = float(self.variaveis_ppra.get())
 
-            elif self.lista_ppra_2.get() == 'Ep (GPa)':
+            elif self.lista_ppra_2.get() == 'Eₚ':
                 self.valores_variaveis_ppra[5] = float(self.variaveis_ppra.get())
 
-            elif self.lista_ppra_2.get() == 'Ic (m⁴)':
+            elif self.lista_ppra_2.get() == 'Ic':
                 self.valores_variaveis_ppra[6] = float(self.variaveis_ppra.get())
 
-            elif self.lista_ppra_2.get() == 'Eci₂₈ (GPa)':
+            elif self.lista_ppra_2.get() == 'Eci₂₈':
                 self.valores_variaveis_ppra[7] = float(self.variaveis_ppra.get())
 
-            elif self.lista_ppra_2.get() == 'fptk (MPa)':
+            elif self.lista_ppra_2.get() == 'fptk':
                 self.valores_variaveis_ppra[8] = float(self.variaveis_ppra.get())
 
-            elif self.lista_ppra_2.get() == 't₀ (dias)':
+            elif self.lista_ppra_2.get() == 't₀':
                 self.valores_variaveis_ppra[9] = float(self.variaveis_ppra.get())
 
-            elif self.lista_ppra_2.get() == 't = ∞ (dias)':
+            elif self.lista_ppra_2.get() == 't = ∞':
                 self.valores_variaveis_ppra[10] = '∞'
 
-            elif self.lista_ppra_2.get() == 't ≠ ∞ (dias)':
+            elif self.lista_ppra_2.get() == 't ≠ ∞':
                 self.valores_variaveis_ppra[10] = float(self.variaveis_ppra.get())
 
         elif tipo == 2 and self.variavel_delta_o_p_cs_ppra_entrada.get() != '':
@@ -747,20 +747,21 @@ class funcoes():
         barra_de_menu.add_cascade(label='Exemplos', menu = menu_de_exemplos)
         menu_de_exemplos.add_command(label='E.1.0. PIAT', command=lambda: self.exemplos('1.0'))
         menu_de_exemplos.add_command(label='E.1.1. PIAT', command=lambda: self.exemplos('1.1'))
-        menu_de_exemplos.add_command(label='E.2.0. PIAC', command=lambda: self.exemplos('2'))
-        menu_de_exemplos.add_command(label='E.3.0. PIEC', command=lambda: self.exemplos('3'))
-        menu_de_exemplos.add_command(label='E.4.0. PPRC', command=lambda: self.exemplos('4'))
+        menu_de_exemplos.add_command(label='E.2.0. PIAC', command=lambda: self.exemplos('2.0'))
+        menu_de_exemplos.add_command(label='E.3.0. PIEC', command=lambda: self.exemplos('3.0'))
+        menu_de_exemplos.add_command(label='E.4.0. PPRC', command=lambda: self.exemplos('4.0'))
         menu_de_exemplos.add_command(label='E.5.0. PPFC', command=lambda: self.exemplos('5.0'))
         menu_de_exemplos.add_command(label='E.5.1. PPFC', command=lambda: self.exemplos('5.1'))
         menu_de_exemplos.add_command(label='E.6.0. PPRA', command=lambda: self.exemplos('6.0'))
-        menu_de_exemplos.add_command(label='E.8.0. ESFI', command=lambda: self.exemplos('8.0'))
-        menu_de_exemplos.add_command(label='E.9.0. IDFI', command=lambda: self.exemplos('9.0'))
-        menu_de_exemplos.add_command(label='E.0.0. ECRF', command=lambda: self.exemplos('0.0'))
+        menu_de_exemplos.add_command(label='E.7.0. ESFI', command=lambda: self.exemplos('7.0'))
+        menu_de_exemplos.add_command(label='E.8.0. IDFI', command=lambda: self.exemplos('8.0'))
+        menu_de_exemplos.add_command(label='E.9.0. ECRF', command=lambda: self.exemplos('9.0'))
 
         menu_de_tabelas = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Tabelas', menu = menu_de_tabelas)
         menu_de_tabelas.add_command(label='T.1.0. Fluência e Retração', command=lambda: self.tabelas_auxiliares('numeros_usuais_para_determinacao_da_fluencia_e_retracao', '650x500'))
         menu_de_tabelas.add_command(label='T.2.0. Endurecimento do Cimento', command=lambda: self.tabelas_auxiliares('fluencia_e_retracao_em_funcao_da_vel_de_endurecimento_do_cim', '650x500'))
+        menu_de_tabelas.add_command(label='T.3.0. Variáveis', command=lambda: self.tabelas_auxiliares('variaveis', '535x505'))
 
         menu_de_calculos = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Cálculos', menu = menu_de_calculos)
@@ -789,6 +790,18 @@ class funcoes():
         self.my_canvas = Canvas(self.main_frame)
 
         self.my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
+
+        if int(list(geometria.split('x'))[1]) > 500:
+
+            # Adicionando ScrollBar ao Canvas
+
+            self.my_scrollbar = ttk.Scrollbar(self.main_frame, orient=VERTICAL, command=self.my_canvas.yview)
+            self.my_scrollbar.pack(side=RIGHT, fill=Y)
+
+            # Configurando o Canvas
+
+            self.my_canvas.configure(yscrollcommand=self.my_scrollbar.set)
+            self.my_canvas.bind('<Configure>', lambda e: self.my_canvas.configure(scrollregion = self.my_canvas.bbox("all")))
 
         # Adicionando Imagem à Janela na Tela
 
@@ -834,7 +847,7 @@ class funcoes():
         self.quadro_ef_1.column('#0', width=0, stretch=NO)
         self.quadro_ef_1.column('U', anchor=CENTER, width=20)
 
-        self.quadro_ef_1.heading('U', text='U (%)', anchor=CENTER)
+        self.quadro_ef_1.heading('U', text='U', anchor=CENTER)
 
         self.quadro_ef_1.place(relx=0.075, rely=0.118, relwidth=0.19, relheight=0.808)
 
@@ -865,7 +878,7 @@ class funcoes():
         self.r1 = Label(self.janela, text=str(self.valor_de_Ac), relief="sunken", bg='#FFFFFF', fg='#000000')
         self.r1.place(relx=0.41, rely=0.48, relwidth=0.19, relheight=0.064)
 
-        self.texto_ef = Label(self.janela, text='μ_ar', bg='#F0F0F0', fg='#000000')
+        self.texto_ef = Label(self.janela, text='μₐᵣ', bg='#F0F0F0', fg='#000000')
         self.texto_ef.place(relx=0.41, rely=0.54, relwidth=0.08, relheight=0.05)
 
         self.r2 = Label(self.janela, text=str(self.valor_de_u_ar), relief="sunken", bg='#FFFFFF', fg='#000000')
@@ -875,8 +888,8 @@ class funcoes():
         self.variavel_2.place(relx=0.41, rely=0.6875, relwidth=0.19, relheight=0.064)
 
         self.lista_variaveis_ef = ttk.Combobox(self.janela, values=['', 
-                                                                    'Ac (m²)', 
-                                                                    'μ_ar (m)'])
+                                                                    'Ac', 
+                                                                    'μₐᵣ'])
         self.lista_variaveis_ef.place(relx=0.41, rely=0.775, relwidth=0.19, relheight=0.065)
         self.lista_variaveis_ef.current(0)
 
@@ -895,7 +908,7 @@ class funcoes():
         self.quadro_ef_2.column('#0', width=0, stretch=NO)
         self.quadro_ef_2.column('h_fic', anchor=CENTER, width=20)
 
-        self.quadro_ef_2.heading('h_fic', text='h (cm)', anchor=CENTER)
+        self.quadro_ef_2.heading('h_fic', text='h', anchor=CENTER)
 
         self.quadro_ef_2.place(relx=0.685, rely=0.118, relwidth=0.19, relheight=0.715)
 
@@ -922,10 +935,10 @@ class funcoes():
             del (self.valores_de_U[int(selecionador)])
 
         elif funcao == 'inserir_2':
-            if self.lista_variaveis_ef.get() == 'Ac (m²)':
+            if self.lista_variaveis_ef.get() == 'Ac':
                 self.valor_de_Ac = float(self.variavel_2.get())
 
-            elif self.lista_variaveis_ef.get() == 'μ_ar (m)':
+            elif self.lista_variaveis_ef.get() == 'μₐᵣ':
                 self.valor_de_u_ar = float(self.variavel_2.get())
 
         elif funcao == 'calcular':
@@ -965,14 +978,14 @@ class funcoes():
 
         # Variáveis
 
-        self.quadro_tf = ttk.Treeview(self.janela, columns=('Ti (°C)', 'Δt (dias)'))
+        self.quadro_tf = ttk.Treeview(self.janela, columns=('Ti', 'Δt'))
 
         self.quadro_tf.column('#0', width=0, stretch=NO)
-        self.quadro_tf.column('Ti (°C)', anchor=CENTER, width=20)
-        self.quadro_tf.column('Δt (dias)', anchor=CENTER, width=20)
+        self.quadro_tf.column('Ti', anchor=CENTER, width=20)
+        self.quadro_tf.column('Δt', anchor=CENTER, width=20)
 
-        self.quadro_tf.heading('Ti (°C)', text='Ti (°C)', anchor=CENTER)
-        self.quadro_tf.heading('Δt (dias)', text='Δt (dias)', anchor=CENTER)
+        self.quadro_tf.heading('Ti', text='Ti', anchor=CENTER)
+        self.quadro_tf.heading('Δt', text='Δt', anchor=CENTER)
 
         self.quadro_tf.place(relx=0.062, rely=0.118, relwidth=0.436, relheight=0.808)
 
@@ -1118,7 +1131,7 @@ class funcoes():
 
         self.janela = tk.Toplevel()
 
-        self.janela.geometry("375x350")
+        self.janela.geometry("650x350")
 
         self.janela.resizable(False, False)
 
@@ -1137,17 +1150,17 @@ class funcoes():
         self.fundo_ecrf_3.place(relx=0.044, rely=0.7975, relwidth=0.9075, relheight=0.16)
 
         self.texto_ecrf = Label(self.janela, text='Efeito Conjunto de Retração e Fluência', bg='#F0F0F0', fg='#000000')
-        self.texto_ecrf.place(relx=0.125, rely=0.01, relwidth=0.55, relheight=0.05)
+        self.texto_ecrf.place(relx=0.125, rely=0.01, relwidth=0.33, relheight=0.05)
 
         self.texto_ecrf = Label(self.janela, text='Δσₚ,c+s', bg='#F0F0F0', fg='#000000')
-        self.texto_ecrf.place(relx=0.8, rely=0.0525, relwidth=0.12, relheight=0.05)
+        self.texto_ecrf.place(relx=0.825, rely=0.0525, relwidth=0.07, relheight=0.05)
 
         # Variáveis
 
-        self.quadro_ecrf = ttk.Treeview(self.janela, columns=('Ep', 'εcs', 'εcc', 'Eci₂₈', 'αcP₀', 'αP₀', 'φ'))
+        self.quadro_ecrf = ttk.Treeview(self.janela, columns=('Eₚ', 'εcs', 'εcc', 'Eci₂₈', 'αcP₀', 'αP₀', 'φ'))
 
         self.quadro_ecrf.column('#0', width=0, stretch=NO)
-        self.quadro_ecrf.column('Ep', anchor=CENTER, width=20)
+        self.quadro_ecrf.column('Eₚ', anchor=CENTER, width=20)
         self.quadro_ecrf.column('εcs', anchor=CENTER, width=20)
         self.quadro_ecrf.column('εcc', anchor=CENTER, width=20)
         self.quadro_ecrf.column('Eci₂₈', anchor=CENTER, width=20)
@@ -1155,7 +1168,7 @@ class funcoes():
         self.quadro_ecrf.column('αP₀', anchor=CENTER, width=20)
         self.quadro_ecrf.column('φ', anchor=CENTER, width=20)
 
-        self.quadro_ecrf.heading('Ep', text='Ep', anchor=CENTER)
+        self.quadro_ecrf.heading('Eₚ', text='Eₚ', anchor=CENTER)
         self.quadro_ecrf.heading('εcs', text='εcs', anchor=CENTER)
         self.quadro_ecrf.heading('εcc', text='εcc', anchor=CENTER)
         self.quadro_ecrf.heading('Eci₂₈', text='Eci₂₈', anchor=CENTER)
@@ -1163,13 +1176,13 @@ class funcoes():
         self.quadro_ecrf.heading('αP₀', text='αP₀', anchor=CENTER)
         self.quadro_ecrf.heading('φ', text='φ', anchor=CENTER)
 
-        self.quadro_ecrf.place(relx=0.063, rely=0.12, relwidth=0.63, relheight=0.6215)
+        self.quadro_ecrf.place(relx=0.063, rely=0.12, relwidth=0.6375, relheight=0.6215)
 
         self.y_scroll_ecrf = ttk.Scrollbar(self.janela, orient=tk.VERTICAL, command=self.quadro_ecrf.yview)
 
         self.quadro_ecrf['yscroll'] = self.y_scroll_ecrf.set
 
-        self.y_scroll_ecrf.place(relx=0.6925, rely=0.12, relwidth=0.05, relheight=0.6215)
+        self.y_scroll_ecrf.place(relx=0.7, rely=0.12, relwidth=0.03, relheight=0.6215)
 
         for i in range(1, 8):
             if self.valores_de_ecrf[0] < len(self.valores_de_ecrf[i]):
@@ -1187,7 +1200,7 @@ class funcoes():
                                             self.valores_de_ecrf[5][i], self.valores_de_ecrf[6][i],
                                             self.valores_de_ecrf[7][i]))
 
-        self.lista_variaveis_ecrf = ttk.Combobox(self.janela, values=['', 'Ep', 'εcs', 'εcc', 'Eci₂₈', 'αcP₀', 'αP₀', 'φ'])
+        self.lista_variaveis_ecrf = ttk.Combobox(self.janela, values=['', 'Eₚ', 'εcs', 'εcc', 'Eci₂₈', 'αcP₀', 'αP₀', 'φ'])
         self.lista_variaveis_ecrf.place(relx=0.063, rely=0.84, relwidth=0.165, relheight=0.065)
         self.lista_variaveis_ecrf.current(0)
 
@@ -1215,13 +1228,13 @@ class funcoes():
 
         self.quadro_ecrf_res.heading('Δσₚ,c+s', text='Δσ', anchor=CENTER)
 
-        self.quadro_ecrf_res.place(relx=0.79, rely=0.12, relwidth=0.1012, relheight=0.6215)
+        self.quadro_ecrf_res.place(relx=0.79, rely=0.12, relwidth=0.11, relheight=0.6215)
 
         self.y_scroll_ecrf_res = ttk.Scrollbar(self.janela, orient=tk.VERTICAL, command=self.quadro_ecrf_res.yview)
 
         self.quadro_ecrf_res['yscroll'] = self.y_scroll_ecrf_res.set
 
-        self.y_scroll_ecrf_res.place(relx=0.89, rely=0.12, relwidth=0.05, relheight=0.6215)
+        self.y_scroll_ecrf_res.place(relx=0.9, rely=0.12, relwidth=0.03, relheight=0.6215)
 
         for i in range(len(self.valores_de_ecrf[8])):
             self.quadro_ecrf_res.insert(parent='', index=i, iid=i, text='',
@@ -1238,25 +1251,25 @@ class funcoes():
             for i in range(len(matriz)):
                 self.valores_de_ecrf.append(matriz[i])
             
-            if self.lista_variaveis_if.get() == 'Ep':
+            if self.lista_variaveis_ecrf.get() == 'Eₚ':
                 self.valores_de_ecrf[1].append(self.variavel.get())
 
-            elif self.lista_variaveis_if.get() == 'εcs':
+            elif self.lista_variaveis_ecrf.get() == 'εcs':
                 self.valores_de_ecrf[2].append(self.variavel.get())
 
-            elif self.lista_variaveis_if.get() == 'εcc':
+            elif self.lista_variaveis_ecrf.get() == 'εcc':
                 self.valores_de_ecrf[3].append(self.variavel.get())
 
-            elif self.lista_variaveis_if.get() == 'Eci₂₈':
+            elif self.lista_variaveis_ecrf.get() == 'Eci₂₈':
                 self.valores_de_ecrf[4].append(self.variavel.get())
 
-            elif self.lista_variaveis_if.get() == 'αcP₀':
+            elif self.lista_variaveis_ecrf.get() == 'αcP₀':
                 self.valores_de_ecrf[5].append(self.variavel.get())
 
-            elif self.lista_variaveis_if.get() == 'αP₀':
+            elif self.lista_variaveis_ecrf.get() == 'αP₀':
                 self.valores_de_ecrf[6].append(self.variavel.get())
 
-            elif self.lista_variaveis_if.get() == 'φ':
+            elif self.lista_variaveis_ecrf.get() == 'φ':
                 self.valores_de_ecrf[7].append(self.variavel.get())
 
         elif funcao == 'apagar':
@@ -1293,7 +1306,7 @@ class funcoes():
 
     # Opção Sair
     def sair(self):
-        print("\nSaindo do programa...")
+        print("\nEm verdade que não convém gloriar-me; mas passarei às visões e revelações do Senhor. 2 Coríntios 12:1\n")
         quit()
 
     # Variáveis Iniciais
@@ -1579,7 +1592,7 @@ class programa(funcoes):
         self.fundo_de_resultados_1 = Label(self.aba_1, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_de_resultados_1.place(relx=0.465, rely=0.04, relwidth=0.115, relheight=0.535)
 
-        self.resultados = Label(self.aba_1, text='Força P0 :', bg='#F0F0F0', fg='#000000')
+        self.resultados = Label(self.aba_1, text='Força P₀ :', bg='#F0F0F0', fg='#000000')
         self.resultados.place(relx=0.475, rely=0.02, relwidth=0.07, relheight=0.035)
 
         self.fundo_de_resultados_1_1 = Label(self.aba_1, text='', relief="groove", bg='#F0F0F0', fg='#800000')
@@ -1616,7 +1629,7 @@ class programa(funcoes):
         self.ncd_texto = Label(self.aba_1, text='Nº Cd. :', bg='#F0F0F0', fg='#000000')
         self.ncd_texto.place(relx=0.63, rely=0.156, relwidth=0.058, relheight=0.05)
 
-        self.area_texto = Label(self.aba_1, text='Ap⁽⁰⁾ :', bg='#F0F0F0', fg='#000000')
+        self.area_texto = Label(self.aba_1, text='Aₚ⁽⁰⁾ :', bg='#F0F0F0', fg='#000000')
         self.area_texto.place(relx=0.63, rely=0.203, relwidth=0.048, relheight=0.05)
 
         self.u_texto = Label(self.aba_1, text='μ :', bg='#F0F0F0', fg='#000000')
@@ -1630,9 +1643,9 @@ class programa(funcoes):
 
         self.lista_variaveis_1 = ttk.Combobox(self.aba_1, values=['', 
                                                                   'μ', 
-                                                                  'fptk (MPa)', 
-                                                                  'fpyk (MPa)', 
-                                                                  'Ap⁽⁰⁾ (cm² / Cord.)', 
+                                                                  'fptk', 
+                                                                  'fpyk', 
+                                                                  'Aₚ⁽⁰⁾', 
                                                                   'Nº de Cordoalhas',
                                                                   'Planilha em Excel'])
         self.lista_variaveis_1.place(relx=0.63, rely=0.056, relwidth=0.145, relheight=0.05)
@@ -1808,10 +1821,10 @@ class programa(funcoes):
         self.comprimento_meio_l_nome = Label(self.aba_2, text='l/2 :', bg='#F0F0F0', fg='#000000')
         self.comprimento_meio_l_nome.place(relx=0.41, rely=0.1, relwidth=0.03, relheight=0.035)
 
-        self.variavel_constante_E_nome = Label(self.aba_2, text='Ep :', bg='#F0F0F0', fg='#000000')
+        self.variavel_constante_E_nome = Label(self.aba_2, text='Eₚ :', bg='#F0F0F0', fg='#000000')
         self.variavel_constante_E_nome.place(relx=0.23, rely=0.27, relwidth=0.03, relheight=0.035)
 
-        self.variavel_p_i_nome = Label(self.aba_2, text='Pi :', bg='#F0F0F0', fg='#000000')
+        self.variavel_p_i_nome = Label(self.aba_2, text='Pᵢ :', bg='#F0F0F0', fg='#000000')
         self.variavel_p_i_nome.place(relx=0.41, rely=0.27, relwidth=0.028, relheight=0.035)
 
         self.variavel_p_a_nome = Label(self.aba_2, text='P₀(x = a) :', bg='#F0F0F0', fg='#000000')
@@ -1820,21 +1833,21 @@ class programa(funcoes):
         self.variavel_p_meio_l_nome = Label(self.aba_2, text='P₀(x = l/2) :', bg='#F0F0F0', fg='#000000')
         self.variavel_p_meio_l_nome.place(relx=0.41, rely=0.44, relwidth=0.085, relheight=0.035)
 
-        self.area_p_nome = Label(self.aba_2, text='Ap⁽⁰⁾ :', bg='#F0F0F0', fg='#000000')
+        self.area_p_nome = Label(self.aba_2, text='Aₚ⁽⁰⁾ :', bg='#F0F0F0', fg='#000000')
         self.area_p_nome.place(relx=0.23, rely=0.61, relwidth=0.048, relheight=0.035)
 
-        self.ncd_texto_2 = Label(self.aba_2, text='Nº de Cord. :', bg='#F0F0F0', fg='#000000')
-        self.ncd_texto_2.place(relx=0.41, rely=0.61, relwidth=0.1, relheight=0.035)
+        self.ncd_texto_2 = Label(self.aba_2, text='Nº Cd. :', bg='#F0F0F0', fg='#000000')
+        self.ncd_texto_2.place(relx=0.41, rely=0.61, relwidth=0.06, relheight=0.035)
         
         self.lista_de_variaveis_2 = ttk.Combobox(self.aba_2, values=['',
-                                                                     'a (m)', 
-                                                                     'l/2 (m)', 
-                                                                     'Ep (GPa)', 
-                                                                     'Pi (kN/Cabo)', 
-                                                                     'P₀(x = a) (kN)', 
-                                                                     'P₀(x = l/2) (kN)', 
-                                                                     'Ap⁽⁰⁾ (cm²)',
-                                                                     'Nº de Cord.'])
+                                                                     'a', 
+                                                                     'l/2', 
+                                                                     'Eₚ', 
+                                                                     'Pᵢ', 
+                                                                     'P₀(x = a)', 
+                                                                     'P₀(x = l/2)', 
+                                                                     'Aₚ⁽⁰⁾',
+                                                                     'Nº de Cordoalhas'])
         self.lista_de_variaveis_2.place(relx=0.19, rely=0.88, relwidth=0.165, relheight=0.05)
         self.lista_de_variaveis_2.current(0)
 
@@ -1985,7 +1998,7 @@ class programa(funcoes):
         self.dias_ppec = Entry(self.aba_3, text="")
         self.dias_ppec.place(relx=0.2625, rely=0.685, relwidth=0.07, relheight=0.04)
 
-        self.forca_ppec_texto = Label(self.aba_3, text='Forca :', bg='#F0F0F0', fg='#000000')
+        self.forca_ppec_texto = Label(self.aba_3, text='Força :', bg='#F0F0F0', fg='#000000')
         self.forca_ppec_texto.place(relx=0.04, rely=0.75, relwidth=0.045, relheight=0.035)
 
         self.forca_ppec = Entry(self.aba_3, text="")
@@ -2025,14 +2038,14 @@ class programa(funcoes):
         self.fundo_de_variaveis_3.place(relx=0.395, rely=0.845, relwidth=0.38, relheight=0.125)
 
         self.lista_de_variaveis_4 = ttk.Combobox(self.aba_3, values=['',
-                                                                     'n (Cabos)',
-                                                                     'Ac (m²)',
-                                                                     'Ap (cm²)',
-                                                                     'Ep (GPa)',
-                                                                     'Ic (m⁴)',
-                                                                     'Mg (kN.m)',
-                                                                     'ycin (m)',
-                                                                     'fck₂₈ (MPa)',
+                                                                     'n',
+                                                                     'Ac',
+                                                                     'Aₚ⁽⁰⁾',
+                                                                     'Eₚ',
+                                                                     'Ic',
+                                                                     'Mg',
+                                                                     'ycin',
+                                                                     'fck₂₈',
                                                                      'Nº de Cordoalhas'])
         self.lista_de_variaveis_4.place(relx=0.42, rely=0.88, relwidth=0.135, relheight=0.05)
         self.lista_de_variaveis_4.current(0)
@@ -2043,10 +2056,10 @@ class programa(funcoes):
         self.variavel_ppec_ac_texto = Label(self.aba_3, text='Ac :', bg='#F0F0F0', fg='#000000')
         self.variavel_ppec_ac_texto.place(relx=0.42, rely=0.37, relwidth=0.034, relheight=0.035)
 
-        self.variavel_ppec_ap_texto = Label(self.aba_3, text='Ap :', bg='#F0F0F0', fg='#000000')
-        self.variavel_ppec_ap_texto.place(relx=0.42, rely=0.6, relwidth=0.034, relheight=0.035)
+        self.variavel_ppec_ap_texto = Label(self.aba_3, text='Aₚ⁽⁰⁾ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ppec_ap_texto.place(relx=0.42, rely=0.6, relwidth=0.04, relheight=0.035)
 
-        self.variavel_ep_ppec_texto = Label(self.aba_3, text='Ep :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ep_ppec_texto = Label(self.aba_3, text='Eₚ :', bg='#F0F0F0', fg='#000000')
         self.variavel_ep_ppec_texto.place(relx=0.535, rely=0.13, relwidth=0.030, relheight=0.035)
 
         self.variavel_ppec_ic_texto = Label(self.aba_3, text='Ic :', bg='#F0F0F0', fg='#000000')
@@ -2586,11 +2599,11 @@ class programa(funcoes):
         self.fundo_insercao_de_variaveis = Label(self.aba_6, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_insercao_de_variaveis.place(relx=0.018, rely=0.8485, relwidth=0.759, relheight=0.12)
 
-        self.variavel_n_ppra_texto = Label(self.aba_6, text='n :', bg='#F0F0F0', fg='#000000')
-        self.variavel_n_ppra_texto.place(relx=0.078, rely=0.125, relwidth=0.02, relheight=0.035)
+        self.variavel_n_ppra_texto = Label(self.aba_6, text='Nº Cd.:', bg='#F0F0F0', fg='#000000')
+        self.variavel_n_ppra_texto.place(relx=0.078, rely=0.125, relwidth=0.05, relheight=0.035)
 
-        self.variavel_ap_ppra_texto = Label(self.aba_6, text='Ap :', bg='#F0F0F0', fg='#000000')
-        self.variavel_ap_ppra_texto.place(relx=0.254, rely=0.125, relwidth=0.03, relheight=0.05)
+        self.variavel_ap_ppra_texto = Label(self.aba_6, text='Aₚ⁽⁰⁾ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ap_ppra_texto.place(relx=0.254, rely=0.125, relwidth=0.04, relheight=0.05)
 
         self.variavel_p0_ppra_texto = Label(self.aba_6, text='P₀ :', bg='#F0F0F0', fg='#000000')
         self.variavel_p0_ppra_texto.place(relx=0.4415, rely=0.125, relwidth=0.03, relheight=0.05)
@@ -2598,10 +2611,10 @@ class programa(funcoes):
         self.variavel_Mg_ppra_texto = Label(self.aba_6, text='Mg :', bg='#F0F0F0', fg='#000000')
         self.variavel_Mg_ppra_texto.place(relx=0.6175, rely=0.125, relwidth=0.03, relheight=0.05)
 
-        self.variavel_ep_ppra_texto = Label(self.aba_6, text='ep :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ep_ppra_texto = Label(self.aba_6, text='eₚ :', bg='#F0F0F0', fg='#000000')
         self.variavel_ep_ppra_texto.place(relx=0.078, rely=0.3625, relwidth=0.03, relheight=0.05)
 
-        self.variavel_Ep_ppra_texto = Label(self.aba_6, text='Ep :', bg='#F0F0F0', fg='#000000')
+        self.variavel_Ep_ppra_texto = Label(self.aba_6, text='Eₚ :', bg='#F0F0F0', fg='#000000')
         self.variavel_Ep_ppra_texto.place(relx=0.254, rely=0.3625, relwidth=0.03, relheight=0.05)
 
         self.variavel_Ic_ppra_texto = Label(self.aba_6, text='Ic :', bg='#F0F0F0', fg='#000000')
@@ -2630,18 +2643,18 @@ class programa(funcoes):
         self.botao_inserir_13.place(relx=0.195, rely=0.8825, relwidth=0.08, relheight=0.05)
 
         self.lista_ppra_2 = ttk.Combobox(self.aba_6, values=['', 
-                                                             'Nº de Cord. | Fios | Bar.', 
-                                                             'Ap (cm²)', 
-                                                             'P₀ (kN / (C. | F. | B.)', 
-                                                             'Mg (kN . m)', 
-                                                             'ep', 
-                                                             'Ep (GPa)', 
-                                                             'Ic (m⁴)', 
-                                                             'Eci₂₈ (GPa)', 
-                                                             'fptk (MPa)', 
-                                                             't₀ (dias)', 
-                                                             't = ∞ (dias)', 
-                                                             't ≠ ∞ (dias)'])
+                                                             'Nº de Cordoalhas', 
+                                                             'Aₚ⁽⁰⁾', 
+                                                             'P₀', 
+                                                             'Mg', 
+                                                             'eₚ', 
+                                                             'Eₚ', 
+                                                             'Ic', 
+                                                             'Eci₂₈', 
+                                                             'fptk', 
+                                                             't₀', 
+                                                             't = ∞', 
+                                                             't ≠ ∞'])
         self.lista_ppra_2.place(relx=0.2922, rely=0.8825, relwidth=0.206, relheight=0.05)
         self.lista_ppra_2.current(0)
 
