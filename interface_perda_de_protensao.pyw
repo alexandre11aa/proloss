@@ -2,6 +2,9 @@ print("Porque para mim o viver é Cristo, e o morrer é ganho. Filipenses 1:21")
 
 import tkinter as tk
 
+import os
+import base64
+
 from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename
@@ -20,6 +23,7 @@ from itens_auxiliares.tabelas_informativas import tabelas_informativas
 from itens_auxiliares.calculos_auxiliares import calculo_da_espessura_ficticia
 from itens_auxiliares.calculos_auxiliares import calculo_da_idade_ficticia
 from itens_auxiliares.calculos_auxiliares import efeito_conjunto_retracao_e_fluencia
+from itens_auxiliares.calculos_auxiliares import perda_de_tensao_pelo_metodo_geral_funcoes
 
 from perdas_progressivas.retracao_do_concreto import retracao_do_concreto
 from perdas_progressivas.fluencia_do_concreto import fluencia_do_concreto
@@ -30,6 +34,19 @@ from perdas_progressivas.relaxacao import relaxacao_relativa
 root = Tk()
 
 class funcoes():
+
+    # Ícone
+
+    def conversao_de_icone(self, janela):
+        
+        icone = base64.b64decode(tabelas_informativas('icone'))
+
+        with open("icone_temporario.ico", "wb") as ico:
+            ico.write(icone)
+
+        janela.iconbitmap('icone_temporario.ico')
+
+        os.remove("icone_temporario.ico")
             
     # Resultados
     def perda_por_atrito(self):
@@ -423,7 +440,15 @@ class funcoes():
 
         elif ex == '9.0':
 
-            self.valores_de_ecrf = [1, [200], [-18], [-117.637], [32], [-29143.6], [1242603.5], [1.95], []]
+            # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 184-189.
+
+            self.valores_de_ecrf = [3, [200, 200, 200], [-18, -18, -18], [-117.637, -122.657, -112.312], [32, 32, 32], [-29143.6, -30698.2, -27492.8], [1242603.5, 1282051, 1203156], [1.95, 1.95, 1.95], []]
+
+        elif ex == '0.0':
+
+            # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 197-202.
+
+            self.valores_de_mg = ['', -118946.8, -89032.2]
 
     # Inserções
     def insercao_1(self):
@@ -741,6 +766,7 @@ class funcoes():
         barra_de_menu.add_cascade(label='Arquivos', menu = menu_de_arquivos)
         menu_de_arquivos.add_command(label='Limpar', command=self.limpar)
         menu_de_arquivos.add_command(label='Reiniciar', command=self.reiniciar)
+        menu_de_arquivos.add_command(label='Sobre', command=lambda: self.tabelas_auxiliares('sobre', '750x505'))
         menu_de_arquivos.add_command(label='Sair', command=self.sair)
 
         menu_de_exemplos = Menu(barra_de_menu)
@@ -753,21 +779,24 @@ class funcoes():
         menu_de_exemplos.add_command(label='E.5.0. PPFC', command=lambda: self.exemplos('5.0'))
         menu_de_exemplos.add_command(label='E.5.1. PPFC', command=lambda: self.exemplos('5.1'))
         menu_de_exemplos.add_command(label='E.6.0. PPRA', command=lambda: self.exemplos('6.0'))
-        menu_de_exemplos.add_command(label='E.7.0. ESFI', command=lambda: self.exemplos('7.0'))
-        menu_de_exemplos.add_command(label='E.8.0. IDFI', command=lambda: self.exemplos('8.0'))
-        menu_de_exemplos.add_command(label='E.9.0. ECRF', command=lambda: self.exemplos('9.0'))
+        menu_de_exemplos.add_command(label='E.C.1. ESFI', command=lambda: self.exemplos('7.0'))
+        menu_de_exemplos.add_command(label='E.C.2. IDFI', command=lambda: self.exemplos('8.0'))
+        menu_de_exemplos.add_command(label='E.C.3. ECRF', command=lambda: self.exemplos('9.0'))
+        menu_de_exemplos.add_command(label='E.C.4. PTMG', command=lambda: self.exemplos('0.0'))
 
         menu_de_tabelas = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Tabelas', menu = menu_de_tabelas)
-        menu_de_tabelas.add_command(label='T.1.0. Fluência e Retração', command=lambda: self.tabelas_auxiliares('numeros_usuais_para_determinacao_da_fluencia_e_retracao', '650x500'))
-        menu_de_tabelas.add_command(label='T.2.0. Endurecimento do Cimento', command=lambda: self.tabelas_auxiliares('fluencia_e_retracao_em_funcao_da_vel_de_endurecimento_do_cim', '650x500'))
-        menu_de_tabelas.add_command(label='T.3.0. Variáveis', command=lambda: self.tabelas_auxiliares('variaveis', '535x505'))
+        menu_de_tabelas.add_command(label='T.1.0. Siglas', command=lambda: self.tabelas_auxiliares('siglas', '420x485'))
+        menu_de_tabelas.add_command(label='T.2.0. Variáveis', command=lambda: self.tabelas_auxiliares('variaveis', '535x505'))
+        menu_de_tabelas.add_command(label='T.3.0. Fluência e Retração', command=lambda: self.tabelas_auxiliares('numeros_usuais_para_determinacao_da_fluencia_e_retracao', '650x500'))
+        menu_de_tabelas.add_command(label='T.4.0. Endurecimento do Cimento', command=lambda: self.tabelas_auxiliares('fluencia_e_retracao_em_funcao_da_vel_de_endurecimento_do_cim', '650x500'))
 
         menu_de_calculos = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Cálculos', menu = menu_de_calculos)
         menu_de_calculos.add_command(label='C.1.0. ESFI', command=self.calculo_espessura_ficticia)
         menu_de_calculos.add_command(label='C.2.0. IDFI', command=self.calculo_idade_ficticia)
         menu_de_calculos.add_command(label='C.3.0. ECRF', command=self.calculo_efeito_conjunto_r_f)
+        menu_de_calculos.add_command(label='C.4.0. PTMG', command=self.calculo_perda_de_tensao_pelo_metodo_geral)
 
     # Tabelas Informativas
     def tabelas_auxiliares(self, img, geometria):
@@ -784,6 +813,8 @@ class funcoes():
         
         self.main_frame = Frame(self.janela_de_ajuda)
         self.main_frame.pack(fill=BOTH, expand=1)
+
+        self.conversao_de_icone(self.janela_de_ajuda)
 
         # Criando um Canvas
 
@@ -821,6 +852,8 @@ class funcoes():
         self.janela.resizable(False, False)
 
         self.janela.grab_set()
+
+        self.conversao_de_icone(self.janela)
        
         self.fundo_ef_0 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_ef_0.place(relx=0.0225, rely=0.04, relwidth=0.955, relheight=0.94)
@@ -960,6 +993,8 @@ class funcoes():
         self.janela.resizable(False, False)
 
         self.janela.grab_set()
+
+        self.conversao_de_icone(self.janela)
         
         self.fundo_tf_0 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_tf_0.place(relx=0.02, rely=0.04, relwidth=0.955, relheight=0.94)
@@ -1137,6 +1172,8 @@ class funcoes():
 
         self.janela.grab_set()
 
+        self.conversao_de_icone(self.janela)
+
         self.fundo_ecrf_0 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_ecrf_0.place(relx=0.02, rely=0.04, relwidth=0.955, relheight=0.94)
 
@@ -1292,6 +1329,85 @@ class funcoes():
         self.janela.destroy()
         self.calculo_efeito_conjunto_r_f()
 
+    def calculo_perda_de_tensao_pelo_metodo_geral(self):
+
+        # Configurações da Página
+
+        self.janela = tk.Toplevel()
+
+        self.janela.geometry("101x350")
+
+        self.janela.resizable(False, False)
+
+        self.janela.grab_set()
+
+        self.conversao_de_icone(self.janela)
+       
+        self.fundo_mg_0 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_mg_0.place(relx=0.0225, rely=0.04, relwidth=0.955, relheight=0.94)
+
+        self.fundo_mg_1 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_mg_1.place(relx=0.1, rely=0.0825, relwidth=0.8, relheight=0.3)
+
+        self.fundo_mg_2 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_mg_2.place(relx=0.1, rely=0.415, relwidth=0.8, relheight=0.5325)
+        
+        self.texto_mg = Label(self.janela, text='PTMG', bg='#F0F0F0', fg='#000000')
+        self.texto_mg.place(relx=0.1, rely=0.01, relwidth=0.4, relheight=0.05)
+
+        # Variáveis
+            
+        self.texto_mg = Label(self.janela, text='Δσₚ,c+s+r', bg='#F0F0F0', fg='#000000')
+        self.texto_mg.place(relx=0.2, rely=0.1, relwidth=0.58, relheight=0.065)
+
+        self.variavel_delta_csr = Label(self.janela, text=self.valores_de_mg[0], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_delta_csr.place(relx=0.2, rely=0.1900, relwidth=0.58, relheight=0.065)
+
+        self.botao_calcular_mg = tk.Button(self.janela, text='Calcular', bg='#F0F0F0', fg='#000000',
+                                         command=lambda: self.calculo_perda_de_tensao_pelo_metodo_geral_funcoes('calcular'))
+        self.botao_calcular_mg.place(relx=0.2, rely=0.295, relwidth=0.58, relheight=0.065)
+
+        self.texto_delta_cs = Label(self.janela, text='Δσₚ,c+s', bg='#F0F0F0', fg='#000000')
+        self.texto_delta_cs.place(relx=0.2, rely=0.42, relwidth=0.58, relheight=0.05)
+
+        self.delta_cs = Label(self.janela, text=self.valores_de_mg[1], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.delta_cs.place(relx=0.2, rely=0.48, relwidth=0.58, relheight=0.064)
+
+        self.texto_delta_rrel = Label(self.janela, text='Δσₚᵣ,rel', bg='#F0F0F0', fg='#000000')
+        self.texto_delta_rrel.place(relx=0.2, rely=0.54, relwidth=0.58, relheight=0.05)
+
+        self.delta_rrel = Label(self.janela, text=self.valores_de_mg[2], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.delta_rrel.place(relx=0.2, rely=0.6, relwidth=0.58, relheight=0.064)
+
+        self.variavel_mg = Entry(self.janela, text="")
+        self.variavel_mg.place(relx=0.2, rely=0.6875, relwidth=0.58, relheight=0.064)
+
+        self.lista_variaveis_mg = ttk.Combobox(self.janela, values=['', 
+                                                                    'Δσₚ,c+s', 
+                                                                    'Δσₚᵣ,rel'])
+        self.lista_variaveis_mg.place(relx=0.2, rely=0.775, relwidth=0.58, relheight=0.065)
+        self.lista_variaveis_mg.current(0)
+
+        self.botao_inserir_mg = tk.Button(self.janela, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                            command=lambda: self.calculo_perda_de_tensao_pelo_metodo_geral_funcoes('inserir'))
+        self.botao_inserir_mg.place(relx=0.2, rely=0.8625, relwidth=0.58, relheight=0.065)       
+
+    def calculo_perda_de_tensao_pelo_metodo_geral_funcoes(self, funcao):
+
+        if funcao == 'inserir':
+            if self.lista_variaveis_mg.get() == 'Δσₚ,c+s':
+                self.valores_de_mg[1] = float(self.variavel_mg.get())
+
+            elif self.lista_variaveis_mg.get() == 'Δσₚᵣ,rel':
+                self.valores_de_mg[2] = float(self.variavel_mg.get())
+
+        elif funcao == 'calcular':
+            self.valores_de_mg[0] = perda_de_tensao_pelo_metodo_geral_funcoes(self.valores_de_mg[1], 
+                                                                              self.valores_de_mg[2])
+            
+        self.janela.destroy()
+        self.calculo_perda_de_tensao_pelo_metodo_geral()
+
     # Opção Limpar
     def limpar(self):
         self.variaveis_iniciais()
@@ -1299,6 +1415,9 @@ class funcoes():
         self.destruicao_1()
         self.destruicao_2()
         self.destruicao_3()
+        self.destruicao_4()
+        self.destruicao_5()
+        self.destruicao_6()
 
     # Opção Reiniciar
     def reiniciar(self):
@@ -1307,7 +1426,9 @@ class funcoes():
     # Opção Sair
     def sair(self):
         print("\nEm verdade que não convém gloriar-me; mas passarei às visões e revelações do Senhor. 2 Coríntios 12:1\n")
-        quit()
+        
+        self.root.destroy()
+        sys.exit()
 
     # Variáveis Iniciais
     def variaveis_iniciais(self):
@@ -1406,11 +1527,15 @@ class funcoes():
                                        '', '', '', '', 
                                        '', '', '', '', '']
         
-        # Variáveis 
+        # Efeito Conjunto de Retração e Fluência
 
         self.valores_de_ecrf = [ 0, [], [], 
                                 [], [], [], 
                                 [], [], []]
+        
+        # Perda de Tensão pelo Método Geral
+
+        self.valores_de_mg = ['', '', '']
 
 class programa(funcoes):
 
@@ -1433,6 +1558,8 @@ class programa(funcoes):
         self.root.maxsize(width=1920, height=1080)
         self.root.minsize(width=750, height=500)
         self.root.protocol("WM_DELETE_WINDOW", self.sair)
+
+        self.conversao_de_icone(self.root)
 
     # Configurações do Frame da Tela
     def frame_tela(self):
