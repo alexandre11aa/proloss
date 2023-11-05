@@ -11,8 +11,6 @@ def encurtamento_imediato_do_concreto(Ac, ycin, Ic,
                                       fck28, Mg, n, 
                                       dias, forcas, altura):
     
-    # Ajustando Formatos
-
     Ac = float(Ac)
     ycin = float(ycin)
     Ic = float(Ic)
@@ -34,8 +32,6 @@ def encurtamento_imediato_do_concreto(Ac, ycin, Ic,
     fcks, Ecis = [[],[]]
 
     for i in range(len(dias)):
-
-        # Ajustando Formatos
 
         dias[i] = float(dias[i])
         forcas[i] = float(forcas[i])
