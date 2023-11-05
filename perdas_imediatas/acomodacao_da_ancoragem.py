@@ -4,7 +4,7 @@ Cálculo de perda de protensão por acomodação de ancoragem explicado por Chol
 CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 145-154.
 '''
 
-def raiz_quadrada(a, b, c):
+def eq_2_grau(a, b, c):
 
     delta = b**2 - 4 * a * c
 
@@ -23,9 +23,26 @@ def acomodacao_da_ancoragem(delta_w,
                             constante_E,
                             area_p,
                             ncd):
+    
+    # Ajustando Formatos
+
+    comprimento_a = float(comprimento_a)
+    comprimento_meio_l = float(comprimento_meio_l)
+    p_i = float(p_i)
+    p_a = float(p_a)
+    p_meio_l = float(p_meio_l)
+    constante_E = float(constante_E)
+    area_p = float(area_p)
+    ncd = float(ncd)
+
+    # Calculando
+    
     hipoteses = []
   
     for i in range(len(delta_w)):
+
+        delta_w[i] = float(delta_w[i])
+
         for j in range(3):
             delta_p_1 = (p_i - p_a) / comprimento_a
             delta_p_2 = (p_a - p_meio_l) / (comprimento_meio_l - comprimento_a)
@@ -46,9 +63,9 @@ def acomodacao_da_ancoragem(delta_w,
 
             elif (j + 1) == 2:
 
-                raizes = raiz_quadrada(delta_p_2, 
-                                       2 * delta_p_2 * comprimento_a, 
-                                       delta_p_1 * comprimento_a**2 - delta_w[i] * constante_E * ncd * area_p * 10**(-1))
+                raizes = eq_2_grau(delta_p_2, 
+                                   2 * delta_p_2 * comprimento_a, 
+                                   delta_p_1 * comprimento_a**2 - delta_w[i] * constante_E * ncd * area_p * 10**(-1))
                 
                 if raizes[0] > raizes[1]:
                     comprimento_w_linha = raizes[0]
