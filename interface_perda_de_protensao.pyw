@@ -3,6 +3,7 @@ print("Porque para mim o viver é Cristo, e o morrer é ganho. Filipenses 1:21")
 import tkinter as tk
 
 import os
+import sys
 import base64
 
 from tkinter import *
@@ -36,7 +37,6 @@ root = Tk()
 class funcoes():
 
     # Ícone
-
     def conversao_de_icone(self, janela):
         
         icone = base64.b64decode(tabelas_informativas('icone'))
@@ -80,7 +80,8 @@ class funcoes():
                                 dist,
                                 situ,
                                 altu,
-                                self.variaveis_1[4])
+                                self.variaveis_1[4],
+                                self.variaveis_1[5])
             
             self.quadro_3_itens = resultados[0]
             
@@ -106,15 +107,15 @@ class funcoes():
 
     def perda_por_cura_do_concreto(self):
         
-        self.resultados_2 = encurtamento_imediato_do_concreto(float(self.variaveis_3[1]),
-                                                              float(self.variaveis_3[6]),
-                                                              float(self.variaveis_3[4]),
-                                                              float(self.variaveis_3[3]),
-                                                              float(self.variaveis_3[2]),
-                                                              float(self.variaveis_3[8]),
-                                                              float(self.variaveis_3[7]),
-                                                              float(self.variaveis_3[5]),
-                                                              float(self.variaveis_3[0]),
+        self.resultados_2 = encurtamento_imediato_do_concreto(self.variaveis_3[1],
+                                                              self.variaveis_3[6],
+                                                              self.variaveis_3[4],
+                                                              self.variaveis_3[3],
+                                                              self.variaveis_3[2],
+                                                              self.variaveis_3[8],
+                                                              self.variaveis_3[7],
+                                                              self.variaveis_3[5],
+                                                              self.variaveis_3[0],
                                                               self.quadro_5_itens[1],
                                                               self.quadro_5_itens[2],
                                                               self.quadro_5_itens[3])
@@ -342,7 +343,7 @@ class funcoes():
             self.quadro_1_itens = [('A', 1.245), ('B', 1.07), ('C', 0.175), ('D', 0.175), ('E', 1.07), ('F', 1.245)]
             self.quadro_2_itens = [(0.8, 'Reto'), (8.43, 'Curvo'), (2.04, 'Reto'), (8.43, 'Curvo'), (0.8, 'Reto')]
 
-            self.variaveis_1 = [12, 1.014, 1900, 1710, 0.2]
+            self.variaveis_1 = [12, 1.014, 1900, 1710, 0.2, 200]
 
             self.destruicao_1()
 
@@ -353,7 +354,7 @@ class funcoes():
             self.quadro_1_itens = [('A', 0.11), ('B', 0.07), ('C', 0.16), ('D', 0.18), ('E', 0.15), ('F', 0.04), ('G', 0.11)]
             self.quadro_2_itens = [(2.8, 'Curvo'), (3.5, 'Curvo'), (0.7, 'Curvo'), (0.9, 'Curvo'), (4.5, 'Curvo'), (3.6, 'Curvo')]
 
-            self.variaveis_1 = [3, 1.4, 2100, 1890, 0.05]
+            self.variaveis_1 = [3, 1.4, 2100, 1890, 0.05, 200]
 
             self.destruicao_1()
 
@@ -466,30 +467,33 @@ class funcoes():
             lista_excel = np.asarray(pd.read_excel(self.lista_de_links.get(), index_col=None, header=None))
 
             for i in range(len(lista_excel)):
-                self.quadro_1_itens.append((lista_excel[i][0], lista_excel[i][1]))
+                self.quadro_1_itens.append((lista_excel[i][0], float(lista_excel[i][1])))
 
             for i in range(len(lista_excel) - 1):
-                self.quadro_2_itens.append((lista_excel[i][2], lista_excel[i][3]))
+                self.quadro_2_itens.append((float(lista_excel[i][2]), lista_excel[i][3]))
 
         self.destruicao_1()
 
     def insercao_4(self):
         decisao = self.lista_variaveis_1.get()
 
-        if decisao == 'μ':
-            self.variaveis_1[4] = self.entrada_das_variaveis_1.get()
+        if decisao == 'Eₚ':
+            self.variaveis_1[5] = float(self.entrada_das_variaveis_1.get())
+
+        elif decisao == 'μ':
+            self.variaveis_1[4] = float(self.entrada_das_variaveis_1.get())
         
         elif decisao == 'fptk':
-            self.variaveis_1[2] = self.entrada_das_variaveis_1.get()
+            self.variaveis_1[2] = float(self.entrada_das_variaveis_1.get())
 
         elif decisao == 'fpyk':
-            self.variaveis_1[3] = self.entrada_das_variaveis_1.get()
+            self.variaveis_1[3] = float(self.entrada_das_variaveis_1.get())
 
         elif decisao == 'Aₚ⁽⁰⁾':
-            self.variaveis_1[1] = self.entrada_das_variaveis_1.get()
+            self.variaveis_1[1] = float(self.entrada_das_variaveis_1.get())
 
         elif decisao == 'Nº de Cordoalhas':
-            self.variaveis_1[0] = self.entrada_das_variaveis_1.get()
+            self.variaveis_1[0] = float(self.entrada_das_variaveis_1.get())
 
         elif decisao == 'Planilha em Excel':
             self.insercao_3()
@@ -536,50 +540,59 @@ class funcoes():
 
         if (self.cabos_ppec.get() != '') and (self.dias_ppec.get() != '') and (self.forca_ppec.get() != '') and (self.altura_ppec.get() != ''):
 
+            inserir_1 = float(self.dias_ppec.get())
+            inserir_2 = float(self.forca_ppec.get())
+            inserir_3 = float(self.altura_ppec.get())
+
             self.quadro_5_itens[0].append(self.cabos_ppec.get())
-            self.quadro_5_itens[1].append(float(self.dias_ppec.get()))
-            self.quadro_5_itens[2].append(float(self.forca_ppec.get()))
-            self.quadro_5_itens[3].append(float(self.altura_ppec.get()))
+            self.quadro_5_itens[1].append(inserir_1)
+            self.quadro_5_itens[2].append(inserir_2)
+            self.quadro_5_itens[3].append(inserir_3)
 
         if str(self.lista_de_links_2.get()) != "":
             lista_excel = np.asarray(pd.read_excel(str(self.lista_de_links_2.get()), index_col=None, header=None))
 
             for i in range(len(lista_excel)):
+
+                inserir_1_e = float(lista_excel[i][1])
+                inserir_2_e = float(lista_excel[i][2])
+                inserir_3_e = float(lista_excel[i][3])
+
                 self.quadro_5_itens[0].append(lista_excel[i][0])
-                self.quadro_5_itens[1].append(float(lista_excel[i][1]))
-                self.quadro_5_itens[2].append(float(lista_excel[i][2]))
-                self.quadro_5_itens[3].append(float(lista_excel[i][3]))
+                self.quadro_5_itens[1].append(inserir_1_e)
+                self.quadro_5_itens[2].append(inserir_2_e)
+                self.quadro_5_itens[3].append(inserir_3_e)
 
         self.destruicao_3()
 
     def insercao_8(self):
 
         if self.lista_de_variaveis_4.get() == 'n':
-            self.variaveis_3[0] = self.entrada_das_variaveis_5.get()
+            self.variaveis_3[0] = float(self.entrada_das_variaveis_5.get())
 
         elif self.lista_de_variaveis_4.get() == 'Ac':
-            self.variaveis_3[1] = self.entrada_das_variaveis_5.get()
+            self.variaveis_3[1] = float(self.entrada_das_variaveis_5.get())
 
         elif self.lista_de_variaveis_4.get() == 'Aₚ⁽⁰⁾':
-            self.variaveis_3[2] = self.entrada_das_variaveis_5.get()
+            self.variaveis_3[2] = float(self.entrada_das_variaveis_5.get())
 
         elif self.lista_de_variaveis_4.get() == 'Eₚ':
-            self.variaveis_3[3] = self.entrada_das_variaveis_5.get()
+            self.variaveis_3[3] = float(self.entrada_das_variaveis_5.get())
 
         elif self.lista_de_variaveis_4.get() == 'Ic':
-            self.variaveis_3[4] = self.entrada_das_variaveis_5.get()
+            self.variaveis_3[4] = float(self.entrada_das_variaveis_5.get())
 
         elif self.lista_de_variaveis_4.get() == 'Mg':
-            self.variaveis_3[5] = self.entrada_das_variaveis_5.get()
+            self.variaveis_3[5] = float(self.entrada_das_variaveis_5.get())
 
         elif self.lista_de_variaveis_4.get() == 'ycin':
-            self.variaveis_3[6] = self.entrada_das_variaveis_5.get()
+            self.variaveis_3[6] = float(self.entrada_das_variaveis_5.get())
 
         elif self.lista_de_variaveis_4.get() == 'fck₂₈':
-            self.variaveis_3[7] = self.entrada_das_variaveis_5.get()
+            self.variaveis_3[7] = float(self.entrada_das_variaveis_5.get())
 
         elif self.lista_de_variaveis_4.get() == 'Nº de Cordoalhas':
-            self.variaveis_3[8] = self.entrada_das_variaveis_5.get()
+            self.variaveis_3[8] = float(self.entrada_das_variaveis_5.get())
 
         self.destruicao_3()
 
@@ -589,20 +602,26 @@ class funcoes():
             self.variavel_t0_tabela.get() != '' and 
             self.variavel_h_tabela.get()  != ''):
 
+            inserir_0 = float(self.variavel_U_tabela.get())
+            inserir_1 = float(self.variavel_t0_tabela.get())
+            inserir_3 = float(self.variavel_h_tabela.get())
+
             if self.variavel_t_tabela_lista.get() == '= ∞':
 
-                self.quadro_6_itens[0].append(self.variavel_U_tabela.get())
-                self.quadro_6_itens[1].append(self.variavel_t0_tabela.get())
+                self.quadro_6_itens[0].append(inserir_0)
+                self.quadro_6_itens[1].append(inserir_1)
                 self.quadro_6_itens[2].append('∞')
-                self.quadro_6_itens[3].append(self.variavel_h_tabela.get())
+                self.quadro_6_itens[3].append(inserir_3)
                 self.quadro_6_itens[4].append(self.variavel_abatimento_tabela_lista.get())
 
             elif self.variavel_t_tabela_lista.get() == '≠ ∞' and self.variavel_t_tabela.get() != '':
 
-                self.quadro_6_itens[0].append(self.variavel_U_tabela.get())
-                self.quadro_6_itens[1].append(self.variavel_t0_tabela.get())
-                self.quadro_6_itens[2].append(self.variavel_t_tabela.get())
-                self.quadro_6_itens[3].append(self.variavel_h_tabela.get())
+                inserir_2 = float(self.variavel_t_tabela.get())
+
+                self.quadro_6_itens[0].append(inserir_0)
+                self.quadro_6_itens[1].append(inserir_1)
+                self.quadro_6_itens[2].append(inserir_2)
+                self.quadro_6_itens[3].append(inserir_3)
                 self.quadro_6_itens[4].append(self.variavel_abatimento_tabela_lista.get())
 
         if self.lista_de_links_3.get() != '':
@@ -610,10 +629,22 @@ class funcoes():
             lista_excel = np.asarray(pd.read_excel(self.lista_de_links_3.get(), index_col=None, header=None))
 
             for i in range(len(lista_excel)):
-                self.quadro_6_itens[0].append(lista_excel[i][0])
-                self.quadro_6_itens[1].append(lista_excel[i][1])
-                self.quadro_6_itens[2].append(lista_excel[i][2])
-                self.quadro_6_itens[3].append(lista_excel[i][3])
+
+                inserir_0_e = float(lista_excel[i][0])
+                inserir_1_e = float(lista_excel[i][1])
+
+                if lista_excel[i][3] != '∞':
+                    inserir_2_e = float(lista_excel[i][2])
+                
+                else:
+                    inserir_2_e = '∞'
+
+                inserir_3_e = float(lista_excel[i][3])
+
+                self.quadro_6_itens[0].append(inserir_0_e)
+                self.quadro_6_itens[1].append(inserir_1_e)
+                self.quadro_6_itens[2].append(inserir_2_e)
+                self.quadro_6_itens[3].append(inserir_3_e)
                 self.quadro_6_itens[4].append(lista_excel[i][4])
 
         self.destruicao_4()
@@ -625,23 +656,30 @@ class funcoes():
             self.variavel_t0_tabela_2.get() != '' and 
             self.variavel_h_tabela_2.get()  != ''):
 
+            inserir_0 = float(self.variavel_U_tabela_2.get())
+            inserir_1 = float(self.variavel_Ti_tabela_2.get())
+            inserir_2 = float(self.variavel_t0_tabela_2.get())
+            inserir_4 = float(self.variavel_h_tabela_2.get())
+
             if self.variavel_t_tabela_lista_2.get() == '= ∞':
 
-                self.quadro_8_itens[0].append(self.variavel_U_tabela_2.get())
-                self.quadro_8_itens[1].append(self.variavel_Ti_tabela_2.get())
-                self.quadro_8_itens[2].append(self.variavel_t0_tabela_2.get())
+                self.quadro_8_itens[0].append(inserir_0)
+                self.quadro_8_itens[1].append(inserir_1)
+                self.quadro_8_itens[2].append(inserir_2)
                 self.quadro_8_itens[3].append('∞')
-                self.quadro_8_itens[4].append(self.variavel_h_tabela_2.get())
+                self.quadro_8_itens[4].append(inserir_4)
                 self.quadro_8_itens[5].append(self.variavel_abatimento_tabela_lista_2.get())
                 self.quadro_8_itens[6].append(self.variavel_CP_tabela_lista_2.get())
 
             elif self.variavel_t_tabela_lista_2.get() == '≠ ∞' and self.variavel_t_tabela_2.get() != '':
 
-                self.quadro_8_itens[0].append(self.variavel_U_tabela_2.get())
-                self.quadro_8_itens[1].append(self.variavel_Ti_tabela_2.get())
-                self.quadro_8_itens[2].append(self.variavel_t0_tabela_2.get())
-                self.quadro_8_itens[3].append(self.variavel_t_tabela_2.get())
-                self.quadro_8_itens[4].append(self.variavel_h_tabela_2.get())
+                inserir_3 = float(self.variavel_t_tabela_2.get())
+
+                self.quadro_8_itens[0].append(inserir_0)
+                self.quadro_8_itens[1].append(inserir_1)
+                self.quadro_8_itens[2].append(inserir_2)
+                self.quadro_8_itens[3].append(inserir_3)
+                self.quadro_8_itens[4].append(inserir_4)
                 self.quadro_8_itens[5].append(self.variavel_abatimento_tabela_lista_2.get())
                 self.quadro_8_itens[6].append(self.variavel_CP_tabela_lista_2.get())
 
@@ -650,11 +688,24 @@ class funcoes():
             lista_excel = np.asarray(pd.read_excel(self.lista_de_links_4.get(), index_col=None, header=None))
 
             for i in range(len(lista_excel)):
-                self.quadro_8_itens[0].append(lista_excel[i][0])
-                self.quadro_8_itens[1].append(lista_excel[i][1])
-                self.quadro_8_itens[2].append(lista_excel[i][2])
-                self.quadro_8_itens[3].append(lista_excel[i][3])
-                self.quadro_8_itens[4].append(lista_excel[i][4])
+
+                inserir_0_e = float(lista_excel[i][0])
+                inserir_1_e = float(lista_excel[i][1])
+                inserir_2_e = float(lista_excel[i][2])
+
+                if lista_excel[i][3] != '∞':
+                    inserir_3_e = float(lista_excel[i][3])
+                
+                else:
+                    inserir_3_e = '∞'
+
+                inserir_4_e = float(lista_excel[i][4])
+
+                self.quadro_8_itens[0].append(inserir_0_e)
+                self.quadro_8_itens[1].append(inserir_1_e)
+                self.quadro_8_itens[2].append(inserir_2_e)
+                self.quadro_8_itens[3].append(inserir_3_e)
+                self.quadro_8_itens[4].append(inserir_4_e)
                 self.quadro_8_itens[5].append(lista_excel[i][5])
                 self.quadro_8_itens[6].append(lista_excel[i][6])
 
@@ -1073,14 +1124,14 @@ class funcoes():
                                          command=lambda: self.calculo_idade_ficticia_funcoes('calcular'))
         self.botao_calcular_if.place(relx=0.595, rely=0.225, relwidth=0.157, relheight=0.065)
 
-        self.quadro_tf_res = ttk.Treeview(self.janela, columns=('α', 't_fic (dias)'))
+        self.quadro_tf_res = ttk.Treeview(self.janela, columns=('α', 't_fic'))
 
         self.quadro_tf_res.column('#0', width=0, stretch=NO)
         self.quadro_tf_res.column('α', anchor=CENTER, width=10)
-        self.quadro_tf_res.column('t_fic (dias)', anchor=CENTER, width=30)
+        self.quadro_tf_res.column('t_fic', anchor=CENTER, width=30)
 
         self.quadro_tf_res.heading('α', text='α', anchor=CENTER)
-        self.quadro_tf_res.heading('t_fic (dias)', text='t_fic (dias)', anchor=CENTER)
+        self.quadro_tf_res.heading('t_fic', text='t_fic', anchor=CENTER)
 
         self.quadro_tf_res.place(relx=0.595, rely=0.5025, relwidth=0.295, relheight=0.424)
 
@@ -1289,25 +1340,25 @@ class funcoes():
                 self.valores_de_ecrf.append(matriz[i])
             
             if self.lista_variaveis_ecrf.get() == 'Eₚ':
-                self.valores_de_ecrf[1].append(self.variavel.get())
+                self.valores_de_ecrf[1].append(float(self.variavel.get()))
 
             elif self.lista_variaveis_ecrf.get() == 'εcs':
-                self.valores_de_ecrf[2].append(self.variavel.get())
+                self.valores_de_ecrf[2].append(float(self.variavel.get()))
 
             elif self.lista_variaveis_ecrf.get() == 'εcc':
-                self.valores_de_ecrf[3].append(self.variavel.get())
+                self.valores_de_ecrf[3].append(float(self.variavel.get()))
 
             elif self.lista_variaveis_ecrf.get() == 'Eci₂₈':
-                self.valores_de_ecrf[4].append(self.variavel.get())
+                self.valores_de_ecrf[4].append(float(self.variavel.get()))
 
             elif self.lista_variaveis_ecrf.get() == 'αcP₀':
-                self.valores_de_ecrf[5].append(self.variavel.get())
+                self.valores_de_ecrf[5].append(float(self.variavel.get()))
 
             elif self.lista_variaveis_ecrf.get() == 'αP₀':
-                self.valores_de_ecrf[6].append(self.variavel.get())
+                self.valores_de_ecrf[6].append(float(self.variavel.get()))
 
             elif self.lista_variaveis_ecrf.get() == 'φ':
-                self.valores_de_ecrf[7].append(self.variavel.get())
+                self.valores_de_ecrf[7].append(float(self.variavel.get()))
 
         elif funcao == 'apagar':
 
@@ -1450,7 +1501,7 @@ class funcoes():
 
         self.links_1 = []
 
-        self.variaveis_1 = ['','','','','']
+        self.variaveis_1 = ['','','','','','']
 
         # Variáveis de Perda por Acomodação de Ancoragem
 
@@ -1737,7 +1788,7 @@ class programa(funcoes):
         self.botao_calcular_1.place(relx=0.4825, rely=0.89, relwidth=0.08, relheight=0.05)
         
         self.delta_l_texto = Label(self.aba_1, text='Δl :', bg='#F0F0F0', fg='#000000')
-        self.delta_l_texto.place(relx=0.4725, rely=0.59, relwidth=0.028, relheight=0.02)
+        self.delta_l_texto.place(relx=0.4725, rely=0.5875, relwidth=0.028, relheight=0.025)
 
         # 4.0 Quadrante:
 
@@ -1747,11 +1798,14 @@ class programa(funcoes):
         self.fundo_de_variaveis_1 = Label(self.aba_1, text='', relief="groove", bg='#F0F0F0', fg='#800000')
         self.fundo_de_variaveis_1.place(relx=0.615, rely=0.04, relwidth=0.368, relheight=0.23)
 
+        self.E_mod_elast_texto = Label(self.aba_1, text='Eₚ :', bg='#F0F0F0', fg='#000000')
+        self.E_mod_elast_texto.place(relx=0.8225, rely=0.108, relwidth=0.025, relheight=0.05)
+
         self.fptk_texto = Label(self.aba_1, text='fptk :', bg='#F0F0F0', fg='#000000')
-        self.fptk_texto.place(relx=0.7925, rely=0.15, relwidth=0.038, relheight=0.05)
+        self.fptk_texto.place(relx=0.8225, rely=0.15, relwidth=0.038, relheight=0.05)
 
         self.fpyk_texto = Label(self.aba_1, text='fpyk :', bg='#F0F0F0', fg='#000000')
-        self.fpyk_texto.place(relx=0.89, rely=0.15, relwidth=0.038, relheight=0.05)
+        self.fpyk_texto.place(relx=0.8225, rely=0.203, relwidth=0.038, relheight=0.05)
 
         self.ncd_texto = Label(self.aba_1, text='Nº Cd. :', bg='#F0F0F0', fg='#000000')
         self.ncd_texto.place(relx=0.63, rely=0.156, relwidth=0.058, relheight=0.05)
@@ -1769,10 +1823,11 @@ class programa(funcoes):
         self.botao_inserir_4.place(relx=0.8875, rely=0.056, relwidth=0.08, relheight=0.05)
 
         self.lista_variaveis_1 = ttk.Combobox(self.aba_1, values=['', 
-                                                                  'μ', 
+                                                                  'μ',
+                                                                  'Eₚ',
                                                                   'fptk', 
                                                                   'fpyk', 
-                                                                  'Aₚ⁽⁰⁾', 
+                                                                  'Aₚ⁽⁰⁾',
                                                                   'Nº de Cordoalhas',
                                                                   'Planilha em Excel'])
         self.lista_variaveis_1.place(relx=0.63, rely=0.056, relwidth=0.145, relheight=0.05)
@@ -1869,10 +1924,13 @@ class programa(funcoes):
         self.area.place(relx=0.695, rely=0.21, relwidth=0.08, relheight=0.04)   
 
         self.fptk = Label(self.aba_1, text=str(self.variaveis_1[2]), relief="sunken", bg='#FFFFFF', fg='#000000')
-        self.fptk.place(relx=0.7925, rely=0.21, relwidth=0.08, relheight=0.04)
+        self.fptk.place(relx=0.8875, rely=0.163, relwidth=0.08, relheight=0.04)
 
         self.fpyk = Label(self.aba_1, text=str(self.variaveis_1[3]), relief="sunken", bg='#FFFFFF', fg='#000000')
-        self.fpyk.place(relx=0.89, rely=0.21, relwidth=0.08, relheight=0.04)
+        self.fpyk.place(relx=0.8875, rely=0.21, relwidth=0.08, relheight=0.04)
+
+        self.E_mod_elast = Label(self.aba_1, text=str(self.variaveis_1[5]), relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.E_mod_elast.place(relx=0.8875, rely=0.115, relwidth=0.08, relheight=0.04)
 
         # 5.0 Quadrante:
 
@@ -2576,7 +2634,7 @@ class programa(funcoes):
         self.inserir_fck_ppfc.place(relx=0.74, rely=0.81, relwidth=0.08, relheight=0.05)
 
         self.texto_fck_ppfc = Label(self.aba_5, text='fck :', bg='#F0F0F0', fg='#000000')
-        self.texto_fck_ppfc.place(relx=0.73, rely=0.69, relwidth=0.035, relheight=0.02)
+        self.texto_fck_ppfc.place(relx=0.73, rely=0.6875, relwidth=0.035, relheight=0.03)
 
         self.botao_inserir_12 = tk.Button(self.aba_5, text='Inserir', bg='#F0F0F0', fg='#000000', 
                                         command=lambda: self.insercao_11(1))
