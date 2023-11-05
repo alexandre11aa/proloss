@@ -30,6 +30,13 @@ def fluencia_do_concreto(U, Ti, t0, t, h, abatimento, CP):
 
     for i in range(len(U)):
 
+        # Ajustando Formatos
+
+        U[i] = float(U[i])
+        Ti[i] = float(Ti[i])
+        t0[i] = float(t0[i])
+        h[i] = float(h[i])
+
         # Primeira Variável
 
         if CP[i] == 'I' or CP[i] == 'II':
@@ -62,6 +69,9 @@ def fluencia_do_concreto(U, Ti, t0, t, h, abatimento, CP):
         fc0 = math.e**(coeficiente * (1 - (28/(t0[i] / (alpha * ((Ti[i] + 10) / 30))))**(1/2)))
 
         if t[i] != '∞':
+
+            t[i] = float(t[i])
+
             fc = math.e**(coeficiente * (1 - (28/(t[i] / (alpha * ((Ti[i] + 10) / 30))))**(1/2)))
  
         Qa = 0.8 * (1 - (fc0 / fc))
@@ -112,6 +122,14 @@ def superposicao_de_efeitos(Q, o, fck):
     Eci_28 = 1 / (5600000 * fck**(1/2))
 
     for i in range(len(Q)):
+
+        # Ajustando Formatos
+
+        Q[i] = float(Q[i])
+        o[i] = float(o[i])
+        fck[i] = float(fck[i])
+
+        # Calculando
 
         ecc += float(Q[i]) * float(o[i])
 
