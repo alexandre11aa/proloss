@@ -32,7 +32,9 @@ def acomodacao_da_ancoragem(delta_w,
     constante_E = float(constante_E)
     area_p = float(area_p)
     ncd = float(ncd)
-   
+
+    # Calculando
+    
     hipoteses = []
   
     for i in range(len(delta_w)):
