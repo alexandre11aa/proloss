@@ -33,6 +33,12 @@ def retracao_do_concreto(U, t0, t, h, abatimento):
 
     for i in range(len(U)):
 
+        # Ajustando Formatos
+
+        U[i] = float(U[i])
+        t0[i] = float(t0[i])
+        h[i] = float(h[i])
+
         # Primeira Variável
 
         if abatimento[i] == '0 - 4':
@@ -58,6 +64,9 @@ def retracao_do_concreto(U, t0, t, h, abatimento):
             Bs_t = 1
         
         else:
+
+            t[i] = float(t[i])
+
             Bs_t = calculo_de_Bst(t[i], h[i])
 
         # Resultado
