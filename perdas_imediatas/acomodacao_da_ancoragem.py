@@ -24,8 +24,6 @@ def acomodacao_da_ancoragem(delta_w,
                             area_p,
                             ncd):
     
-    # Ajustando Formatos
-
     comprimento_a = float(comprimento_a)
     comprimento_meio_l = float(comprimento_meio_l)
     p_i = float(p_i)
@@ -34,9 +32,7 @@ def acomodacao_da_ancoragem(delta_w,
     constante_E = float(constante_E)
     area_p = float(area_p)
     ncd = float(ncd)
-
-    # Calculando
-    
+   
     hipoteses = []
   
     for i in range(len(delta_w)):
