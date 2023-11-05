@@ -20,8 +20,6 @@ def interpolacao_linear(op0, tabela):
 
 def relaxacao_pura(n, Ap, P0, Mg, ep, Ep, Ic, Eci28, fptk, t0, t, relaxacao):
 
-    # Ajustando Formatos
-
     n = float(n)
     Ap = float(Ap)
     P0 = float(P0)
@@ -81,8 +79,6 @@ def relaxacao_pura(n, Ap, P0, Mg, ep, Ep, Ic, Eci28, fptk, t0, t, relaxacao):
     return ('%.2f' % w1000), ('%.2f' % delta_o_pr), ('%.2f' % opi)
 
 def relaxacao_relativa(delta_o_pr, delta_p_cs, opi):
-
-    # Ajustando Formatos
 
     delta_o_pr = float(delta_o_pr)
     delta_p_cs = float(delta_p_cs)
