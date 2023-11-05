@@ -25,8 +25,6 @@ def encurtamento_imediato_do_concreto(Ac, ycin, Ic,
 
     ajuste_1 = 10**(-4)
 
-    # Calculando
-
     # Módulos de elasticidade do concreto
 
     fcks, Ecis = [[],[]]
