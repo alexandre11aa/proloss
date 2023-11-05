@@ -30,8 +30,6 @@ def fluencia_do_concreto(U, Ti, t0, t, h, abatimento, CP):
 
     for i in range(len(U)):
 
-        # Ajustando Formatos
-
         U[i] = float(U[i])
         Ti[i] = float(Ti[i])
         t0[i] = float(t0[i])
@@ -114,7 +112,9 @@ def fluencia_do_concreto(U, Ti, t0, t, h, abatimento, CP):
     return Q
 
 def superposicao_de_efeitos(Q, o, fck):
-    
+
+    fck = float(fck)
+   
     Q_o = []
 
     ecc = 0
@@ -123,11 +123,8 @@ def superposicao_de_efeitos(Q, o, fck):
 
     for i in range(len(Q)):
 
-        # Ajustando Formatos
-
         Q[i] = float(Q[i])
         o[i] = float(o[i])
-        fck[i] = float(fck[i])
 
         # Calculando
 
