@@ -10,12 +10,39 @@ def encurtamento_imediato_do_concreto(Ac, ycin, Ic,
                                       Ep, Ap, n_fios, 
                                       fck28, Mg, n, 
                                       dias, forcas, altura):
+    
+    # Ajustando Formatos
+
+    Ac = float(Ac)
+    ycin = float(ycin)
+    Ic = float(Ic)
+    Ep = float(Ep)
+    Ap = float(Ap)
+    n_fios = float(n_fios)
+    fck28 = float(fck28)
+    Mg = float(Mg)
+    n = float(n)
+
+    # Ajustando Unidades
+
+    ajuste_1 = 10**(-4)
+
+    # Calculando
 
     # Módulos de elasticidade do concreto
 
     fcks, Ecis = [[],[]]
 
     for i in range(len(dias)):
+
+        # Ajustando Formatos
+
+        dias[i] = float(dias[i])
+        forcas[i] = float(forcas[i])
+        altura[i] = float(altura[i])
+
+        # Calculando
+
         fcks.append(fck28 * math.e**(0.25 * (1 - (28 / dias[i])**(1/2))))
         Ecis.append(5600 * (fcks[i])**(1/2))
 
@@ -58,7 +85,7 @@ def encurtamento_imediato_do_concreto(Ac, ycin, Ic,
     perda_de_forca_todos_os_cabos = []
 
     for i in range(len(forcas)):
-        perda_de_forca_todos_os_cabos.append(forcas[i] - n_fios * Ap * 10**(-4) * delta_op)
+        perda_de_forca_todos_os_cabos.append(forcas[i] - n_fios * Ap * ajuste_1 * delta_op)
 
     return ('%.4f' % ocp, 
             '%.4f' % ocg, 
