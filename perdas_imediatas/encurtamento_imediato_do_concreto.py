@@ -35,8 +35,6 @@ def encurtamento_imediato_do_concreto(Ac, ycin, Ic,
         forcas[i] = float(forcas[i])
         altura[i] = float(altura[i])
 
-        # Calculando
-
         fcks.append(fck28 * math.e**(0.25 * (1 - (28 / dias[i])**(1/2))))
         Ecis.append(5600 * (fcks[i])**(1/2))
 
