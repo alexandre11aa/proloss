@@ -33,8 +33,6 @@ def retracao_do_concreto(U, t0, t, h, abatimento):
 
     for i in range(len(U)):
 
-        # Ajustando Formatos
-
         U[i] = float(U[i])
         t0[i] = float(t0[i])
         h[i] = float(h[i])
