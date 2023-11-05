@@ -25,16 +25,12 @@ def calculo_da_forca(n_cordoalhas, area, fptk, fpyk):
 
 def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
 
-    # Ajustando Formatos
-
     variaveis_para_forca[0] = float(variaveis_para_forca[0])
     variaveis_para_forca[1] = float(variaveis_para_forca[1])
     variaveis_para_forca[2] = float(variaveis_para_forca[2])
     variaveis_para_forca[3] = float(variaveis_para_forca[3])
 
     constante_u = float(constante_u)
-
-    # Calculando
 
     forca = calculo_da_forca(variaveis_para_forca[0],
                              variaveis_para_forca[1],
@@ -46,8 +42,6 @@ def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
     perda_media = 0
 
     for i in range(iteracoes):
-
-        # Ajustando Formatos
 
         alturas[i] = float(alturas[i])
         alturas[i + 1] = float(alturas[i + 1])
