@@ -32,6 +32,8 @@ def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
 
     constante_u = float(constante_u)
 
+    # Calculando
+
     forca = calculo_da_forca(variaveis_para_forca[0],
                              variaveis_para_forca[1],
                              variaveis_para_forca[2],
