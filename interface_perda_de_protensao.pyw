@@ -1934,7 +1934,7 @@ class programa(funcoes):
 
         # 5.0 Quadrante:
 
-        fig, ax = plt.subplots(2, 1, figsize=(2.66, 3.035))
+        fig, ax = plt.subplots(2, 1, figsize=(2.66, 2.9))
 
         fig.subplots_adjust(hspace=0.6)
 
@@ -1955,7 +1955,7 @@ class programa(funcoes):
         self.canvas = FigureCanvasTkAgg(fig, master=self.aba_1)
         self.canvas.draw()
 
-        self.canvas.get_tk_widget().pack(side=RIGHT, anchor=SW, padx=15.25, pady=17)
+        self.canvas.get_tk_widget().pack(side=RIGHT, anchor=SW, padx=15.25, pady=16)
 
     # Widgets Estáticos da Aba 2
     def aba_2_funcoes(self):
