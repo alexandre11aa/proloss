@@ -23,7 +23,7 @@ def calculo_da_forca(n_cordoalhas, area, fptk, fpyk):
 
     return forca_i
 
-def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
+def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u, Ep):
 
     variaveis_para_forca[0] = float(variaveis_para_forca[0])
     variaveis_para_forca[1] = float(variaveis_para_forca[1])
@@ -53,6 +53,7 @@ def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
         # Ajustando Unidades
 
         ajuste_1 = 10**(-1)
+        ajuste_2 = 10**(-2)
 
         # Calculando
 
@@ -61,7 +62,7 @@ def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
         if (situacao[i] == 'Curvo'):
             constante_a += 2 * (abs(alturas[i] - alturas[i + 1]) / distancias[i])
         
-        perdas.append(forca * np.exp(- (constante_u * constante_a + ajuste_1 * constante_u * distancia)))
+        perdas.append(forca * np.exp(- (constante_u * constante_a + ajuste_2 * constante_u * distancia)))
 
         if (i != iteracoes - 1):
 
@@ -71,6 +72,6 @@ def atrito(variaveis_para_forca, distancias, situacao, alturas, constante_u):
 
         perda_percentual = ((forca - perdas[-1]) / forca) * 100
 
-    perda_media /= (200 * variaveis_para_forca[0] * variaveis_para_forca[1] * ajuste_1)
+    perda_media /= (Ep * variaveis_para_forca[0] * variaveis_para_forca[1] * ajuste_1)
 
     return (perdas, '%.2f' % perda_media, perda_percentual)
