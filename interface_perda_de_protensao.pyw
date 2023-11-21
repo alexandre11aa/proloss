@@ -1835,7 +1835,7 @@ class programa(funcoes):
 
         # 5.0 Quadrante:
 
-        self.fundo_de_duracoes = Label(self.aba_1, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_de_duracoes = Label(self.aba_1, text='', relief="groove", bg='#FFFFFF', fg='#800000')
         self.fundo_de_duracoes.place(relx=0.615, rely=0.3, relwidth=0.368, relheight=0.67)
         
     # Widgets Dinâmicos da Aba 1
