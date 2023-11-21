@@ -74,7 +74,7 @@ def relaxacao_pura(n, Ap, P0, Mg, ep, Ep, Ic, Eci28, fptk, t0, t, relaxacao):
 
         w = w1000 * ((float(t) - t0) / 41.67)**0.15
 
-    delta_o_pr = w * opi / (100 * 1000)
+    delta_o_pr = w * opi / 100
 
     return ('%.2f' % w1000), ('%.2f' % delta_o_pr), ('%.2f' % opi)
 
