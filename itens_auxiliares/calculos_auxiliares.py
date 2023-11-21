@@ -73,4 +73,4 @@ def perda_de_tensao_pelo_metodo_geral_funcoes(delta_cs, delta_rrel):
     delta_cs = float(delta_cs)
     delta_rrel = float(delta_rrel)
 
-    return '%.2f' % (delta_cs + delta_rrel)
+    return '%.1f' % (delta_cs + delta_rrel)
