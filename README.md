@@ -6,4 +6,4 @@ Todas as bibliotecas usadas para desenvolver o presente trabalho estão contidas
 
 Para baixar o instalador da ferramenta ProLoss acesse:
 
-https://drive.google.com/file/d/1DPpjaV90V_58RLwzlJYpqE39TLZBepX7/view
+https://drive.google.com/file/d/10qLiEjmwaYy5N1mKKgNSJD-lSnqrwFQl/view
