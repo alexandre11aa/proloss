@@ -633,7 +633,7 @@ class funcoes():
                 inserir_0_e = float(lista_excel[i][0])
                 inserir_1_e = float(lista_excel[i][1])
 
-                if lista_excel[i][3] != '∞':
+                if lista_excel[i][2] != '∞':
                     inserir_2_e = float(lista_excel[i][2])
                 
                 else:
