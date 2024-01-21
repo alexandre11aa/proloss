@@ -10,6 +10,8 @@ https://drive.google.com/file/d/10qLiEjmwaYy5N1mKKgNSJD-lSnqrwFQl/view
 
 # Requeriments
 
+Python 3.12.1
+
 contourpy       1.2.0  
 cycler          0.12.1  
 fonttools       4.47.2  
