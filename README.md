@@ -26,4 +26,6 @@ pyparsing       3.1.1
 python-dateutil 2.8.2  
 pytz            2023.3.post1  
 six             1.16.0  
-tzdata          2023.4  
+tzdata          2023.4
+
+Sistema operacional: Windwos
