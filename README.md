@@ -28,4 +28,4 @@ pytz            2023.3.post1
 six             1.16.0  
 tzdata          2023.4
 
-Sistema operacional: Windwos
+Sistema operacional: Windows
