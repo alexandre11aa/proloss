@@ -24,13 +24,15 @@ from itens_auxiliares.tabelas_informativas import tabelas_informativas
 from itens_auxiliares.calculos_auxiliares import calculo_da_espessura_ficticia
 from itens_auxiliares.calculos_auxiliares import calculo_da_idade_ficticia
 from itens_auxiliares.calculos_auxiliares import efeito_conjunto_retracao_e_fluencia
-from itens_auxiliares.calculos_auxiliares import perda_de_tensao_pelo_metodo_geral_funcoes
 
 from perdas_progressivas.retracao_do_concreto import retracao_do_concreto
 from perdas_progressivas.fluencia_do_concreto import fluencia_do_concreto
 from perdas_progressivas.fluencia_do_concreto import superposicao_de_efeitos
 from perdas_progressivas.relaxacao import relaxacao_pura
 from perdas_progressivas.relaxacao import relaxacao_relativa
+from perdas_progressivas.processos_de_calculo import perda_progressiva_processo_simplificado
+from perdas_progressivas.processos_de_calculo import perda_progressiva_metodo_geral
+
 
 root = Tk()
 
@@ -178,6 +180,23 @@ class funcoes():
                                                                  self.valores_variaveis_ppra[16])
             
         self.destruicao_6()
+
+    def perda_processo_simplificado(self):
+        
+        self.valores_de_ps[14] = perda_progressiva_processo_simplificado(self.valores_de_ps[0] , self.valores_de_ps[1] , self.valores_de_ps[2],
+                                                                         self.valores_de_ps[3] , self.valores_de_ps[4] , self.valores_de_ps[5],
+                                                                         self.valores_de_ps[6] , self.valores_de_ps[7] , self.valores_de_ps[8],
+                                                                         self.valores_de_ps[9] , self.valores_de_ps[10], self.valores_de_ps[11],
+                                                                         self.valores_de_ps[12], self.valores_de_ps[13])
+        
+        self.destruicao_7()
+
+    def perda_metodo_geral(self):
+        
+        self.valores_de_mg[0] = perda_progressiva_metodo_geral(self.valores_de_mg[1],
+                                                               self.valores_de_mg[2])
+        
+        self.destruicao_7()
 
     # Aplicações
     def aplicar_1(self):
@@ -333,6 +352,29 @@ class funcoes():
 
         self.aba_6_funcoes_destrutivas()
 
+    def destruicao_7(self):
+        
+        self.variavel_delta_csr.destroy()
+        self.delta_cs.destroy()
+        self.delta_rrel.destroy()
+        self.variavel_Ac_ps.destroy()
+        self.variavel_Ap_ps.destroy()
+        self.variavel_ecs_ps.destroy()
+        self.variavel_ep_ps.destroy()
+        self.variavel_Ep_ps.destroy()
+        self.variavel_fck_ps.destroy()
+        self.variavel_Ic_ps.destroy()
+        self.variavel_Mg_ps.destroy()
+        self.variavel_y_ps.destroy()
+        self.variavel_w1000_ps.destroy()
+        self.variavel_P0_ps.destroy()
+        self.variavel_t_ps.destroy()
+        self.variavel_t0_ps.destroy()
+        self.variavel_delta_op_ps.destroy()
+        self.variavel_ocpog_ps.destroy()
+
+        self.aba_7_funcoes_destrutivas()
+
     # Exemplos
     def exemplos(self, ex):
 
@@ -450,6 +492,10 @@ class funcoes():
             # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 197-202.
 
             self.valores_de_mg = ['', -118946.8, -89032.2]
+
+            self.valores_de_ps = [0.726, (3 * 12) * 1.4, -0.00017, (0.855 - 0.12), 200, 30, 0.176, 5000, 2.25, 0.03, (3 * 12) * 180, '∞', 16, 'Compressão', '']
+
+            self.destruicao_7()
 
     # Inserções
     def insercao_1(self):
@@ -785,6 +831,51 @@ class funcoes():
 
         self.destruicao_6()
 
+    def insercao_13(self, tipo):
+
+        if tipo == 0 and self.lista_variaveis_mg.get() != '':
+
+            if self.lista_variaveis_mg.get() == 'Δσₚ,c+s':
+                self.valores_de_mg[1] = float(self.variavel_mg.get())
+            
+            elif self.lista_variaveis_mg.get() == 'Δσₚᵣ,rel':
+                self.valores_de_mg[2] = float(self.variavel_mg.get())
+            
+        elif tipo == 1 and self.lista_variaveis_ps.get() != '':
+
+            if self.lista_variaveis_ps.get() == 'Ac':
+                self.valores_de_ps[0] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 'Aₚ':
+                self.valores_de_ps[1] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 'εcs':
+                self.valores_de_ps[2] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 'eₚ':
+                self.valores_de_ps[3] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 'fck':
+                self.valores_de_ps[4] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 'Ic':
+                self.valores_de_ps[5] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 'Mg':
+                self.valores_de_ps[6] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 'φ':
+                self.valores_de_ps[7] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 'Ψ₁₀₀₀':
+                self.valores_de_ps[8] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 'P₀':
+                self.valores_de_ps[9] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 't ≠ ∞':
+                self.valores_de_ps[10] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 't = ∞':
+                self.valores_de_ps[11] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 't₀':
+                self.valores_de_ps[12] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 'σc,pog = +':
+                self.valores_de_ps[13] = 'Compressão'
+            elif self.lista_variaveis_ps.get() == 'σc,pog = -':
+                self.valores_de_ps[13] = 'Tração'
+
+        self.destruicao_7()
+
     # Apagando
     def apagando(self, quadro, quadro_itens, destruir, modelo):
         selecionador = quadro.selection()[0]
@@ -833,7 +924,7 @@ class funcoes():
         menu_de_exemplos.add_command(label='E.C.1. ESFI', command=lambda: self.exemplos('7.0'))
         menu_de_exemplos.add_command(label='E.C.2. IDFI', command=lambda: self.exemplos('8.0'))
         menu_de_exemplos.add_command(label='E.C.3. ECRF', command=lambda: self.exemplos('9.0'))
-        menu_de_exemplos.add_command(label='E.C.4. PTMG', command=lambda: self.exemplos('0.0'))
+        menu_de_exemplos.add_command(label='E.0.0. PPPC', command=lambda: self.exemplos('0.0'))
 
         menu_de_tabelas = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Tabelas', menu = menu_de_tabelas)
@@ -847,7 +938,6 @@ class funcoes():
         menu_de_calculos.add_command(label='C.1.0. ESFI', command=self.calculo_espessura_ficticia)
         menu_de_calculos.add_command(label='C.2.0. IDFI', command=self.calculo_idade_ficticia)
         menu_de_calculos.add_command(label='C.3.0. ECRF', command=self.calculo_efeito_conjunto_r_f)
-        menu_de_calculos.add_command(label='C.4.0. PTMG', command=self.calculo_perda_de_tensao_pelo_metodo_geral)
 
     # Tabelas Informativas
     def tabelas_auxiliares(self, img, geometria):
@@ -1380,85 +1470,6 @@ class funcoes():
         self.janela.destroy()
         self.calculo_efeito_conjunto_r_f()
 
-    def calculo_perda_de_tensao_pelo_metodo_geral(self):
-
-        # Configurações da Página
-
-        self.janela = tk.Toplevel()
-
-        self.janela.geometry("101x350")
-
-        self.janela.resizable(False, False)
-
-        self.janela.grab_set()
-
-        self.conversao_de_icone(self.janela)
-       
-        self.fundo_mg_0 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_mg_0.place(relx=0.0225, rely=0.04, relwidth=0.955, relheight=0.94)
-
-        self.fundo_mg_1 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_mg_1.place(relx=0.1, rely=0.0825, relwidth=0.8, relheight=0.3)
-
-        self.fundo_mg_2 = Label(self.janela, text='', relief="groove", bg='#F0F0F0', fg='#800000')
-        self.fundo_mg_2.place(relx=0.1, rely=0.415, relwidth=0.8, relheight=0.5325)
-        
-        self.texto_mg = Label(self.janela, text='PTMG', bg='#F0F0F0', fg='#000000')
-        self.texto_mg.place(relx=0.1, rely=0.01, relwidth=0.4, relheight=0.05)
-
-        # Variáveis
-            
-        self.texto_mg = Label(self.janela, text='Δσₚ,c+s+r', bg='#F0F0F0', fg='#000000')
-        self.texto_mg.place(relx=0.2, rely=0.1, relwidth=0.58, relheight=0.065)
-
-        self.variavel_delta_csr = Label(self.janela, text=self.valores_de_mg[0], relief="sunken", bg='#FFFFFF', fg='#000000')
-        self.variavel_delta_csr.place(relx=0.2, rely=0.1900, relwidth=0.58, relheight=0.065)
-
-        self.botao_calcular_mg = tk.Button(self.janela, text='Calcular', bg='#F0F0F0', fg='#000000',
-                                         command=lambda: self.calculo_perda_de_tensao_pelo_metodo_geral_funcoes('calcular'))
-        self.botao_calcular_mg.place(relx=0.2, rely=0.295, relwidth=0.58, relheight=0.065)
-
-        self.texto_delta_cs = Label(self.janela, text='Δσₚ,c+s', bg='#F0F0F0', fg='#000000')
-        self.texto_delta_cs.place(relx=0.2, rely=0.42, relwidth=0.58, relheight=0.05)
-
-        self.delta_cs = Label(self.janela, text=self.valores_de_mg[1], relief="sunken", bg='#FFFFFF', fg='#000000')
-        self.delta_cs.place(relx=0.2, rely=0.48, relwidth=0.58, relheight=0.064)
-
-        self.texto_delta_rrel = Label(self.janela, text='Δσₚᵣ,rel', bg='#F0F0F0', fg='#000000')
-        self.texto_delta_rrel.place(relx=0.2, rely=0.54, relwidth=0.58, relheight=0.05)
-
-        self.delta_rrel = Label(self.janela, text=self.valores_de_mg[2], relief="sunken", bg='#FFFFFF', fg='#000000')
-        self.delta_rrel.place(relx=0.2, rely=0.6, relwidth=0.58, relheight=0.064)
-
-        self.variavel_mg = Entry(self.janela, text="")
-        self.variavel_mg.place(relx=0.2, rely=0.6875, relwidth=0.58, relheight=0.064)
-
-        self.lista_variaveis_mg = ttk.Combobox(self.janela, values=['', 
-                                                                    'Δσₚ,c+s', 
-                                                                    'Δσₚᵣ,rel'])
-        self.lista_variaveis_mg.place(relx=0.2, rely=0.775, relwidth=0.58, relheight=0.065)
-        self.lista_variaveis_mg.current(0)
-
-        self.botao_inserir_mg = tk.Button(self.janela, text='Inserir', bg='#F0F0F0', fg='#000000',
-                                            command=lambda: self.calculo_perda_de_tensao_pelo_metodo_geral_funcoes('inserir'))
-        self.botao_inserir_mg.place(relx=0.2, rely=0.8625, relwidth=0.58, relheight=0.065)       
-
-    def calculo_perda_de_tensao_pelo_metodo_geral_funcoes(self, funcao):
-
-        if funcao == 'inserir':
-            if self.lista_variaveis_mg.get() == 'Δσₚ,c+s':
-                self.valores_de_mg[1] = float(self.variavel_mg.get())
-
-            elif self.lista_variaveis_mg.get() == 'Δσₚᵣ,rel':
-                self.valores_de_mg[2] = float(self.variavel_mg.get())
-
-        elif funcao == 'calcular':
-            self.valores_de_mg[0] = perda_de_tensao_pelo_metodo_geral_funcoes(self.valores_de_mg[1], 
-                                                                              self.valores_de_mg[2])
-            
-        self.janela.destroy()
-        self.calculo_perda_de_tensao_pelo_metodo_geral()
-
     # Opção Limpar
     def limpar(self):
         self.variaveis_iniciais()
@@ -1588,6 +1599,12 @@ class funcoes():
 
         self.valores_de_mg = ['', '', '']
 
+        # Perda de Tensão pelo Processo Simplificado
+
+        self.valores_de_ps = ['', '', '', '', '',
+                              '', '', '', '', '',
+                              '', '', '', '', '', '']
+
 class programa(funcoes):
 
     # Inicialização e Variáveis
@@ -1661,6 +1678,12 @@ class programa(funcoes):
         self.aba_6.configure(background='#F0F0F0')
         self.abas.add(self.aba_6, text=" PPRA ")
 
+        # Perda de Protensão Progressiva - Processos de Cálculo
+
+        self.aba_7 = Frame(self.abas)
+        self.aba_7.configure(background='#F0F0F0')
+        self.abas.add(self.aba_7, text=" PPPC ")
+
         # Abrindo Abas
 
         self.abas.place(relx=0, rely=0, relwidth=1, relheight=1)
@@ -1682,6 +1705,9 @@ class programa(funcoes):
 
         self.aba_6_funcoes()
         self.aba_6_funcoes_destrutivas()
+
+        self.aba_7_funcoes()
+        self.aba_7_funcoes_destrutivas()
 
     # Widgets Estáticos da Aba 1
     def aba_1_funcoes(self):
@@ -2941,5 +2967,188 @@ class programa(funcoes):
 
         self.variavel_delta_o_pr_rel_ppra = Label(self.aba_6, text=self.valores_variaveis_ppra[15], relief="sunken", bg='#FFFFFF', fg='#000000')
         self.variavel_delta_o_pr_rel_ppra.place(relx=0.85, rely=0.805, relwidth=0.0985, relheight=0.05)
+
+    def aba_7_funcoes(self):
+
+        # 1.0 Quadrante
+
+        self.fundo_mg_0 = Label(self.aba_7, text='', relief="raised", bg='#F0F0F0', fg='#800000')
+        self.fundo_mg_0.place(relx=0.005, rely=0.011, relwidth=0.1865, relheight=0.98)
+
+        self.fundo_mg_1 = Label(self.aba_7, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_mg_1.place(relx=0.018, rely=0.041, relwidth=0.163, relheight=0.3)
+        
+        self.fundo_mg_2 = Label(self.aba_7, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_mg_2.place(relx=0.018, rely=0.365, relwidth=0.163, relheight=0.6)
+
+        self.texto_mg = Label(self.aba_7, text='PTMG', bg='#F0F0F0', fg='#000000')
+        self.texto_mg.place(relx=0.03, rely=0.023, relwidth=0.05, relheight=0.04)
+            
+        self.texto_csr = Label(self.aba_7, text='Δσₚ,c+s+r', bg='#F0F0F0', fg='#000000')
+        self.texto_csr.place(relx=0.058, rely=0.08, relwidth=0.08, relheight=0.04)
+        
+        self.botao_calcular_mg = tk.Button(self.aba_7, text='Calcular', bg='#F0F0F0', fg='#000000',
+                                           command=self.perda_metodo_geral)
+        self.botao_calcular_mg.place(relx=0.04, rely=0.25, relwidth=0.12, relheight=0.05)       
+
+        self.texto_delta_cs = Label(self.aba_7, text='Δσₚ,c+s', bg='#F0F0F0', fg='#000000')
+        self.texto_delta_cs.place(relx=0.058, rely=0.4, relwidth=0.08, relheight=0.04)
+
+        self.texto_delta_rrel = Label(self.aba_7, text='Δσₚᵣ,rel', bg='#F0F0F0', fg='#000000')
+        self.texto_delta_rrel.place(relx=0.058, rely=0.52, relwidth=0.08, relheight=0.04)
+
+        self.variavel_mg = Entry(self.aba_7, text="")
+        self.variavel_mg.place(relx=0.04, rely=0.68, relwidth=0.12, relheight=0.05)
+
+        self.lista_variaveis_mg = ttk.Combobox(self.aba_7, values=['', 
+                                                                   'Δσₚ,c+s', 
+                                                                   'Δσₚᵣ,rel'])
+        self.lista_variaveis_mg.place(relx=0.04, rely=0.78, relwidth=0.12, relheight=0.05)
+        self.lista_variaveis_mg.current(0)
+
+        self.botao_inserir_mg = tk.Button(self.aba_7, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                          command=lambda: self.insercao_13(0))
+        self.botao_inserir_mg.place(relx=0.04, rely=0.88, relwidth=0.12, relheight=0.05)
+
+        # 2.0 Quadrante
+
+        self.fundo_ps_0 = Label(self.aba_7, text='', relief="raised", bg='#F0F0F0', fg='#800000')
+        self.fundo_ps_0.place(relx=0.208, rely=0.011, relwidth=0.7835, relheight=0.98)
+
+        self.fundo_ps_1 = Label(self.aba_7, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ps_1.place(relx=0.219, rely=0.041, relwidth=0.759, relheight=0.78)
+
+        self.fundo_ps_2 = Label(self.aba_7, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ps_2.place(relx=0.219, rely=0.8485, relwidth=0.3, relheight=0.12)
+
+        self.fundo_ps_3 = Label(self.aba_7, text='', relief="groove", bg='#F0F0F0', fg='#800000')
+        self.fundo_ps_3.place(relx=0.54, rely=0.8485, relwidth=0.44, relheight=0.12)
+
+        self.texto_ps = Label(self.aba_7, text='PTPS', bg='#F0F0F0', fg='#000000')
+        self.texto_ps.place(relx=0.232, rely=0.023, relwidth=0.042, relheight=0.04)
+
+        self.variavel_Ac_ps_texto = Label(self.aba_7, text='Ac :', bg='#F0F0F0', fg='#000000')
+        self.variavel_Ac_ps_texto.place(relx=0.25, rely=0.125, relwidth=0.03, relheight=0.05)
+
+        self.variavel_Ap_ps_texto = Label(self.aba_7, text='Aₚ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_Ap_ps_texto.place(relx=0.40, rely=0.125, relwidth=0.03, relheight=0.05)
+
+        self.variavel_ecs_ps_texto = Label(self.aba_7, text='εcs :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ecs_ps_texto.place(relx=0.55, rely=0.125, relwidth=0.03, relheight=0.05)
+
+        self.variavel_ep_ps_texto = Label(self.aba_7, text='eₚ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ep_ps_texto.place(relx=0.70, rely=0.125, relwidth=0.03, relheight=0.05)
+
+        self.variavel_Ep_ps_texto = Label(self.aba_7, text='Eₚ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_Ep_ps_texto.place(relx=0.85, rely=0.125, relwidth=0.03, relheight=0.05)
+
+        self.variavel_fck_ps_texto = Label(self.aba_7, text='fck :', bg='#F0F0F0', fg='#000000')
+        self.variavel_fck_ps_texto.place(relx=0.325, rely=0.3625, relwidth=0.03, relheight=0.05)
+
+        self.variavel_Ic_ps_texto = Label(self.aba_7, text='Ic :', bg='#F0F0F0', fg='#000000')
+        self.variavel_Ic_ps_texto.place(relx=0.475, rely=0.3625, relwidth=0.03, relheight=0.05)
+
+        self.variavel_Mg_ps_texto = Label(self.aba_7, text='Mg :', bg='#F0F0F0', fg='#000000')
+        self.variavel_Mg_ps_texto.place(relx=0.625, rely=0.3625, relwidth=0.03, relheight=0.05)
+
+        self.variavel_y_ps_texto = Label(self.aba_7, text='φ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_y_ps_texto.place(relx=0.775, rely=0.3625, relwidth=0.03, relheight=0.05)
+
+        self.variavel_w1000_ps_texto = Label(self.aba_7, text='Ψ₁₀₀₀ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_w1000_ps_texto.place(relx=0.25, rely=0.6, relwidth=0.04, relheight=0.05)
+
+        self.variavel_P0_ps_texto = Label(self.aba_7, text='P₀ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_P0_ps_texto.place(relx=0.40, rely=0.6, relwidth=0.03, relheight=0.05)
+
+        self.variavel_t_ps_texto = Label(self.aba_7, text='t :', bg='#F0F0F0', fg='#000000')
+        self.variavel_t_ps_texto.place(relx=0.55, rely=0.6, relwidth=0.03, relheight=0.05)
+
+        self.variavel_t0_ps_texto = Label(self.aba_7, text='t₀ :', bg='#F0F0F0', fg='#000000')
+        self.variavel_t0_ps_texto.place(relx=0.70, rely=0.6, relwidth=0.03, relheight=0.05)
+
+        self.variavel_ocpog_ps_texto = Label(self.aba_7, text='σc,pog :', bg='#F0F0F0', fg='#000000')
+        self.variavel_ocpog_ps_texto.place(relx=0.85, rely=0.6, relwidth=0.06, relheight=0.05)
+
+        self.texto_delta_op_ps = Label(self.aba_7, text='Δσₚ(t,t₀)', bg='#F0F0F0', fg='#000000')
+        self.texto_delta_op_ps.place(relx=0.24, rely=0.88, relwidth=0.058, relheight=0.04)
+
+        self.botao_calcular_ps = tk.Button(self.aba_7, text='Calcular', bg='#F0F0F0', fg='#000000',
+                                            command=self.perda_processo_simplificado)
+        self.botao_calcular_ps.place(relx=0.42, rely=0.88, relwidth=0.08, relheight=0.05)
+
+        self.lista_variaveis_ps = ttk.Combobox(self.aba_7, values=['', 'Ac', 'Aₚ', 'εcs',
+                                                                   'eₚ', 'fck', 'Ic', 'Mg',
+                                                                   'φ', 'Ψ₁₀₀₀', 'P₀', 
+                                                                   't ≠ ∞', 't = ∞', 't₀',
+                                                                   'σc,pog = +', 'σc,pog = -'])
+        self.lista_variaveis_ps.place(relx=0.56, rely=0.88, relwidth=0.16, relheight=0.05)
+        self.lista_variaveis_ps.current(0)
+
+        self.variavel_ps = Entry(self.aba_7, text="")
+        self.variavel_ps.place(relx=0.73, rely=0.88, relwidth=0.135, relheight=0.05)
+
+        self.botao_inserir_ps = tk.Button(self.aba_7, text='Inserir', bg='#F0F0F0', fg='#000000',
+                                          command=lambda: self.insercao_13(1))
+        self.botao_inserir_ps.place(relx=0.878, rely=0.88, relwidth=0.08, relheight=0.05)
+
+    def aba_7_funcoes_destrutivas(self):
+
+        # 1.0 Quadrante
+
+        self.variavel_delta_csr = Label(self.aba_7, text=self.valores_de_mg[0], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_delta_csr.place(relx=0.04, rely=0.16, relwidth=0.12, relheight=0.05)
+
+        self.delta_cs = Label(self.aba_7, text=self.valores_de_mg[1], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.delta_cs.place(relx=0.04, rely=0.46, relwidth=0.12, relheight=0.05)
+
+        self.delta_rrel = Label(self.aba_7, text=self.valores_de_mg[2], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.delta_rrel.place(relx=0.04, rely=0.58, relwidth=0.12, relheight=0.05)
+
+        # 2.0 Quadrante
+
+        self.variavel_Ac_ps = Label(self.aba_7, text=self.valores_de_ps[0], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Ac_ps.place(relx=0.25, rely=0.2025, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_Ap_ps = Label(self.aba_7, text=self.valores_de_ps[1], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Ap_ps.place(relx=0.40, rely=0.2025, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_ecs_ps = Label(self.aba_7, text=self.valores_de_ps[2], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ecs_ps.place(relx=0.55, rely=0.2025, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_ep_ps = Label(self.aba_7, text=self.valores_de_ps[3], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ep_ps.place(relx=0.70, rely=0.2025, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_Ep_ps = Label(self.aba_7, text=self.valores_de_ps[4], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Ep_ps.place(relx=0.85, rely=0.2025, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_fck_ps = Label(self.aba_7, text=self.valores_de_ps[5], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_fck_ps.place(relx=0.325, rely=0.44, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_Ic_ps = Label(self.aba_7, text=self.valores_de_ps[6], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Ic_ps.place(relx=0.475, rely=0.44, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_Mg_ps = Label(self.aba_7, text=self.valores_de_ps[7], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_Mg_ps.place(relx=0.625, rely=0.44, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_y_ps = Label(self.aba_7, text=self.valores_de_ps[8], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_y_ps.place(relx=0.775, rely=0.44, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_w1000_ps = Label(self.aba_7, text=self.valores_de_ps[9], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_w1000_ps.place(relx=0.25, rely=0.6775, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_P0_ps = Label(self.aba_7, text=self.valores_de_ps[10], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_P0_ps.place(relx=0.40, rely=0.6775, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_t_ps = Label(self.aba_7, text=self.valores_de_ps[11], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_t_ps.place(relx=0.55, rely=0.6775, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_t0_ps = Label(self.aba_7, text=self.valores_de_ps[12], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_t0_ps.place(relx=0.70, rely=0.6775, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_ocpog_ps = Label(self.aba_7, text=self.valores_de_ps[13], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_ocpog_ps.place(relx=0.85, rely=0.6775, relwidth=0.0985, relheight=0.05)
+
+        self.variavel_delta_op_ps = Label(self.aba_7, text=self.valores_de_ps[14], relief="sunken", bg='#FFFFFF', fg='#000000')
+        self.variavel_delta_op_ps.place(relx=0.31, rely=0.88, relwidth=0.1, relheight=0.05)
 
 programa()
