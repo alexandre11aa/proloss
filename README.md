@@ -2,7 +2,7 @@
 
 Ferramenta computacional para cálculo de perdas de protensão para estruturas em concreto protendido. Todo o código usado em sua elaboração está contido neste repositório e disponível para uso de acordo com a licensa.
 
-![ProLoss](https://drive.google.com/file/d/1vzxc9r7l8Cb-DZxDfEkgsJ4oQHfO_rWK/view?usp=sharing)
+![ProLoss](ProLoss.png)
 
 # Anexos
 
