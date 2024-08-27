@@ -850,22 +850,24 @@ class funcoes():
                 self.valores_de_ps[2] = float(self.variavel_ps.get())
             elif self.lista_variaveis_ps.get() == 'eₚ':
                 self.valores_de_ps[3] = float(self.variavel_ps.get())
-            elif self.lista_variaveis_ps.get() == 'fck':
+            elif self.lista_variaveis_ps.get() == 'Eₚ':
                 self.valores_de_ps[4] = float(self.variavel_ps.get())
-            elif self.lista_variaveis_ps.get() == 'Ic':
+            elif self.lista_variaveis_ps.get() == 'fck':
                 self.valores_de_ps[5] = float(self.variavel_ps.get())
-            elif self.lista_variaveis_ps.get() == 'Mg':
+            elif self.lista_variaveis_ps.get() == 'Ic':
                 self.valores_de_ps[6] = float(self.variavel_ps.get())
-            elif self.lista_variaveis_ps.get() == 'φ':
+            elif self.lista_variaveis_ps.get() == 'Mg':
                 self.valores_de_ps[7] = float(self.variavel_ps.get())
-            elif self.lista_variaveis_ps.get() == 'Ψ₁₀₀₀':
+            elif self.lista_variaveis_ps.get() == 'φ':
                 self.valores_de_ps[8] = float(self.variavel_ps.get())
-            elif self.lista_variaveis_ps.get() == 'P₀':
+            elif self.lista_variaveis_ps.get() == 'Ψ₁₀₀₀':
                 self.valores_de_ps[9] = float(self.variavel_ps.get())
-            elif self.lista_variaveis_ps.get() == 't ≠ ∞':
+            elif self.lista_variaveis_ps.get() == 'P₀':
                 self.valores_de_ps[10] = float(self.variavel_ps.get())
-            elif self.lista_variaveis_ps.get() == 't = ∞':
+            elif self.lista_variaveis_ps.get() == 't ≠ ∞':
                 self.valores_de_ps[11] = float(self.variavel_ps.get())
+            elif self.lista_variaveis_ps.get() == 't = ∞':
+                self.valores_de_ps[11] = '∞'
             elif self.lista_variaveis_ps.get() == 't₀':
                 self.valores_de_ps[12] = float(self.variavel_ps.get())
             elif self.lista_variaveis_ps.get() == 'σc,pog = +':
@@ -3076,8 +3078,8 @@ class programa(funcoes):
         self.botao_calcular_ps.place(relx=0.42, rely=0.88, relwidth=0.08, relheight=0.05)
 
         self.lista_variaveis_ps = ttk.Combobox(self.aba_7, values=['', 'Ac', 'Aₚ', 'εcs',
-                                                                   'eₚ', 'fck', 'Ic', 'Mg',
-                                                                   'φ', 'Ψ₁₀₀₀', 'P₀', 
+                                                                   'eₚ', 'Eₚ', 'fck', 'Ic',
+                                                                   'Mg', 'φ', 'Ψ₁₀₀₀', 'P₀', 
                                                                    't ≠ ∞', 't = ∞', 't₀',
                                                                    'σc,pog = +', 'σc,pog = -'])
         self.lista_variaveis_ps.place(relx=0.56, rely=0.88, relwidth=0.16, relheight=0.05)
