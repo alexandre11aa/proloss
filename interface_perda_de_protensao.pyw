@@ -20,7 +20,6 @@ from perdas_imediatas.acomodacao_da_ancoragem import acomodacao_da_ancoragem
 from perdas_imediatas.encurtamento_imediato_do_concreto import encurtamento_imediato_do_concreto
 
 from itens_auxiliares.tabelas_informativas import tabelas_informativas
-
 from itens_auxiliares.calculos_auxiliares import calculo_da_espessura_ficticia
 from itens_auxiliares.calculos_auxiliares import calculo_da_idade_ficticia
 from itens_auxiliares.calculos_auxiliares import efeito_conjunto_retracao_e_fluencia
@@ -928,7 +927,7 @@ class funcoes():
 
         menu_de_tabelas = Menu(barra_de_menu)
         barra_de_menu.add_cascade(label='Tabelas', menu = menu_de_tabelas)
-        menu_de_tabelas.add_command(label='T.1.0. Siglas', command=lambda: self.tabelas_auxiliares('siglas', '420x485'))
+        menu_de_tabelas.add_command(label='T.1.0. Siglas', command=lambda: self.tabelas_auxiliares('siglas', '430x510'))
         menu_de_tabelas.add_command(label='T.2.0. Variáveis', command=lambda: self.tabelas_auxiliares('variaveis', '535x505'))
         menu_de_tabelas.add_command(label='T.3.0. Fluência e Retração', command=lambda: self.tabelas_auxiliares('numeros_usuais_para_determinacao_da_fluencia_e_retracao', '650x500'))
         menu_de_tabelas.add_command(label='T.4.0. Endurecimento do Cimento', command=lambda: self.tabelas_auxiliares('fluencia_e_retracao_em_funcao_da_vel_de_endurecimento_do_cim', '650x500'))
