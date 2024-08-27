@@ -1,5 +1,5 @@
 '''
-Cálculo de perda de protensão por relaxação pura e relativa explicado por Cholfe e Bonilha (2013).
+Cálculo de perda de protensão por progressiva do concreto explicado por Cholfe e Bonilha (2013).
 
 CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 193-202.
 '''
