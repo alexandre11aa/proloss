@@ -45,9 +45,13 @@ class funcoes():
         with open("icone_temporario.ico", "wb") as ico:
             ico.write(icone)
 
-        janela.iconbitmap('icone_temporario.ico')
+        try:
+            janela.iconbitmap('icone_temporario.ico')
 
-        os.remove("icone_temporario.ico")
+            os.remove("icone_temporario.ico")
+
+        except:
+            print("Ícone não encontrado. Usando o ícone padrão.")
             
     # Resultados
     def perda_por_atrito(self):
@@ -484,7 +488,7 @@ class funcoes():
 
             # CHOLFE, L.; BONILHA, L. Concreto Protendido: teoria e prática. São Paulo: Pini, 2013. Páginas 184-189.
 
-            self.valores_de_ecrf = [3, [200, 200, 200], [-18, -18, -18], [-117.637, -122.657, -112.312], [32, 32, 32], [-29143.6, -30698.2, -27492.8], [1242603.5, 1282051, 1203156], [1.95, 1.95, 1.95], []]
+            self.valores_de_ecrf = [3, [200, 200, 200], [-0.00018, -0.00018, -0.00018], [-0.00117637, -0.00122657, -0.00112312], [32, 32, 32], [-29143.6, -30698.2, -27492.8], [1242603.5, 1282051, 1203156], [1.95, 1.95, 1.95], []]
 
         elif ex == '0.0':
 
