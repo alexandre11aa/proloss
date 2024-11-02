@@ -48,9 +48,7 @@ def efeito_conjunto_retracao_e_fluencia(Ep, Ecs, Ecc, Eci28, ocP0, oP0, y):
 
     # Ajustando unidades de medidas
 
-    ajuste_1 = 10**6
-
-    ajuste_2 = 10**(-5)
+    ajuste = 10**6
 
     for i in range(len(Ep)):
 
@@ -62,6 +60,6 @@ def efeito_conjunto_retracao_e_fluencia(Ep, Ecs, Ecc, Eci28, ocP0, oP0, y):
         oP0[i] = float(oP0[i])
         y[i] = float(y[i])
 
-        lista_de_resultados.append("%.2f" % ((Ep[i] * ajuste_1 * (Ecs[i] * ajuste_2 + Ecc[i] * ajuste_2)) / (1 - (Ep[i] * ajuste_1 * ocP0[i]  / (Eci28[i] * ajuste_1 * oP0[i])) * (1 + y[i] / 2))))
+        lista_de_resultados.append("%.2f" % ((Ep[i] * ajuste * (Ecs[i] + Ecc[i])) / (1 - (Ep[i] * ajuste * ocP0[i]  / (Eci28[i] * ajuste * oP0[i])) * (1 + y[i] / 2))))
 
     return lista_de_resultados
