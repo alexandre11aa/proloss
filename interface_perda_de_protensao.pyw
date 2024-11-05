@@ -440,7 +440,7 @@ class funcoes():
 
             self.quadro_8_itens = [[75, 75], [30, 30], [38, 160], ['∞', '∞'], [17.9, 17.9], ['10 - 15', '10 - 15'], ['II', 'II']]
 
-            self.quadro_10_itens = [-19.134 + 7.281, 986]
+            self.quadro_10_itens = [-19134 + 7281, 986]
 
             self.fck_ecc = 30
 
@@ -2548,6 +2548,7 @@ class programa(funcoes):
         self.y_scroll_7.place(relx=0.9572, rely=0.0665, relwidth=0.025, relheight=0.885)
 
         for i in range(len(self.quadro_7_itens)):
+            print(self.quadro_7_itens[i])
             self.quadro_7.insert(parent='', index=i, iid=i, text='', values=((self.quadro_7_itens[i])))
 
     # Widgets Estáticos da Aba 5
