@@ -8,7 +8,7 @@ Ferramenta computacional para cálculo de perdas de protensão para estruturas e
 
 Para baixar o instalador da ferramenta ProLoss acesse:
 
-https://drive.google.com/file/d/10qLiEjmwaYy5N1mKKgNSJD-lSnqrwFQl/view
+https://drive.google.com/file/d/1nKPL4tEQIbp7gVyTN9htUf-OAzp7rYnk/view
 
 # Requeriments
 
