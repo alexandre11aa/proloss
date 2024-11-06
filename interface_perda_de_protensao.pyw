@@ -51,7 +51,7 @@ class funcoes():
             os.remove("icone_temporario.ico")
 
         except:
-            print("Ícone não encontrado. Usando o ícone padrão.")
+            ("Ícone não encontrado. Usando o ícone padrão.")
             
     # Resultados
     def perda_por_atrito(self):
@@ -1492,7 +1492,7 @@ class funcoes():
 
     # Opção Sair
     def sair(self):
-        print("\nEm verdade que não convém gloriar-me; mas passarei às visões e revelações do Senhor. 2 Coríntios 12:1\n")
+        ("\nEm verdade que não convém gloriar-me; mas passarei às visões e revelações do Senhor. 2 Coríntios 12:1\n")
         
         self.root.destroy()
         sys.exit()
@@ -2548,7 +2548,6 @@ class programa(funcoes):
         self.y_scroll_7.place(relx=0.9572, rely=0.0665, relwidth=0.025, relheight=0.885)
 
         for i in range(len(self.quadro_7_itens)):
-            print(self.quadro_7_itens[i])
             self.quadro_7.insert(parent='', index=i, iid=i, text='', values=((self.quadro_7_itens[i])))
 
     # Widgets Estáticos da Aba 5
